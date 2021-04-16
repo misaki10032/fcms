@@ -16,6 +16,6 @@ import java.util.HashMap;
  */
 @Component
 public interface ComCollectMapper extends BaseMapper<ComCollect> {
-        int collect(String id);
+        int collect();
         int uncollect(String id);
 }

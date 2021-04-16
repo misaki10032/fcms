@@ -5,10 +5,13 @@ import com.cxy.fcms.pojo.SysAdmin;
 import com.cxy.fcms.service.LoginService;
 import com.cxy.fcms.util.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 @Service
@@ -39,6 +42,18 @@ public class LoginServiceImpl implements LoginService {
                 redisUtil.lLeftPush("allAdmins",admin);
             }
             return allAdmins1;
+        }
+    }
+    @Override
+    public void addAdmin(HashMap<String,String> map) {
+        adminMapper.addAdmin(map);//添加新注册的用户
+        List<SysAdmin> allAdmins = adminMapper.getAllAdmins();//更新redis信息
+        redisUtil.delete("allAdmins");//删除原来的list
+        System.out.println("=====================从MySQL中读取数据=======================");
+        List<SysAdmin> allAdmins1 = adminMapper.getAllAdmins();
+        System.out.println("=====================向 Redis 中存数据=======================");
+        for (SysAdmin admin:allAdmins1) {
+            redisUtil.lLeftPush("allAdmins",admin);
         }
     }
 }

@@ -60,4 +60,5 @@ public class ComFiction implements Serializable {
     private Integer isDeleted;
 
 
+
 }
