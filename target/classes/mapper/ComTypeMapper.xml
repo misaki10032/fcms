@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cxy.fcms.mapper.ComTypeMapper">
+
+    <insert id="addType" parameterType="map">
+        insert into com_type(id,
+                             ty_name,
+                             gmt_create,
+                             gmt_modified)
+        VALUES (#{id},
+                #{tyName},
+                now(),
+                now())
+    </insert>
+    <select id="getTypeIdByName" resultType="string">
+        select id from com_type where ty_name=#{name}
+    </select>
+
+</mapper>

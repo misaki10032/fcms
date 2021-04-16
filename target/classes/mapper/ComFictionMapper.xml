@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cxy.fcms.mapper.ComFictionMapper">
+
+    <insert id="addFiction" parameterType="map">
+        insert into
+        com_fiction(
+            id,
+            fic_name,
+            <if test="ficAuthor!=null">
+                    fic_author,
+            </if>
+            gmt_create,
+            gmt_modified
+        ) values (
+            #{id},
+            #{ficName},
+            <if test="ficAuthor!=null">
+                  #{ficAuthor},
+            </if>
+            now(),
+            now()
+        );
+    </insert>
+    <insert id="addFictionData">
+        insert into com_fiction_data
+            (id, fic_id, fic_data, gmt_create, gmt_modified,is_deleted)
+        VALUE
+            (#{id},#{ficId},#{text},now(),now(),0);
+    </insert>
+    <insert id="addFictionType">
+        insert into com_fiction_type
+            (id, fic_id, fic_type, gmt_create, gmt_modified,is_deleted)
+        value
+            (#{id},#{ficId},#{typeId},now(),now(),0);
+    </insert>
+
+</mapper>
