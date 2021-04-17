@@ -1,9 +1,16 @@
 package com.cxy.fcms.service;
 
+import com.cxy.fcms.pojo.ComType;
+
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public interface TypeService {
+    /**
+     * 获取所有的类型
+     */
+    List<ComType> selType();
     /**
      * 添加类型
      */

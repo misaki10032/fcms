@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cxy.fcms.mapper.ComCommentMapper">
+
+    <!--根据评论id查询评论信息-->
+    <select id="selById" resultType="com.cxy.fcms.pojo.ComComment" parameterType="string">
+        select * from com_comment where id = #{id}
+    </select>
     <!--查询某位用户评论-->
     <select id="selCommentsByUserId" parameterType="string" resultType="com.cxy.fcms.pojo.ComComment">
         select *

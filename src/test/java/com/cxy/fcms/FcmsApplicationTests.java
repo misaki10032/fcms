@@ -2,12 +2,16 @@ package com.cxy.fcms;
 
 import com.cxy.fcms.mapper.ComFictionMapper;
 import com.cxy.fcms.mapper.ComTypeMapper;
+import com.cxy.fcms.pojo.ComLink;
+import com.cxy.fcms.service.impl.LinkServiceImpl;
+import com.cxy.fcms.service.impl.TypeServiceImpl;
 import com.cxy.fcms.util.IDUtil;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.HashMap;
+import java.util.List;
 
 @SpringBootTest
 class FcmsApplicationTests {
@@ -15,6 +19,8 @@ class FcmsApplicationTests {
     ComFictionMapper fictionMapper;
     @Autowired
     ComTypeMapper typeMapper;
+    @Autowired
+    LinkServiceImpl linkService;
     @Test
     void insertFic() {
         HashMap<String,String> map = new HashMap<>();
@@ -45,6 +51,12 @@ class FcmsApplicationTests {
     void addFicType(){
         String typeId = typeMapper.getTypeIdByName("轻小说");
         fictionMapper.addFictionType(IDUtil.getID(),"5e760d25a6054213b21fbec1783d4c23",typeId);
+    }
+
+    @Test
+    public  void fa(){
+        int i = linkService.showLink("123");
+        System.out.println(i);
     }
 
 }
