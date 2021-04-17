@@ -19,7 +19,7 @@ class FcmsApplicationTests {
     void insertFic() {
         HashMap<String,String> map = new HashMap<>();
         map.put("id",IDUtil.getID());
-        map.put("ficName","从零开始的异世界生活");
+        map.put("ficName","刀剑神域");
         map.put("ficAuthor",null);
         fictionMapper.addFiction(map);
     }
