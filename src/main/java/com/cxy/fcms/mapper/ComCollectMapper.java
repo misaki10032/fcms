@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -16,6 +18,29 @@ import java.util.HashMap;
  */
 @Component
 public interface ComCollectMapper extends BaseMapper<ComCollect> {
-        int collect(String id);
-        int uncollect(String id);
+         /**
+          * 用户根据userid 查询收藏
+          * */
+         List<ComCollect> selCollectsByUserId(String userid);
+        /**
+         * 管理员根据ficId 查询收藏
+         * */
+        List<ComCollect> selCollectsByFicId(String ficid);
+         /**
+         * 删除/取消收藏
+         * */
+         int delCollect(String id);
+        /**
+         * 添加收藏
+         * */
+         int addCollect(Map<String,Object> map);
+        /**
+         * 不显示收藏
+         * */
+         int noShow(String id);
+        /**
+         * 显示收藏
+         * */
+         int show(String id);
+
 }
