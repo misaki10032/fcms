@@ -1,23 +1,24 @@
 package com.cxy.fcms.service.impl;
 
-import com.cxy.fcms.mapper.ComTypeMapper;
 import com.cxy.fcms.mapper.ComUserMapper;
-import com.cxy.fcms.pojo.ComType;
 import com.cxy.fcms.pojo.ComUser;
 import com.cxy.fcms.service.UserService;
 import com.cxy.fcms.util.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Service
 public class UserServiceImpl implements UserService {
     @Autowired
     ComUserMapper comUserMapper;
     @Autowired
     RedisUtil redisUtil;
+
     @Override
     public int addUser(HashMap<String, String> map) {
         try {

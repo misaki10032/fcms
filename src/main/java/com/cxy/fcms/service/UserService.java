@@ -1,10 +1,12 @@
 package com.cxy.fcms.service;
 
 import com.cxy.fcms.pojo.ComUser;
+import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 
 public interface UserService {
     /**
