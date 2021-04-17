@@ -94,7 +94,7 @@ public class LoginController {
             }else if(!pwd.equals(pwd2)){
                 out.println("两次密码不一致");
             }else{
-                out.println("ok");
+                out.print("ok");
             }
         }
     }
