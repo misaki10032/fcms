@@ -1,8 +1,12 @@
 package com.cxy.fcms.service.impl;
 
 import com.cxy.fcms.mapper.ComFictionMapper;
+import com.cxy.fcms.mapper.ComTypeMapper;
 import com.cxy.fcms.pojo.ComFiction;
+import com.cxy.fcms.pojo.ComType;
+import com.cxy.fcms.pojo.SysAdmin;
 import com.cxy.fcms.service.FictionService;
+import com.cxy.fcms.util.IDUtil;
 import com.cxy.fcms.util.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +19,8 @@ import java.util.List;
 public class FictionServiceImpl implements FictionService {
     @Autowired
     ComFictionMapper fictionMapper;
+    @Autowired
+    ComTypeMapper typeMapper;
     @Autowired
     RedisUtil redisUtil;
     @Override
@@ -47,5 +53,19 @@ public class FictionServiceImpl implements FictionService {
             return fictionMapper.getFictions();
         }
 
+    }
+    @Override
+    public void addFiction(HashMap<String,String> ficmap,String ficid,String text,String type) {
+        fictionMapper.addFiction(ficmap);
+        fictionMapper.addFictionData(IDUtil.getID(),ficid,text);
+        String typeId = typeMapper.getTypeIdByName(type);
+        fictionMapper.addFictionType(IDUtil.getID(),ficid,typeId);
+        //更新redis
+        redisUtil.delete("fictions");//删除原来的list
+        List<ComFiction> fictions = fictionMapper.getFictions();
+        System.out.println("=====================更新 Redis  数据=======================");
+        for (ComFiction fiction:fictions) {
+            redisUtil.lLeftPush("fictions",fiction);
+        }
     }
 }
