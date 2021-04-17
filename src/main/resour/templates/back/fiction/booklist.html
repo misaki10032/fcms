@@ -9,7 +9,7 @@
 		<meta name="renderer" content="webkit">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-		<link rel="stylesheet" href="../layui-v2.6.4/layui/css/layui.css" media="all">
+		<link rel="stylesheet" href="/layui-v2.6.4/layui/css/layui.css" media="all">
 	</head>
 	<body>
 
@@ -20,6 +20,7 @@
 				<button class="layui-btn layui-btn-sm" lay-event="getCheckData">获取选中行数据</button>
 				<button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button>
 				<button class="layui-btn layui-btn-sm" lay-event="isAll">验证是否全选</button>
+				<button class="layui-btn layui-btn-sm" id="addfiction">新增</button>
 			</div>
 		</script>
 
@@ -29,8 +30,7 @@
 		</script>
 
 
-		<script src="../layui-v2.6.4/layui/layui.js" charset="utf-8"></script>
-		<!-- 注意：如果你直接复制所有代码到本地，上述 JS 路径需要改成你本地的 -->
+		<script src="/layui-v2.6.4/layui/layui.js" charset="utf-8"></script>
 
 		<script>
 			layui.use('table', function() {
@@ -147,6 +147,27 @@
 							layer.close(index);
 						});
 					}
+				});
+			});
+
+			layui.use(['layer', 'table', "laypage", "jquery"], function () {
+				var
+						layer = layui.layer //弹层
+						, table = layui.table //表格
+						, laypage = layui.laypage //分页
+						, $ = layui.jquery
+				$('#addfiction').on("click", function () {
+					layer.open({
+						//调整弹框的大小
+						area: ['500px', '300px'],
+						shadeClose: true,//点击旁边地方自动关闭
+						//动画
+						anim: 2,
+						//弹出层的基本类型
+						type: 2,
+						//刚才定义的弹窗页面
+						content: '/addfictionWindow'//路由地址
+					});
 				});
 			});
 		</script>
