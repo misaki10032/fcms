@@ -94,6 +94,7 @@
           <element id="library" level="project" name="Maven: org.apache.velocity:velocity-engine-core:2.0" />
           <element id="library" level="project" name="Maven: org.apache.commons:commons-lang3:3.11" />
           <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.30" />
+          <element id="library" level="project" name="Maven: com.google.code.gson:gson:2.8.6" />
         </element>
       </element>
       <element id="directory" name="META-INF">

@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * <p>
@@ -25,5 +26,6 @@ public interface ComFictionMapper extends BaseMapper<ComFiction> {
 
     int addFictionType(@Param("id") String id,@Param("ficId") String ficId,@Param("typeId") String typeID);
 
+    List<ComFiction> getFictions();
 
 }
