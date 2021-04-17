@@ -1,5 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cxy.fcms.mapper.ComCommentMapper">
+    <!--查询某位用户评论-->
+    <select id="selCommentsByUserId" parameterType="string" resultType="com.cxy.fcms.pojo.ComComment">
+        select *
+        from com_comment
+        where user_id = #{userId}
+    </select>
+    <!--管理员查询某本书评论-->
+    <select id="selCommentsByFicId" parameterType="string" resultType="com.cxy.fcms.pojo.ComComment">
+        select *
+        from com_comment
+        where fic_id = #{ficId}
+    </select>
+    <!--删除/取消评论-->
+    <delete id="delComment" parameterType="string">
+        delete
+        from com_comment
+        where id = #{id}
+    </delete>
 
+    <!--添加评论-->
+    <insert id="addComment" parameterType="map">
+        insert into com_comment (id, fic_id, user_id, comm_data, gmt_create, gmt_modified, is_deleted)
+        values (#{id}, #{ficId}, #{userId}, #{commData}, now(), now(), #{isDeleted})
+    </insert>
+
+    <!--不显示评论-->
+    <update id="noShowComment" parameterType="string">
+        update com_comment
+        set gmt_modified = now() and is_deleted = 1
+        where id = #{id}
+    </update>
+    <!--显示评论-->
+    <update id="showComment" parameterType="string">
+        update com_comment
+        set gmt_modified = now() and is_deleted = 0
+        where id = #{id}
+    </update>
 </mapper>
