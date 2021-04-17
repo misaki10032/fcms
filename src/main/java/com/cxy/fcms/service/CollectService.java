@@ -7,6 +7,10 @@ import java.util.Map;
 
 public interface CollectService {
     /**
+     * 用户根据收藏id 查询收藏信息
+     */
+    ComCollect selCollectById(String id);
+    /**
      * 用户根据userid 查询收藏
      * */
     List<ComCollect> selCollectsByUserId(String userid);

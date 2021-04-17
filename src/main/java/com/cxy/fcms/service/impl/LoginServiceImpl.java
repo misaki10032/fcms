@@ -52,14 +52,18 @@ public class LoginServiceImpl implements LoginService {
     }
     @Override
     public void addAdmin(HashMap<String,String> map) {
-        adminMapper.addAdmin(map);//添加新注册的用户
-        List<SysAdmin> allAdmins = adminMapper.getAllAdmins();//更新redis信息
-        redisUtil.delete("allAdmins");//删除原来的list
-        System.out.println("=====================从MySQL中读取数据=======================");
-        List<SysAdmin> allAdmins1 = adminMapper.getAllAdmins();
-        System.out.println("=====================向 Redis 中存数据=======================");
-        for (SysAdmin admin:allAdmins1) {
-            redisUtil.lLeftPush("allAdmins",admin);
+        try {
+            adminMapper.addAdmin(map);//添加新注册的用户
+            List<SysAdmin> allAdmins = adminMapper.getAllAdmins();//更新redis信息
+            redisUtil.delete("allAdmins");//删除原来的list
+            System.out.println("=====================从MySQL中读取数据=======================");
+            List<SysAdmin> allAdmins1 = adminMapper.getAllAdmins();
+            System.out.println("=====================向 Redis 中存数据=======================");
+            for (SysAdmin admin:allAdmins1) {
+                redisUtil.lLeftPush("allAdmins",admin);
+            }
+        } catch (Exception e) {
+            adminMapper.addAdmin(map);
         }
     }
 }

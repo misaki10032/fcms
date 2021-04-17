@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -17,6 +18,10 @@ import java.util.Map;
  */
 @Component
 public interface ComTypeMapper extends BaseMapper<ComType> {
+    /**
+     * 获取所有的类型
+     */
+    List<ComType> selType();
     /**
      * 添加类型
      */
