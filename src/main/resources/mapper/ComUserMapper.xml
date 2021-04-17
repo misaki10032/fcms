@@ -2,4 +2,71 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cxy.fcms.mapper.ComUserMapper">
 
+
+    <!--禁用用户-->
+    <update id="delUser" parameterType="string">
+        update com_user
+        set is_banned   = 1,
+            gmt_modified=now()
+        where id = #{id}
+    </update>
+
+    <!--修改用户-->
+    <update id="revUser" parameterType="map">
+        update com_user
+        <set>
+            <if test="id!=null">
+                id = #{id},
+            </if>
+            <if test="userName!=null">
+                user_name = #{userName},
+            </if>
+            <if test="userPhone!=null">
+                user_phone = #{userPhone},
+            </if>
+            <if test="userPwd!=null">
+                user_pwd = #{userPwd},
+            </if>
+            <if test="userLevel!=null">
+                user_level = #{userLevel},
+            </if>
+            <if test="gmtModified!=null">
+                gmt_modified = #{gmtModified},
+            </if>
+            <if test="gmtModified == null">
+                gmt_modified = now(),
+            </if>
+            <if test="isDeleted!=null">
+                is_deleted = #{isDeleted}
+            </if>
+            <if test="isBanned!=null">
+                is_banned = #{isBanned}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <!--添加用户-->
+    <insert id="addUser" parameterType="map">
+        insert into com_user (id, user_name, user_phone, user_pwd, user_level, gmt_create, gmt_modified, is_deleted,
+                              is_banned)
+        values (#{id}, #{userName}, #{userPhone}, #{userPwd}, 1, now(), now(), 0, 0);
+    </insert>
+    <!--查询所有用户-->
+    <select id="selUser" resultType="com.cxy.fcms.pojo.ComUser">
+        select *
+        from com_user;
+    </select>
+
+    <!--登录注册验证-->
+    <select id="logUser" resultType="com.cxy.fcms.pojo.ComUser">
+        select * from com_user
+        <where>
+            <if test="userPhone!=null">
+                user_phone = #{userPhone}
+            </if>
+            <if test="userPwd!=null">
+                and user_pwd = #{userPwd}
+            </if>
+        </where>
+    </select>
 </mapper>

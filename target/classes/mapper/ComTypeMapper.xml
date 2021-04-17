@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cxy.fcms.mapper.ComTypeMapper">
+    <!--查询所有的类型-->
+    <select id="selType" resultType="com.cxy.fcms.pojo.ComType">
+        select * from com_type
+    </select>
     <!--添加类型-->
     <insert id="addType" parameterType="map">
         insert into com_type(id,

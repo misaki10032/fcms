@@ -18,6 +18,11 @@ import java.util.Map;
  */
 @Component
 public interface ComCommentMapper extends BaseMapper<ComComment> {
+
+    /**
+     * 根据评论id查询评论信息
+     * */
+    ComComment selById(String id);
     /**
      * 用户查询自己评论
      */
