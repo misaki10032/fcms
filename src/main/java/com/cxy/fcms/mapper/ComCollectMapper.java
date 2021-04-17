@@ -18,6 +18,8 @@ import java.util.Map;
  */
 @Component
 public interface ComCollectMapper extends BaseMapper<ComCollect> {
+        int collect();
+        int uncollect(String id);
          /**
           * 用户根据userid 查询收藏
           * */
@@ -42,5 +44,6 @@ public interface ComCollectMapper extends BaseMapper<ComCollect> {
          * 显示收藏
          * */
          int show(String id);
+
 
 }

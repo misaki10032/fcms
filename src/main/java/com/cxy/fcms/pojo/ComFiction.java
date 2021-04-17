@@ -45,19 +45,22 @@ public class ComFiction implements Serializable {
     private String ficImg;
 
     /**
+     * 类型
+     */
+    private String ficType;
+
+    /**
      * 创建时间
      */
-    private Date gmtCreate;
+    private Date createTime;
 
     /**
      * 修改时间
      */
-    private Date gmtModified;
+    private Date updateTime;
 
     /**
      * 逻辑删除
      */
     private Integer isDeleted;
-
-
 }
