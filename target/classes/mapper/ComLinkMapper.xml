@@ -2,4 +2,69 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cxy.fcms.mapper.ComLinkMapper">
 
+    <!--查询所有链接-->
+    <select id="searchLinks" resultType="comType">
+        select *
+        from com_link
+    </select>
+    <!--查询所有链接-->
+    <select id="searchShowLinks" resultType="comType">
+        select *
+        from com_link
+        where is_deleted = 0
+    </select>
+
+
+    <!--增加链接-->
+    <insert id="addLink" parameterType="map">
+        insert into com_link
+            (id, link_data, link_name, gmt_create, gmt_modified, is_deleted)
+        values (#{id}, #{linkData}, #{linkName}, #{gmtCreate}, #{gmtModified}, #{isDeleted})
+    </insert>
+    <!--删除链接-->
+    <delete id="delLink" parameterType="String">
+        delete
+        form com_link
+        where id=
+        #{id}
+    </delete>
+    <!--修改链接-->
+    <update id="revLink" parameterType="map">
+        update com_link
+        <set>
+            <if test="id!=null">
+                id = #{id},
+            </if>
+            <if test="linkData!=null">
+                link_data = #{linkData},
+            </if>
+            <if test="linkName!=null">
+                link_name = #{linkName},
+            </if>
+            <if test="gmtModified!=null">
+                gmt_modified = #{gmtModified},
+            </if>
+            <if test="gmtModified==null">
+                 gmt_modified = now(),
+            </if>
+            <if test="isDeleted!=null">
+                is_deleted = #{isDeleted}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <!--不显示链接-->
+    <update id="noShowLink" parameterType="String">
+        update com_link
+        set gmtModified =now(),is_deleted = 1
+        where id = #{id}
+    </update>
+
+    <!--显示链接-->
+    <update id="showLink" parameterType="String">
+        update com_link
+        set gmtModified =now(),is_deleted = 0
+        where id = #{id}
+    </update>
+
 </mapper>

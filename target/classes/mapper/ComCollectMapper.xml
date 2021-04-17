@@ -2,8 +2,37 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cxy.fcms.mapper.ComCollectMapper">
 
+    <!--根据userid 查询收藏-->
+    <select id="selCollectsByUserId" parameterType="string" resultType="com.cxy.fcms.pojo.ComCollect">
+        select * from com_collect where user_id = ${userId}
+    </select>
+    <!--根据ficId 查询收藏-->
+    <select id="selCollectsByFicId" parameterType="string" resultType="com.cxy.fcms.pojo.ComCollect">
+        select * from com_collect where fic_id = ${ficId}
+    </select>
+    <!--删除/取消收藏-->
+    <delete id="delCollect" parameterType="string">
+        delete
+        from com_collect
+        where id = #{id}
+    </delete>
 
-    <insert id="collect">
-
+    <!--添加收藏-->
+    <insert id="addCollect" parameterType="map">
+        insert into com_collect (id, fic_id, user_id, gmt_create, gmt_modified, is_deleted)
+        values (#{id}, #{ficId}, #{userId}, now(), now(), #{isDeleted})
     </insert>
+
+    <!--不显示收藏-->
+    <update id="noShow" parameterType="string">
+        update com_collect
+        set gmt_modified = now() and is_deleted = 1
+        where id = #{id}
+    </update>
+    <!--显示收藏-->
+    <update id="show" parameterType="string">
+        update com_collect
+        set gmt_modified = now() and is_deleted = 0
+        where id = #{id}
+    </update>
 </mapper>
