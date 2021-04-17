@@ -56,14 +56,14 @@
     <!--不显示链接-->
     <update id="noShowLink" parameterType="string">
         update com_link
-        set gmtModified =now(),is_deleted = 1
+        set gmt_modified =now(),is_deleted = 1
         where id = #{id}
     </update>
 
     <!--显示链接-->
     <update id="showLink" parameterType="string">
         update com_link
-        set gmtModified =now(),is_deleted = 0
+        set gmt_modified =now(),is_deleted = 0
         where id = #{id}
     </update>
 

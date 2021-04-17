@@ -55,8 +55,8 @@ class FcmsApplicationTests {
 
     @Test
     public  void fa(){
-        List<ComLink> i = linkService.searchLinks();
-        i.forEach(System.out::println);
+        int i = linkService.showLink("123");
+        System.out.println(i);
     }
 
 }
