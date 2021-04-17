@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cxy.fcms.mapper.ComCollectMapper">
-
+<select id="selCollectById" resultType="com.cxy.fcms.pojo.ComCollect">
+    select * from com_collect where id = #{id}
+</select>
     <!--根据userid 查询收藏-->
     <select id="selCollectsByUserId" parameterType="string" resultType="com.cxy.fcms.pojo.ComCollect">
         select * from com_collect where user_id = ${userId}
