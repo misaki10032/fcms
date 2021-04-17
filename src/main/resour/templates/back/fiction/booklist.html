@@ -14,7 +14,6 @@
 	<body>
 
 		<table class="layui-hide" id="test" lay-filter="test"></table>
-
 		<script type="text/html" id="toolbarDemo">
 			<div class="layui-btn-container">
 				<button class="layui-btn layui-btn-sm" lay-event="getCheckData">获取选中行数据</button>
@@ -23,13 +22,10 @@
 				<button class="layui-btn layui-btn-sm" id="addfiction">新增</button>
 			</div>
 		</script>
-
 		<script type="text/html" id="barDemo">
 			<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
 			<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 		</script>
-
-
 		<script src="/layui-v2.6.4/layui/layui.js" charset="utf-8"></script>
 
 		<script>
@@ -38,7 +34,15 @@
 
 				table.render({
 					elem: '#test',
-					url: 'http://127.0.0.1:9898/getfictions',
+					url: 'http://192.168.31.225:9898/getfictions',
+					parseData: function (res) { //res 即为原始返回的数据
+						return {
+							"code": res.code, //解析接口状态
+							"msg": res.msg, //解析提示文本
+							"count": res.count, //解析数据长度
+							"data": res.data //解析数据列表
+						}
+					},
 					toolbar: '#toolbarDemo', //开启头部工具栏，并为其绑定左侧模板
 					height:'full-3',
 					defaultToolbar: ['filter', 'exports', 'print', { //自定义头部工具栏右侧图标。如无需自定义，去除该参数即可
@@ -95,14 +99,6 @@
 						}]
 					],
 					page: true
-					,parseData: function(res) { //res 即为原始返回的数据
-						return {
-							"code": res.code, //解析接口状态
-							"msg": res.msg, //解析提示文本
-							"count": res.count, //解析数据长度
-							"data": res.data //解析数据列表
-						}
-					}
 				});
 
 				table.on('toolbar(test)', function(obj) {
