@@ -4,10 +4,11 @@ import com.cxy.fcms.mapper.ComCommentMapper;
 import com.cxy.fcms.pojo.ComComment;
 import com.cxy.fcms.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
-
+@Service
 public class CommentServiceImpl implements CommentService {
     @Autowired
     ComCommentMapper comCommentMapper;

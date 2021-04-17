@@ -4,10 +4,11 @@ import com.cxy.fcms.mapper.ComCollectMapper;
 import com.cxy.fcms.pojo.ComCollect;
 import com.cxy.fcms.service.CollectService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
-
+@Service
 public class CollectServiceImpl implements CollectService {
     @Autowired
     ComCollectMapper comCollectMapper;

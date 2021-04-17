@@ -3,10 +3,11 @@ package com.cxy.fcms.service.impl;
 import com.cxy.fcms.mapper.ComTypeMapper;
 import com.cxy.fcms.service.TypeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
-
+@Service
 public class TypeServiceImpl implements TypeService {
     @Autowired
     ComTypeMapper comTypeMapper;

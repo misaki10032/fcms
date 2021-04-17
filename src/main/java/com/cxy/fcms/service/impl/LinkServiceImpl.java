@@ -4,10 +4,11 @@ import com.cxy.fcms.mapper.ComLinkMapper;
 import com.cxy.fcms.pojo.ComLink;
 import com.cxy.fcms.service.LinkService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.List;
-
+@Service
 public class LinkServiceImpl implements LinkService {
     @Autowired
     ComLinkMapper linkMapper;
