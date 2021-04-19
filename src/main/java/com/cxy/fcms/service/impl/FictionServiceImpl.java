@@ -8,12 +8,14 @@ import com.cxy.fcms.pojo.SysAdmin;
 import com.cxy.fcms.service.FictionService;
 import com.cxy.fcms.util.IDUtil;
 import com.cxy.fcms.util.RedisUtil;
+import com.cxy.fcms.util.TimeOutSetting;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class FictionServiceImpl implements FictionService {
@@ -45,6 +47,7 @@ public class FictionServiceImpl implements FictionService {
                 for (ComFiction fiction:fictions) {
                     redisUtil.lLeftPush("fictions",fiction);
                 }
+                redisUtil.expire("fictions", TimeOutSetting.REDIS_TIME_OUT, TimeUnit.SECONDS);
                 return fictions;
             }
         }catch (Exception e){
@@ -57,7 +60,7 @@ public class FictionServiceImpl implements FictionService {
     @Override
     public void addFiction(HashMap<String,String> ficmap,String ficid,String text,String type) {
         fictionMapper.addFiction(ficmap);
-        fictionMapper.addFictionData(IDUtil.getID(),ficid,text);
+        fictionMapper.addFictionData(IDUtil.getID(), ficid, text);
         String typeId = typeMapper.getTypeIdByName(type);
         fictionMapper.addFictionType(IDUtil.getID(), ficid, typeId);
         //更新redis
@@ -67,6 +70,8 @@ public class FictionServiceImpl implements FictionService {
         for (ComFiction fiction : fictions) {
             redisUtil.lRightPush("fictions", fiction);
         }
+        redisUtil.expire("fictions", TimeOutSetting.REDIS_TIME_OUT, TimeUnit.SECONDS);
+
     }
 
     @Override
@@ -91,6 +96,8 @@ public class FictionServiceImpl implements FictionService {
                 for (ComFiction fiction : fictions) {
                     redisUtil.lRightPush("fictionsOrderByTime", fiction);
                 }
+                redisUtil.expire("fictionsOrderByTime", TimeOutSetting.REDIS_TIME_OUT, TimeUnit.SECONDS);
+
                 return fictions;
             }
         } catch (Exception e) {
@@ -122,6 +129,8 @@ public class FictionServiceImpl implements FictionService {
                 for (ComFiction fiction : fictions) {
                     redisUtil.lRightPush("fictionsOrderByHost", fiction);
                 }
+                redisUtil.expire("fictionsOrderByHost", TimeOutSetting.REDIS_TIME_OUT, TimeUnit.SECONDS);
+                System.out.println("=====================  设置300s后过期 =======================");
                 return fictions;
             }
         } catch (Exception e) {

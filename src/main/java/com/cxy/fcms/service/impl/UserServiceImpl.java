@@ -4,6 +4,7 @@ import com.cxy.fcms.mapper.ComUserMapper;
 import com.cxy.fcms.pojo.ComUser;
 import com.cxy.fcms.service.UserService;
 import com.cxy.fcms.util.RedisUtil;
+import com.cxy.fcms.util.TimeOutSetting;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -28,7 +30,7 @@ public class UserServiceImpl implements UserService {
             List<ComUser> comUsers = comUserMapper.selUser();
             System.out.println("=====================向 Redis 中存数据=======================");
             for (ComUser user : comUsers) {
-                redisUtil.lLeftPush("comUsers", user);
+                redisUtil.lRightPush("comUsers", user);
             }
             return i;
         } catch (Exception e) {
@@ -45,8 +47,9 @@ public class UserServiceImpl implements UserService {
             List<ComUser> comUsers = comUserMapper.selUser();
             System.out.println("=====================向 Redis 中存数据=======================");
             for (ComUser user : comUsers) {
-                redisUtil.lLeftPush("comUsers", user);
+                redisUtil.lRightPush("comUsers", user);
             }
+            redisUtil.expire("comUsers", TimeOutSetting.REDIS_TIME_OUT, TimeUnit.SECONDS);
             return i;
         } catch (Exception e) {
             return comUserMapper.delUser(id);
@@ -62,8 +65,9 @@ public class UserServiceImpl implements UserService {
             List<ComUser> comUsers = comUserMapper.selUser();
             System.out.println("=====================向 Redis 中存数据=======================");
             for (ComUser user : comUsers) {
-                redisUtil.lLeftPush("comUsers", user);
+                redisUtil.lRightPush("comUsers", user);
             }
+            redisUtil.expire("comUsers", TimeOutSetting.REDIS_TIME_OUT, TimeUnit.SECONDS);
             return i;
         } catch (Exception e) {
             return comUserMapper.revUser(map);
@@ -89,8 +93,9 @@ public class UserServiceImpl implements UserService {
             } else {
                 List<ComUser> comUsers1 = comUserMapper.selUser();
                 for (ComUser user : comUsers1) {
-                    redisUtil.lLeftPush("comUsers", user);
+                    redisUtil.lRightPush("comUsers", user);
                 }
+                redisUtil.expire("comUsers", TimeOutSetting.REDIS_TIME_OUT, TimeUnit.SECONDS);
                 return comUsers1;
             }
         } catch (Exception e) {

@@ -5,12 +5,14 @@ import com.cxy.fcms.pojo.ComCollect;
 import com.cxy.fcms.pojo.SysAdmin;
 import com.cxy.fcms.service.CollectService;
 import com.cxy.fcms.util.RedisUtil;
+import com.cxy.fcms.util.TimeOutSetting;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class CollectServiceImpl implements CollectService {
@@ -43,8 +45,9 @@ public class CollectServiceImpl implements CollectService {
                 List<ComCollect> collects = comCollectMapper.selCollectsByUserId(userid);
                 System.out.println("=====================向 Redis 中存数据=======================");
                 for (ComCollect collect : collects) {
-                    redisUtil.lLeftPush("collectByUID", collect);
+                    redisUtil.lRightPush("collectByUID", collect);
                 }
+                redisUtil.expire("collectByUID", TimeOutSetting.REDIS_TIME_OUT, TimeUnit.SECONDS);
                 return collects;
             }
         } catch (Exception e) {
@@ -73,8 +76,9 @@ public class CollectServiceImpl implements CollectService {
                 List<ComCollect> collects = comCollectMapper.selCollectsByFicId(ficid);
                 System.out.println("=====================向 Redis 中存数据=======================");
                 for (ComCollect collect : collects) {
-                    redisUtil.lLeftPush("collectByFID", collect);
+                    redisUtil.lRightPush("collectByFID", collect);
                 }
+                redisUtil.expire("collectByUID", TimeOutSetting.REDIS_TIME_OUT, TimeUnit.SECONDS);
                 return collects;
             }
         } catch (Exception e) {
@@ -96,11 +100,13 @@ public class CollectServiceImpl implements CollectService {
             List<ComCollect> collects3 = comCollectMapper.selCollectsByFicId(collect.getFicId());//更新redis信息
             System.out.println("=====================向 Redis 中存数据=======================");
             for (ComCollect collect1 : collects2) {
-                redisUtil.lLeftPush("collectByUID", collect1);
+                redisUtil.lRightPush("collectByUID", collect1);
             }
             for (ComCollect collect1 : collects3) {
-                redisUtil.lLeftPush("collectByFID", collect1);
+                redisUtil.lRightPush("collectByFID", collect1);
             }
+            redisUtil.expire("collectByUID", TimeOutSetting.REDIS_TIME_OUT, TimeUnit.SECONDS);
+            redisUtil.expire("collectByFID", TimeOutSetting.REDIS_TIME_OUT, TimeUnit.SECONDS);
             return i;
         } catch (Exception e) {
             return comCollectMapper.delCollect(id);
@@ -120,11 +126,13 @@ public class CollectServiceImpl implements CollectService {
             List<ComCollect> collects3 = comCollectMapper.selCollectsByFicId(collect.getFicId());//更新redis信息
             System.out.println("=====================向 Redis 中存数据=======================");
             for (ComCollect collect1 : collects2) {
-                redisUtil.lLeftPush("collectByUID", collect1);
+                redisUtil.lRightPush("collectByUID", collect1);
             }
             for (ComCollect collect1 : collects3) {
-                redisUtil.lLeftPush("collectByFID", collect1);
+                redisUtil.lRightPush("collectByFID", collect1);
             }
+            redisUtil.expire("collectByUID", TimeOutSetting.REDIS_TIME_OUT, TimeUnit.SECONDS);
+            redisUtil.expire("collectByFID", TimeOutSetting.REDIS_TIME_OUT, TimeUnit.SECONDS);
             return i;
         } catch (Exception e) {
             return comCollectMapper.addCollect(map);

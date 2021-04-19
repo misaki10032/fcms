@@ -4,6 +4,7 @@ import com.cxy.fcms.mapper.SysAdminMapper;
 import com.cxy.fcms.pojo.SysAdmin;
 import com.cxy.fcms.service.LoginService;
 import com.cxy.fcms.util.RedisUtil;
+import com.cxy.fcms.util.TimeOutSetting;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class LoginServiceImpl implements LoginService {
@@ -42,6 +44,7 @@ public class LoginServiceImpl implements LoginService {
                 for (SysAdmin admin:allAdmins1) {
                     redisUtil.lLeftPush("allAdmins",admin);
                 }
+                redisUtil.expire("allAdmins", TimeOutSetting.REDIS_TIME_OUT, TimeUnit.SECONDS);
                 return allAdmins1;
             }
         }catch (Exception e){
@@ -62,6 +65,7 @@ public class LoginServiceImpl implements LoginService {
             for (SysAdmin admin:allAdmins1) {
                 redisUtil.lLeftPush("allAdmins",admin);
             }
+            redisUtil.expire("allAdmins", 300, TimeUnit.SECONDS);
         } catch (Exception e) {
             adminMapper.addAdmin(map);
         }

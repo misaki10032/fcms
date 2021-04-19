@@ -5,12 +5,14 @@ import com.cxy.fcms.pojo.ComCollect;
 import com.cxy.fcms.pojo.ComComment;
 import com.cxy.fcms.service.CommentService;
 import com.cxy.fcms.util.RedisUtil;
+import com.cxy.fcms.util.TimeOutSetting;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class CommentServiceImpl implements CommentService {
@@ -44,8 +46,10 @@ public class CommentServiceImpl implements CommentService {
                 List<ComComment> comments = comCommentMapper.selCommentsByUserId(userId);
                 System.out.println("=====================向 Redis 中存数据=======================");
                 for (ComComment comComment : comments) {
-                    redisUtil.lLeftPush("commentByUID", comComment);
+                    redisUtil.lRightPush("commentByUID", comComment);
                 }
+                redisUtil.expire("commentByUID", TimeOutSetting.REDIS_TIME_OUT, TimeUnit.SECONDS);
+
                 return comments;
             }
         } catch (Exception e) {
