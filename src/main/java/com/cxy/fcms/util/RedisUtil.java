@@ -536,12 +536,11 @@ public class RedisUtil {
     }
 
     /**
-     *
      * @param key
      * @param value
      * @return
      */
-    public Long lLeftPushAll(String key, String... value) {
+    public Long lLeftPushAll(String key, Object... value) {
         return redisTemplate.opsForList().leftPushAll(key, value);
     }
 
@@ -562,7 +561,7 @@ public class RedisUtil {
      * @param value
      * @return
      */
-    public Long lLeftPushIfPresent(String key, String value) {
+    public Long lLeftPushIfPresent(String key, Object value) {
         return redisTemplate.opsForList().leftPushIfPresent(key, value);
     }
 
@@ -574,7 +573,7 @@ public class RedisUtil {
      * @param value
      * @return
      */
-    public Long lLeftPush(String key, String pivot, String value) {
+    public Long lLeftPush(String key, String pivot, Object value) {
         return redisTemplate.opsForList().leftPush(key, pivot, value);
     }
 
@@ -584,7 +583,7 @@ public class RedisUtil {
      * @param value
      * @return
      */
-    public Long lRightPush(String key, String value) {
+    public Long lRightPush(String key, Object value) {
         return redisTemplate.opsForList().rightPush(key, value);
     }
 
@@ -594,7 +593,7 @@ public class RedisUtil {
      * @param value
      * @return
      */
-    public Long lRightPushAll(String key, String... value) {
+    public Long lRightPushAll(String key, Object... value) {
         return redisTemplate.opsForList().rightPushAll(key, value);
     }
 
@@ -615,7 +614,7 @@ public class RedisUtil {
      * @param value
      * @return
      */
-    public Long lRightPushIfPresent(String key, String value) {
+    public Long lRightPushIfPresent(String key, Object value) {
         return redisTemplate.opsForList().rightPushIfPresent(key, value);
     }
 
@@ -627,7 +626,7 @@ public class RedisUtil {
      * @param value
      * @return
      */
-    public Long lRightPush(String key, String pivot, String value) {
+    public Long lRightPush(String key, String pivot, Object value) {
         return redisTemplate.opsForList().rightPush(key, pivot, value);
     }
 

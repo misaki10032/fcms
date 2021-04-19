@@ -30,4 +30,6 @@ public interface ComFictionMapper extends BaseMapper<ComFiction> {
 
     List<ComFiction> getFictionsOrderByTime();
 
+    List<ComFiction> getFictionsOrderByHost();
+
 }
