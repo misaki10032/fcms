@@ -1,5 +1,6 @@
 package com.cxy.fcms.controller;
 
+import com.cxy.fcms.pojo.ComUser;
 import com.cxy.fcms.pojo.SysAdmin;
 import com.cxy.fcms.service.LoginService;
 import com.cxy.fcms.util.IDUtil;
@@ -40,16 +41,25 @@ public class LoginController {
     public String toLogin(){
         return "login";
     }
+
     @PostMapping("/login")
     public String Login(Model model, String nums, String pwd){
         Subject subject = SecurityUtils.getSubject();//获取用户信息
         UsernamePasswordToken token = new UsernamePasswordToken(nums,pwd);//封装
-        try{
+        try {
             subject.login(token);
             //通过subject取
-            SysAdmin admin = (SysAdmin) subject.getSession().getAttribute("admin");
-            model.addAttribute("adminName",admin.getAdminName());
-            return "back/adminHome";
+            Session session = subject.getSession();
+            Boolean isAdmin = (Boolean) session.getAttribute("isAdmin");
+            System.out.println("isAdmin" + isAdmin);
+            if (isAdmin) {
+                SysAdmin admin = (SysAdmin) session.getAttribute("admin");
+                model.addAttribute("adminName", admin.getAdminName());
+                return "back/adminHome";
+            } else {
+                model.addAttribute("msg", "没有用户名为-->" + token.getPrincipal());
+                return "login";
+            }
         }catch (UnknownAccountException uae) {
             model.addAttribute("msg","没有用户名为-->" + token.getPrincipal());
             return "login";
@@ -65,10 +75,11 @@ public class LoginController {
     public String logOut(){
         Subject subject = SecurityUtils.getSubject();
         subject.logout();
-        return "login";
+        return "index";
     }
+
     /**
-     * 注册相关
+     * 管理员注册相关
      */
     @GetMapping("/withResiger")
     public void resiger(String phone, String number, String pwd, String pwd2, String name, HttpServletResponse resp) throws IOException {
@@ -99,14 +110,53 @@ public class LoginController {
         }
     }
     @GetMapping("/resiger")
-    public String resigerOk(String phone, String number, String pwd, String name){
-        HashMap<String,String> map = new HashMap<>();
+    public String resigerOk(String phone, String number, String pwd, String name) {
+        HashMap<String, String> map = new HashMap<>();
         map.put("id", IDUtil.getID());
-        map.put("num",number);
-        map.put("pwd",pwd);
-        map.put("name",name);
-        map.put("phone",phone);
+        map.put("num", number);
+        map.put("pwd", pwd);
+        map.put("name", name);
+        map.put("phone", phone);
         loginService.addAdmin(map);
         return "login";
     }
+
+    /**
+     * 用户登录
+     */
+    @GetMapping("/usertologin")
+    public String userToLogin() {
+        return "userlogin";
+    }
+
+    @PostMapping("/userlogin")
+    public String userLogin(Model model, String nums, String pwd) {
+        Subject subject = SecurityUtils.getSubject();//获取用户信息
+        UsernamePasswordToken token = new UsernamePasswordToken(nums, pwd);//封装
+        try {
+            subject.login(token);
+            //通过subject取
+            Session session = subject.getSession();
+            Boolean isAdmin = (Boolean) session.getAttribute("isAdmin");
+            System.out.println("isAdmin" + isAdmin);
+            if (!isAdmin) {
+                ComUser user = (ComUser) session.getAttribute("user");
+                model.addAttribute("username", user.getUserName());
+                return "index";
+            } else {
+                model.addAttribute("msg", "没有用户名为->" + token.getPrincipal());
+                return "userlogin";
+            }
+        } catch (UnknownAccountException uae) {
+            model.addAttribute("msg", "没有用户名为-->" + token.getPrincipal());
+            return "userlogin";
+        } catch (IncorrectCredentialsException ice) {
+            model.addAttribute("msg", "账号或密码错误!");
+            return "userlogin";
+        } catch (LockedAccountException lae) {
+            model.addAttribute("msg", "用户名 : " + token.getPrincipal() + ",被锁定了.请联系您的管理员解锁.");
+            return "userlogin";
+        }
+    }
+
 }
