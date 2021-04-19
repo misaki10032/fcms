@@ -6,7 +6,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class AdminController {
     @GetMapping("/toFicList")
-    public String toFicList(){
+    public String toFicList() {
         return "back/fiction/booklist";
+    }
+
+    @GetMapping("/gohome")
+    public String toAdminInfo() {
+        return "back/adminInfo";
     }
 }
