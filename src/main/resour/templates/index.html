@@ -44,21 +44,31 @@
 					</dl>
 				</li>
 			</ul>
-			<div class="layui-carousel" id="test1">
-				<div carousel-item>
-					<div style="background-color: #338bff">条目1</div>
-					<div style="background-color: #435bfa">条目1</div>
-					<div style="background-color: #765bbf">条目1</div>
-					<div style="background-color: #100bff">条目1</div>
-					<div style="background-color: #344bff">条目1</div>
-					<div style="background-color: #999bff">条目1</div>
+			<div class="layui-row">
+				<div class="layui-col-md2" style="background-color: #ffb09c;height:420px">
+					新闻
+				</div>
+				<div class="layui-col-md8" style="background-color: #beff9b;">
+					<div class="layui-carousel" id="test1">
+						<div carousel-item>
+							<div style="background-color: #338bff">条目1</div>
+							<div style="background-color: #5b9ba4">条目2</div>
+							<div style="background-color: #765bbf">条目3</div>
+							<div style="background-color: #ff0bfb">条目4</div>
+							<div style="background-color: #7b9b5e">条目5</div>
+							<div style="background-color: #8f5a55">条目6</div>
+						</div>
+					</div>
+				</div>
+				<div class="layui-col-md2" style="background-color: #ffb09c;height:420px">
+					广告
 				</div>
 			</div>
 			<!-- 条目中可以是任意内容，如：<img src=""> -->
 
 			<script src="/static/build/layui.js"></script>
 			<script>
-				layui.use('carousel', function() {
+				layui.use('carousel', function () {
 					var carousel = layui.carousel;
 					//建造实例
 					carousel.render({
