@@ -21,28 +21,28 @@
 		  <div class="layui-header layui-bg-black">
 			<div class="layui-logo layui-bg-black">后台管理系统</div>
 				<ul class="layui-nav layui-layout-left layui-bg-black">
-					<li class="layui-nav-item"><a href="/toFicList" target="if-windows">头部导航 1</a></li>
-					<li class="layui-nav-item"><a href="/toFicList" target="if-windows">头部导航 2</a></li>
-					<li class="layui-nav-item"><a href="/toFicList" target="if-windows">头部导航 3</a></li>
+					<li class="layui-nav-item"><a href="/toFicList" target="if-windows">浏览统计</a></li>
+					<li class="layui-nav-item"><a href="/toFicList" target="if-windows">畅销查看</a></li>
+					<li class="layui-nav-item"><a href="/toFicList" target="if-windows">奖项设置</a></li>
 					<li class="layui-nav-item">
-						<a href="/toFicList" target="if-windows">nav groups</a>
+						<a href="/toFicList" target="if-windows">其他</a>
 						<dl class="layui-nav-child">
-							<dd><a href="/toFicList" target="if-windows">menu 11</a></dd>
-							<dd><a href="/toFicList" target="if-windows">menu 22</a></dd>
-							<dd><a href="/toFicList" target="if-windows">menu 33</a></dd>
+							<dd><a href="/toFicList" target="if-windows">其他1</a></dd>
+							<dd><a href="/toFicList" target="if-windows">其他2</a></dd>
+							<dd><a href="/toFicList" target="if-windows">其他3</a></dd>
 						</dl>
 					</li>
 				</ul>
 				<!-- 头部右侧导航栏  -->
 				<ul class="layui-nav layui-layout-right layui-bg-black">
 					<li class="layui-nav-item">
-						<a href="">
+						<a href="/toFicList"  target="if-windows">
 							<img src="//tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg" class="layui-nav-img">
 							<span th:text="${adminName}"></span>
 						</a>
 						<dl class="layui-nav-child">
-							<dd><a href="">set 1</a></dd>
-							<dd><a href="">set 2</a></dd>
+							<dd><a href="/toFicList" target="if-windows">个人中心</a></dd>
+							<dd><a href="/toFicList" target="if-windows">设置</a></dd>
 						</dl>
 					</li>
 					<li class="layui-nav-item"><a th:href="@{/logOut}">退出</a></li>
@@ -55,10 +55,11 @@
 						<li class="layui-nav-item layui-nav-itemed">
 							<a class="" href="/toFicList" target="if-windows">信息管理</a>
 							<dl class="layui-nav-child">
-								<dd><a href="/toFicList" target="if-windows">图书信息</a></dd>
+								<dd><a href="/toFicList" target="if-windows">小说信息</a></dd>
 								<dd><a href="/toUsers" target="if-windows">用户信息</a></dd>
-								<dd><a href="/toFicList" target="if-windows">广告信息</a></dd>
 								<dd><a href="/toFicList" target="if-windows">评论信息</a></dd>
+								<dd><a href="/toFicList" target="if-windows">广告信息</a></dd>
+								<dd><a href="/toFicList" target="if-windows">登录记录</a></dd>
 							</dl>
 						</li>
 						<li class="layui-nav-item">

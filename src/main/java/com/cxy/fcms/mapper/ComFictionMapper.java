@@ -20,12 +20,14 @@ import java.util.List;
 @SuppressWarnings("all")
 public interface ComFictionMapper extends BaseMapper<ComFiction> {
 
-    int addFiction(HashMap<String,String> map);
+    int addFiction(HashMap<String, String> map);
 
-    int addFictionData(@Param("id") String id,@Param("ficId") String ficId, @Param("text") String text);
+    int addFictionData(@Param("id") String id, @Param("ficId") String ficId, @Param("text") String text);
 
-    int addFictionType(@Param("id") String id,@Param("ficId") String ficId,@Param("typeId") String typeID);
+    int addFictionType(@Param("id") String id, @Param("ficId") String ficId, @Param("typeId") String typeID);
 
     List<ComFiction> getFictions();
+
+    List<ComFiction> getFictionsOrderByTime();
 
 }

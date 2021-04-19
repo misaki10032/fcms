@@ -57,12 +57,19 @@ public class FictionController {
         List<ComType> comTypes = typeMapper.selectList(null);
         String[] types = new String[comTypes.size()];
         int i = 0;
-        for (ComType type:comTypes) {
+        for (ComType type : comTypes) {
             types[i] = type.getTyName();
             i++;
         }
-        model.addAttribute("types",types);
+        model.addAttribute("types", types);
         return "back/fiction/addFiction";
     }
 
+    @GetMapping("/tofictionxx")
+    @ResponseBody
+    public String toFictionXX(String index) {
+        List<ComFiction> fictionOrderByTime = fictionService.getFictionOrderByTime();
+        int index2 = Integer.parseInt(index);
+        return fictionOrderByTime.get(index2).toString();
+    }
 }
