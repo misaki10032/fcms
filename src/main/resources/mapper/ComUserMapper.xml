@@ -11,6 +11,14 @@
         where id = #{id}
     </update>
 
+    <!--禁用用户-->
+    <update id="unDelUser" parameterType="string">
+        update com_user
+        set is_banned   = 0,
+            gmt_modified=now()
+        where id = #{id}
+    </update>
+
     <!--修改用户-->
     <update id="revUser" parameterType="map">
         update com_user
@@ -47,9 +55,20 @@
     </update>
     <!--添加用户-->
     <insert id="addUser" parameterType="map">
-        insert into com_user (id, user_name, user_phone, user_pwd, user_level, gmt_create, gmt_modified, is_deleted,
-                              is_banned)
-        values (#{id}, #{userName}, #{userPhone}, #{userPwd}, 1, now(), now(), 0, 0);
+        insert into com_user
+        ( id, user_name
+        , user_phone
+        , user_pwd
+        , user_level
+        , gmt_create
+        , gmt_modified
+        , is_deleted
+        , is_banned)
+        values ( #{id}
+               , #{userName}
+               , #{userPhone}
+               , #{userPwd}
+               , 1, now(), now(), 0, 0);
     </insert>
     <!--查询所有用户-->
     <select id="selUser" resultType="com.cxy.fcms.pojo.ComUser">

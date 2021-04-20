@@ -5,6 +5,7 @@ import com.cxy.fcms.pojo.ComType;
 import com.cxy.fcms.pojo.SysAdmin;
 import com.cxy.fcms.service.TypeService;
 import com.cxy.fcms.util.RedisUtil;
+import com.cxy.fcms.util.TimeOutSetting;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class TypeServiceImpl implements TypeService {
@@ -34,8 +36,9 @@ public class TypeServiceImpl implements TypeService {
             } else {
                 List<ComType> comTypes1 = comTypeMapper.selType();
                 for (ComType type : comTypes1) {
-                    redisUtil.lLeftPush("comTypes", type);
+                    redisUtil.lRightPush("comTypes", type);
                 }
+                redisUtil.expire("comTypes", TimeOutSetting.REDIS_TIME_OUT, TimeUnit.SECONDS);
                 return comTypes1;
             }
         } catch (Exception e) {

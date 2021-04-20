@@ -31,7 +31,7 @@
 				<li class="layui-nav-item">
 					<a>分类</a>
 				</li>
-				<li class="layui-nav-item layui-col-lg-offset8">
+				<li class="layui-nav-item layui-col-lg-offset8 layui-col-xs-offset7 layui-col-md-offset8">
 					<a shiro:guest="">login</a>
 					<dl shiro:guest="" class="layui-nav-child">
 						<dd><a href="/tologin">管理员登录</a></dd>
@@ -44,31 +44,41 @@
 					</dl>
 				</li>
 			</ul>
-			<div class="layui-carousel" id="test1">
-				<div carousel-item>
-					<div style="background-color: #338bff">条目1</div>
-					<div style="background-color: #435bfa">条目1</div>
-					<div style="background-color: #765bbf">条目1</div>
-					<div style="background-color: #100bff">条目1</div>
-					<div style="background-color: #344bff">条目1</div>
-					<div style="background-color: #999bff">条目1</div>
+			<div class="layui-row">
+				<div class="layui-col-md2 layui-col-xs2" style="background-color: #ffb09c;height:420px">
+					新闻
+				</div>
+				<div class="layui-col-md8 layui-col-xs8" style="background-color: #beff9b;">
+					<div class="layui-carousel" id="test1">
+						<div carousel-item>
+							<div style="background-color: #338bff">条目1</div>
+							<div style="background-color: #5b9ba4">条目2</div>
+							<div style="background-color: #765bbf">条目3</div>
+							<div style="background-color: #ff0bfb">条目4</div>
+							<div style="background-color: #7b9b5e">条目5</div>
+							<div style="background-color: #8f5a55">条目6</div>
+						</div>
+					</div>
+				</div>
+				<div class="layui-col-md2 layui-col-xs2" style="background-color: #ffb09c;height:420px">
+					广告
 				</div>
 			</div>
 			<!-- 条目中可以是任意内容，如：<img src=""> -->
 
 			<script src="/static/build/layui.js"></script>
 			<script>
-				layui.use('carousel', function() {
+				layui.use('carousel', function () {
 					var carousel = layui.carousel;
 					//建造实例
 					carousel.render({
 						elem: '#test1',
 						width: '100%' //设置容器宽度
-							,
+						,
 						height: '420px',
 						arrow: 'hover' //始终显示箭头
-							// ,anim: 'updown' //切换动画方式
-							,
+						// ,anim: 'updown' //切换动画方式
+						,
 						interval: 3000
 					});
 				});
@@ -90,20 +100,20 @@
 					isAuto: true,
 					isLazyimg: true,
 					end: '到底了哦',
-					done: function(page, next) { //加载下一页
+					done: function (page, next) { //加载下一页
 						//模拟插入
-						setTimeout(function() {
+						setTimeout(function () {
 							var lis = [];
 							for (var i = 0; i < 3; i++) {
 								lis.push(
 										'<a href="#" style="color:#FFFFFF;">' +
-										'<li class="layui-nav-item layui-col-xs4 layui-col-xs-offset0  layui-col-lg4 layui-col-lg-offset0" onmouseover="overit(this)">' +
+										'<li class="layui-nav-item layui-col-xs4 layui-col-xs-offset0  layui-col-lg4 layui-col-lg-offset0" onmouseover="overit(this)" onclick="toFicHost(this,' + page + ',' + i + ');">' +
 										'<img class="layui-col-xs10 layui-col-xs-offset1 layui-col-lg10 layui-col-lg-offset1" src="img/now2.png" width="80%" height="250px" style="padding:20px">' +
-										'<span class="layui-col-xs10 layui-col-xs-offset1 layui-col-lg10 layui-col-lg-offset1" style="position: absolute;background-color:#505658;z-index:13;height:40px;'+
-										'text-align:center;bottom:20px;display:none;">名字</span>'+
+										'<span class="layui-col-xs10 layui-col-xs-offset1 layui-col-lg10 layui-col-lg-offset1" style="position: absolute;background-color:#505658;z-index:13;height:40px;' +
+										'text-align:center;bottom:20px;display:none;">名字</span>' +
 										'</li>' +
 										'</a>'
-									)
+								)
 							}
 							next(lis.join(''), page < 4); //假设总页数为 6
 						}, 500);
@@ -119,7 +129,7 @@
 			</ul>
 		</div>
 		<script type="text/javascript">
-			layui.use('flow', function() {
+			layui.use('flow', function () {
 				var flow = layui.flow;
 				flow.load({
 					elem: '#newFiction', //流加载容器
@@ -127,18 +137,17 @@
 					isAuto: true,
 					isLazyimg: true,
 					end: '到底了哦',
-					done: function(page, next) { //加载下一页
+					done: function (page, next) { //加载下一页
 						//模拟插入
-						setTimeout(function() {
+						setTimeout(function () {
 							var lis = [];
 							for (var i = 0; i < 3; i++) {
 								lis.push(
-
 										'<a style="color:#FFFFFF;">' +
-										'<li class="layui-nav-item layui-col-xs4 layui-col-xs-offset0  layui-col-lg4 layui-col-lg-offset0" onmouseover="overit(this)" onclick="toXX(this,'+page+','+i+')" >' +
+										'<li class="layui-nav-item layui-col-xs4 layui-col-xs-offset0  layui-col-lg4 layui-col-lg-offset0" onmouseover="overit(this)" onclick="toXX(this,' + page + ',' + i + ')" >' +
 										'<img class="layui-col-xs10 layui-col-xs-offset1 layui-col-lg10 layui-col-lg-offset1" src="img/now2.png" width="80%" height="250px" style="padding:20px">' +
-										'<span class="layui-col-xs10 layui-col-xs-offset1 layui-col-lg10 layui-col-lg-offset1" style="position: absolute;background-color:#505658;z-index:13;height:40px;'+
-										'text-align:center;bottom:20px;display:none;">名字</span>'+
+										'<span class="layui-col-xs10 layui-col-xs-offset1 layui-col-lg10 layui-col-lg-offset1" style="position: absolute;background-color:#505658;z-index:13;height:40px;' +
+										'text-align:center;bottom:20px;display:none;">名字</span>' +
 										'</li>' +
 										'</a>'
 								)
@@ -150,16 +159,28 @@
 			});
 		</script>
 		<script type="text/javascript">
-			function overit(ele){
-				$(ele).hover(function(){
-					$(ele).find("span").css("display","block");
-				},function(){
-					$(ele).find("span").css("display","none");
+			function overit(ele) {
+				// $.ajax({
+				// 	 url:
+				// 	,
+				// })
+				//
+
+				$(ele).hover(function () {
+					$(ele).find("span").css("display", "block");
+				}, function () {
+					$(ele).find("span").css("display", "none");
 				});
 			}
-			function toXX(ele,page,i){
-				var index = eval((page - 1)*3+i+1);
-				location.assign("http://192.168.31.225:9898/tofictionxx?index="+index);
+
+			function toXX(ele, page, i) {
+				var index = eval((page - 1) * 3 + i + 1);
+				location.assign("http://192.168.31.225:9898/tofictionxx?index=" + index);
+			}
+
+			function toFicHost(ele, page, i) {
+				var index = eval((page - 1) * 3 + i + 1);
+				location.assign("http://192.168.31.225:9898/tofictionhost?index=" + index);
 			}
 		</script>
 	</body>

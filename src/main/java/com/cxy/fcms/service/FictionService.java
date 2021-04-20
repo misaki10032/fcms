@@ -15,4 +15,8 @@ public interface FictionService {
     void addFiction(HashMap<String, String> ficmap, String id, String text, String type);
 
     List<ComFiction> getFictionOrderByTime();
+
+    List<ComFiction> getFictionsOrderByHost();
+
+    void delFiction(String id);
 }

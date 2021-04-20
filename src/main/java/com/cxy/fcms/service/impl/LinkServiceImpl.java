@@ -6,18 +6,22 @@ import com.cxy.fcms.pojo.ComLink;
 import com.cxy.fcms.pojo.SysAdmin;
 import com.cxy.fcms.service.LinkService;
 import com.cxy.fcms.util.RedisUtil;
+import com.cxy.fcms.util.TimeOutSetting;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+
 @Service
 public class LinkServiceImpl implements LinkService {
     @Autowired
     ComLinkMapper linkMapper;
     @Autowired
     RedisUtil redisUtil;
+
     /**
      * 查询所有链接
      */
@@ -41,8 +45,9 @@ public class LinkServiceImpl implements LinkService {
                 List<ComLink> comLinks = linkMapper.searchLinks();
                 System.out.println("=====================向 Redis 中存数据=======================");
                 for (ComLink link:comLinks) {
-                    redisUtil.lLeftPush("allLinks",link);
+                    redisUtil.lRightPush("allLinks", link);
                 }
+                redisUtil.expire("allLinks", TimeOutSetting.REDIS_TIME_OUT, TimeUnit.SECONDS);
                 return comLinks;
             }
         }catch (Exception e){

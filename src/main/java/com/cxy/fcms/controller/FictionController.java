@@ -70,6 +70,30 @@ public class FictionController {
     public String toFictionXX(String index) {
         List<ComFiction> fictionOrderByTime = fictionService.getFictionOrderByTime();
         int index2 = Integer.parseInt(index);
-        return fictionOrderByTime.get(index2).toString();
+        return fictionOrderByTime.get(index2 - 1).toString();
     }
+
+    @GetMapping("/tofictionhost")
+    @ResponseBody
+    public String toFictionHost(String index) {
+        List<ComFiction> fictions = fictionService.getFictionsOrderByHost();
+        for (ComFiction fiction : fictions) {
+            System.out.println(fiction);
+        }
+        int index2 = Integer.parseInt(index);
+        return fictions.get(index2 - 1).toString();
+    }
+
+    @GetMapping("/delfic")
+    public void delFiction(String id, HttpServletResponse rep) {
+        PrintWriter out = null;
+        try {
+            out = rep.getWriter();
+            fictionService.delFiction(id);
+            out.print("1");
+        } catch (IOException e) {
+            System.err.println("删除失败!");
+        }
+    }
+
 }

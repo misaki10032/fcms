@@ -63,4 +63,9 @@ public class ComFiction implements Serializable {
      * 逻辑删除
      */
     private Integer isDeleted;
+
+    /**
+     * 热度
+     */
+    private Integer ficHost;
 }
