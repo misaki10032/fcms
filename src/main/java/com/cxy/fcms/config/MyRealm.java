@@ -59,6 +59,9 @@ public class MyRealm extends AuthorizingRealm {
         List<ComUser> users = userService.selUser();
         for (ComUser user : users) {
             if (user.getUserPhone().equals(username)) {
+                if (user.getIsBanned() == 1) {
+                    throw new LockedAccountException();
+                }
                 System.out.println("------->user------->ok");
                 Subject subject = SecurityUtils.getSubject();
                 Session session = subject.getSession();

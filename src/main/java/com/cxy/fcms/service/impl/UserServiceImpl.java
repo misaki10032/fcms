@@ -57,6 +57,24 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public int unDelUser(String id) {
+        try {
+            int i = comUserMapper.unDelUser(id);//添加新注册的用户
+            redisUtil.delete("comUsers");//删除原来的list
+            System.out.println("=====================从MySQL中读取数据=======================");
+            List<ComUser> comUsers = comUserMapper.selUser();
+            System.out.println("=====================向 Redis 中存数据=======================");
+            for (ComUser user : comUsers) {
+                redisUtil.lRightPush("comUsers", user);
+            }
+            redisUtil.expire("comUsers", TimeOutSetting.REDIS_TIME_OUT, TimeUnit.SECONDS);
+            return i;
+        } catch (Exception e) {
+            return comUserMapper.unDelUser(id);
+        }
+    }
+
+    @Override
     public int revUser(Map<String, Object> map) {
         try {
             int i = comUserMapper.revUser(map);//添加新注册的用户
