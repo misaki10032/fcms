@@ -1,8 +1,10 @@
 package com.cxy.fcms.service.impl;
 
+import com.cxy.fcms.mapper.ComFictionMapper;
 import com.cxy.fcms.mapper.ComTypeMapper;
 import com.cxy.fcms.pojo.ComType;
 import com.cxy.fcms.pojo.SysAdmin;
+import com.cxy.fcms.service.FictionService;
 import com.cxy.fcms.service.TypeService;
 import com.cxy.fcms.util.RedisUtil;
 import com.cxy.fcms.util.TimeOutSetting;
@@ -19,6 +21,8 @@ import java.util.concurrent.TimeUnit;
 public class TypeServiceImpl implements TypeService {
     @Autowired
     ComTypeMapper comTypeMapper;
+    @Autowired
+    FictionService fictionService;
     @Autowired
     RedisUtil redisUtil;
 
@@ -95,7 +99,13 @@ public class TypeServiceImpl implements TypeService {
     @Override
     public int delType(String id) {
         try {
-            int i = comTypeMapper.delType(id);//添加新注册的用户
+            // 先删除所有外键
+            List<String> fictions = fictionService.getFictionsByType(id);
+            System.out.println(fictions);
+            for (String fid : fictions) {
+                fictionService.delFiction(fid);
+            }
+            int i = comTypeMapper.delType(id);//id删除分区类型
             List<ComType> comTypes = comTypeMapper.selType();//更新redis信息
             redisUtil.delete("comTypes");//删除原来的list
             System.out.println("=====================从MySQL中读取数据=======================");

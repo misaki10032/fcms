@@ -38,4 +38,6 @@ public interface ComFictionMapper extends BaseMapper<ComFiction> {
 
     int delFicData(String id);
 
+    List<String> getFictionByTypeId(String tid);
+
 }

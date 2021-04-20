@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro"
+      lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Layui</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/layui-v2.6.4/layui/css/layui.css" media="all">
+    <script src="/js/jquery-3.5.1.min.js" charset="UTF-8"></script>
+</head>
+<body>
+
+<table class="layui-hide" id="test" lay-filter="test"></table>
+<script type="text/html" id="toolbarDemo">
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm" lay-event="getCheckData">获取选中行数据</button>
+        <button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button>
+        <button class="layui-btn layui-btn-sm" lay-event="isAll">验证是否全选</button>
+        <button class="layui-btn layui-btn-sm" id="addtype">新增</button>
+    </div>
+</script>
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">修改</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+    <a class="layui-btn layui-btn-warm layui-btn-xs" lay-event="block">启用</a>
+</script>
+<script src="/layui-v2.6.4/layui/layui.js" charset="utf-8"></script>
+
+<script>
+    layui.use('table', function () {
+        var table = layui.table;
+
+        table.render({
+            elem: '#test',
+            url: 'http://192.168.31.225:9898/getTypes',
+            parseData: function (res) { //res 即为原始返回的数据
+                return {
+                    "code": res.code, //解析接口状态
+                    "msg": res.msg, //解析提示文本
+                    "count": res.count, //解析数据长度
+                    "data": res.data //解析数据列表
+                }
+            },
+            toolbar: '#toolbarDemo', //开启头部工具栏，并为其绑定左侧模板
+            height: 'full-3',
+            defaultToolbar: ['filter', 'exports', 'print', { //自定义头部工具栏右侧图标。如无需自定义，去除该参数即可
+                title: '提示',
+                layEvent: 'LAYTABLE_TIPS',
+                icon: 'layui-icon-tips'
+            }],
+            title: '用户数据表',
+            cols: [
+                [{
+                    type: 'checkbox',
+                    fixed: 'left'
+                }, {
+                    field: 'id',
+                    title: 'ID',
+                    width: 200,
+                    fixed: 'left',
+                    unresize: true
+                }, {
+                    field: 'tyName',
+                    title: '分区名',
+                    width: 180,
+                    edit: 'text'
+                }, {
+                    field: 'gmtCreate',
+                    title: '创建时间',
+                    width: 200,
+                    edit: 'text'
+                }, {
+                    field: 'gmtModified',
+                    title: '修改时间',
+                    width: 200,
+                    edit: 'text',
+                    sort: true
+                }, {
+                    field: 'isDeleted',
+                    title: '是否启用',
+                    width: 80,
+                    edit: 'text',
+                }, {
+                    fixed: 'right',
+                    title: '操作',
+                    toolbar: '#barDemo',
+                    width: 150
+                }]
+            ],
+            page: true
+        });
+
+        table.on('toolbar(test)', function (obj) {
+            var checkStatus = table.checkStatus(obj.config.id);
+            switch (obj.event) {
+                case 'getCheckData':
+                    var data = checkStatus.data;
+                    layer.alert(JSON.stringify(data));
+                    break;
+                case 'getCheckLength':
+                    var data = checkStatus.data;
+                    layer.msg('选中了：' + data.length + ' 个');
+                    break;
+                case 'isAll':
+                    layer.msg(checkStatus.isAll ? '全选' : '未全选');
+                    break;
+                //自定义头工具栏右侧图标 - 提示
+                case 'LAYTABLE_TIPS':
+                    layer.alert('这是工具栏右侧自定义的一个图标按钮');
+                    break;
+            }
+            ;
+        });
+
+        //监听行工具事件
+        table.on('tool(test)', function (obj) {
+            var data = obj.data;
+            //console.log(obj)
+            if (obj.event === 'del') {
+                layer.confirm('真的删除么', function (index) {
+                    var typeid = data.id;
+                    $.ajax({
+                        url: "/deltype"
+                        , type: 'get'
+                        , async: false
+                        , data: {
+                            id: typeid
+                        }
+                        , success: function (res) {
+                            if (res === "1") {
+                                obj.del();
+                                layer.msg("删除成功")
+                                layer.close(index);
+                            } else if (res === "0") {
+                                layer.msg("删除失败")
+                            }
+                        }
+                    });
+                });
+            } else if (obj.event === 'edit') {
+                layer.prompt({
+                    formType: 2,
+                    value: data.tyName
+                }, function (value, index) {
+                    obj.update({
+                        tyName: value
+                    });
+                    layer.close(index);
+                });
+            }
+        });
+    });
+
+    layui.use(['layer', 'table', "laypage", "jquery"], function () {
+        var
+            layer = layui.layer //弹层
+            , table = layui.table //表格
+            , laypage = layui.laypage //分页
+            , $ = layui.jquery
+        $('#addtype').on("click", function () {
+            layer.prompt({title: '输入新的分区名', formType: 2}, function (pass, index) {
+                layer.close(index);
+                var typename = pass;
+                $.ajax({
+                    url: "/addType"
+                    , type: 'get'
+                    , async: false
+                    , data: {
+                        tyname: typename
+                    }
+                    , success: function (res) {
+                        if (res === "1") {
+                            layer.msg("新增分区 " + typename);
+                            layer.close(index);
+                        } else if (res === "0") {
+                            layer.msg("网络繁忙!");
+                        }
+                    }
+                });
+            });
+        });
+    });
+</script>
+
+</body>
+</html>

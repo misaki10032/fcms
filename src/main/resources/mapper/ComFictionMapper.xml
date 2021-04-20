@@ -100,4 +100,11 @@
         from com_fiction_type
         where fic_id = #{id};
     </delete>
+
+    <select id="getFictionByTypeId" parameterType="string" resultType="string">
+        select f.id AS id
+        from com_fiction f
+                 inner join com_fiction_type t on f.id = t.fic_id
+        where t.fic_type = #{tid};
+    </select>
 </mapper>

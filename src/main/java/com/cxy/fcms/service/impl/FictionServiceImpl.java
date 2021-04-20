@@ -152,4 +152,12 @@ public class FictionServiceImpl implements FictionService {
         }
         redisUtil.expire("fictions", TimeOutSetting.REDIS_TIME_OUT, TimeUnit.SECONDS);
     }
+
+    @Override
+    public List<String> getFictionsByType(String id) {
+        System.out.println("----正在查找书id");
+        return fictionMapper.getFictionByTypeId(id);
+    }
+
+
 }

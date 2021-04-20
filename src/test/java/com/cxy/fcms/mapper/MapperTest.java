@@ -41,4 +41,10 @@ public class MapperTest {
 
         fictionMapper.delFiction("f7a1a9fa267f4eb0bc152fe64517e475");
     }
+
+    @Test
+    void getTTT2() {
+        List<String> aa = fictionMapper.getFictionByTypeId("d7a93c109c444140b1e0b8799e7a1a96");
+        System.out.println(aa);
+    }
 }
