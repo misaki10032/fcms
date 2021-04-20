@@ -84,4 +84,20 @@
              com_type ct ON t.fic_type = ct.id
         order by ficHost DESC;
     </select>
+
+    <delete id="delFiction" parameterType="string">
+        delete
+        from com_fiction
+        where id = #{id};
+    </delete>
+    <delete id="delFicData" parameterType="string">
+        delete
+        from com_fiction_data
+        where fic_id = #{id};
+    </delete>
+    <delete id="delFicType" parameterType="string">
+        delete
+        from com_fiction_type
+        where fic_id = #{id};
+    </delete>
 </mapper>

@@ -83,4 +83,17 @@ public class FictionController {
         int index2 = Integer.parseInt(index);
         return fictions.get(index2 - 1).toString();
     }
+
+    @GetMapping("/delfic")
+    public void delFiction(String id, HttpServletResponse rep) {
+        PrintWriter out = null;
+        try {
+            out = rep.getWriter();
+            fictionService.delFiction(id);
+            out.print("1");
+        } catch (IOException e) {
+            System.err.println("删除失败!");
+        }
+    }
+
 }

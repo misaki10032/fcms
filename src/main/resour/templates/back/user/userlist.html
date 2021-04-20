@@ -136,8 +136,9 @@
 					var data = obj.data;
 					if (obj.event === 'del') {
 						layer.confirm('真的删除行么', function(index) {
-							obj.del();
-							layer.close(index);
+							// obj.del();
+							// layer.close(index);
+							layer.msg('权限不足!!');
 						});
 					} else if (obj.event === 'edit') {
 						layer.prompt({

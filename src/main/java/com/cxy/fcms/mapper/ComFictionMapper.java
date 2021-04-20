@@ -32,4 +32,10 @@ public interface ComFictionMapper extends BaseMapper<ComFiction> {
 
     List<ComFiction> getFictionsOrderByHost();
 
+    int delFiction(String id);
+
+    int delFicType(String id);
+
+    int delFicData(String id);
+
 }

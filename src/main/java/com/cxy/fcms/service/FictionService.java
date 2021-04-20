@@ -17,4 +17,6 @@ public interface FictionService {
     List<ComFiction> getFictionOrderByTime();
 
     List<ComFiction> getFictionsOrderByHost();
+
+    void delFiction(String id);
 }

@@ -90,6 +90,7 @@
                 }
                 , success: function (res) {
                     if(res==='ok'){
+                        layer.msg(res);
                         $("#msg").html("成功")
                         isok=true;
                     }else{
@@ -98,6 +99,7 @@
                 }
             });
             if(isok){
+                parent.layui.admin.events.closeThisTabs();
                 return true;
             }
             return false;

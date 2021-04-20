@@ -73,7 +73,6 @@ public class FictionServiceImpl implements FictionService {
         redisUtil.expire("fictions", TimeOutSetting.REDIS_TIME_OUT, TimeUnit.SECONDS);
 
     }
-
     @Override
     public List<ComFiction> getFictionOrderByTime() {
         try {
@@ -106,7 +105,6 @@ public class FictionServiceImpl implements FictionService {
             return fictionMapper.getFictionsOrderByTime();
         }
     }
-
     @Override
     public List<ComFiction> getFictionsOrderByHost() {
         try {
@@ -138,5 +136,20 @@ public class FictionServiceImpl implements FictionService {
             System.out.println("=====================从MySQL中读取数据=======================");
             return fictionMapper.getFictionsOrderByHost();
         }
+    }
+
+    @Override
+    public void delFiction(String id) {
+        fictionMapper.delFicData(id);
+        fictionMapper.delFicType(id);
+        fictionMapper.delFiction(id);
+        //更新redis
+        redisUtil.delete("fictions");//删除原来的list
+        List<ComFiction> fictions = fictionMapper.getFictions();
+        System.out.println("=====================更新 Redis  数据=======================");
+        for (ComFiction fiction : fictions) {
+            redisUtil.lRightPush("fictions", fiction);
+        }
+        redisUtil.expire("fictions", TimeOutSetting.REDIS_TIME_OUT, TimeUnit.SECONDS);
     }
 }
