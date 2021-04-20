@@ -8,7 +8,6 @@
 	<title></title>
 	<script src="js/jquery-3.5.1.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="layui-v2.6.4/layui/css/layui.css"/>
-	<link rel="stylesheet" type="text/css" href="layui-v2.6.4/layui/css/modules/code.css"/>
 	<script src="layui-v2.6.4/layui/layui.js" type="text/javascript" charset="utf-8"></script>
 	<script>
 		layui.use('element', function () {
@@ -18,20 +17,20 @@
 	</head>
 	<body>
 		<div class="layui-fluid" style="padding: 0;">
-			<ul class="layui-nav">
-				<li class="layui-nav-item">
+			<ul class="layui-nav layui-row">
+				<li class="layui-nav-item layui-col-md1 layui-col-lg1 layui-col-xs1 layui-col-sm1">
 					<a href="/">首页</a>
 				</li>
-				<li class="layui-nav-item">
+				<li class="layui-nav-item layui-col-md1 layui-col-lg1 layui-col-xs1 layui-col-sm1">
 					<a>热门</a>
 				</li>
-				<li class="layui-nav-item">
+				<li class="layui-nav-item layui-col-md1 layui-col-lg1 layui-col-xs1 layui-col-sm1">
 					<a>排行</a>
 				</li>
-				<li class="layui-nav-item">
+				<li class="layui-nav-item layui-col-md1 layui-col-lg1 layui-col-xs1 layui-col-sm1">
 					<a>分类</a>
 				</li>
-				<li class="layui-nav-item layui-col-lg-offset8 layui-col-xs-offset7 layui-col-md-offset8">
+				<li class="layui-nav-item layui-col-md1 layui-col-lg1 layui-col-xs1 layui-col-sm1 layui-col-lg-offset7 layui-col-xs-offset7 layui-col-md-offset7 layui-col-sm-offset7">
 					<a shiro:guest="">login</a>
 					<dl shiro:guest="" class="layui-nav-child">
 						<dd><a href="/tologin">管理员登录</a></dd>
@@ -39,7 +38,7 @@
 					</dl>
 					<a shiro:user="" th:text="${username}"></a>
 					<dl shiro:user="" class="layui-nav-child">
-						<dd><a href="/logOut">小屋</a></dd>
+						<dd><a href="/toUserHome">小屋</a></dd>
 						<dd><a href="/logOut">退出</a></dd>
 					</dl>
 				</li>
@@ -64,9 +63,7 @@
 					广告
 				</div>
 			</div>
-			<!-- 条目中可以是任意内容，如：<img src=""> -->
 
-			<script src="/static/build/layui.js"></script>
 			<script>
 				layui.use('carousel', function () {
 					var carousel = layui.carousel;

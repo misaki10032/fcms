@@ -96,4 +96,19 @@ public class UserController {
         }
     }
 
+    @GetMapping("/toUserHome")
+    public String toUserHome() {
+        return "reception/userHome";
+    }
+
+    @GetMapping("/revUser")
+    public String RevUser(String id) {
+        /*
+            需要携带的数据
+         */
+
+
+        return "reception/rev";
+    }
+
 }

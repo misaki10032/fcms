@@ -141,6 +141,7 @@ public class LoginController {
             System.out.println("isAdmin" + isAdmin);
             if (!isAdmin) {
                 ComUser user = (ComUser) session.getAttribute("user");
+                session.setAttribute("user", user);
                 model.addAttribute("username", user.getUserName());
                 return "index";
             } else {
