@@ -61,4 +61,19 @@ public class TypeController {
             System.err.println("删除失败!");
         }
     }
+
+    @GetMapping("/updateTypeName")
+    public void updateTypeName(String id, String name, HttpServletResponse rep) {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("tyName", name);
+        map.put("id", id);
+        PrintWriter out = null;
+        try {
+            out = rep.getWriter();
+            typeService.revType(map);
+            out.print("1");
+        } catch (IOException e) {
+            System.err.println("删除失败!");
+        }
+    }
 }

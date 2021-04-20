@@ -83,6 +83,11 @@
 							title: '图片名',
 							width: 80,
 							edit: 'text',
+						} ,{
+							field: 'ficType',
+							title: '所属分区',
+							width: 100,
+							edit: 'text',
 						}, {
 							field: 'createTime',
 							title: '创建时间',
@@ -96,7 +101,7 @@
 						}, {
 							field: 'isDeleted',
 							title: '状态',
-							width: 80
+							width: 50
 						} ,{
 							fixed: 'right',
 							title: '操作',
@@ -168,52 +173,52 @@
 							skin: 'layui-layer-rim', //加上边框
 							area: ['420px', '600px'], //宽高
 							content:
-							'<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">\n' +
-							'    <legend>新增小说</legend><span class="success" id="msg"></span>\n' +
-							'</fieldset>\n' +
-							'<form class="layui-form" action="" method="get">\n' +
-							'    <div class="layui-form-item">\n' +
-							'        <label class="layui-form-label">小说名</label>\n' +
-							'        <div class="layui-input-block">\n' +
-							'            <input type="text" id="title" name="title" required lay-verify="required" placeholder="请输入小说标题"\n' +
-							'                   autocomplete="off" class="layui-input">\n' +
-							'        </div>\n' +
-							'    </div>\n' +
-							'    <div class="layui-form-item">\n' +
-							'        <label class="layui-form-label">作者</label>\n' +
-							'        <div class="layui-input-inline">\n' +
-							'            <input type="text" id="author" name="author" placeholder="(选填)作者姓名"\n' +
-							'                   autocomplete="off" class="layui-input">\n' +
-							'        </div>\n' +
-							'    </div>\n' +
-							'    <div class="layui-form-item">\n' +
-							'        <label class="layui-form-label">分区</label>\n' +
-							'        <div class="layui-input-block">\n' +
-							'            <select id="type" name="type" lay-verify="required">\n' +
-							'                <option value=""></option>\n' +
-							'                <option th:each="type,a : ${types}" th:value="${type}" th:text="${type}"></option>\n' +
-							'            </select>\n' +
-							'        </div>\n' +
-							'    </div>\n' +
-							'    <div class="layui-form-item">\n' +
-							'        <label class="layui-form-label">是否展示</label>\n' +
-							'        <div class="layui-input-block">\n' +
-							'            <input id="isdel" type="checkbox" name="isdel" lay-skin="switch">\n' +
-							'        </div>\n' +
-							'    </div>\n' +
-							'    <div class="layui-form-item layui-form-text">\n' +
-							'        <label class="layui-form-label">文章内容</label>\n' +
-							'        <div class="layui-input-block">\n' +
-							'            <textarea id="data" name="data"  required lay-verify="required"  placeholder="请输入内容" class="layui-textarea"></textarea>\n' +
-							'        </div>\n' +
-							'    </div>\n' +
-							'    <div class="layui-form-item">\n' +
-							'        <div class="layui-input-block">\n' +
-							'            <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>\n' +
-							'            <button type="reset" class="layui-btn layui-btn-primary">重置</button>\n' +
-							'        </div>\n' +
-							'    </div>\n' +
-							'</form>'
+									'<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">\n' +
+									'    <legend>新增小说</legend><span class="success" id="msg"></span>\n' +
+									'</fieldset>\n' +
+									'<form class="layui-form" action="" method="get">\n' +
+									'    <div class="layui-form-item">\n' +
+									'        <label class="layui-form-label">小说名</label>\n' +
+									'        <div class="layui-input-block">\n' +
+									'            <input type="text" id="title" name="title" required lay-verify="required" placeholder="请输入小说标题"\n' +
+									'                   autocomplete="off" class="layui-input">\n' +
+									'        </div>\n' +
+									'    </div>\n' +
+									'    <div class="layui-form-item">\n' +
+									'        <label class="layui-form-label">作者</label>\n' +
+									'        <div class="layui-input-inline">\n' +
+									'            <input type="text" id="author" name="author" placeholder="(选填)作者姓名"\n' +
+									'                   autocomplete="off" class="layui-input">\n' +
+									'        </div>\n' +
+									'    </div>\n' +
+									'    <div class="layui-form-item">\n' +
+									'        <label class="layui-form-label">分区</label>\n' +
+									'        <div class="layui-input-block">\n' +
+									'            <select id="type" name="type" lay-verify="required">\n' +
+									'                <option value=""></option>\n' +
+									'                <option th:each="type,a : ${types}" th:value="${type}" th:text="${type}"></option>\n' +
+									'            </select>\n' +
+									'        </div>\n' +
+									'    </div>\n' +
+									'    <div class="layui-form-item">\n' +
+									'        <label class="layui-form-label">是否展示</label>\n' +
+									'        <div class="layui-input-block">\n' +
+									'            <input id="isdel" type="checkbox" name="isdel" lay-skin="switch">\n' +
+									'        </div>\n' +
+									'    </div>\n' +
+									'    <div class="layui-form-item layui-form-text">\n' +
+									'        <label class="layui-form-label">文章内容</label>\n' +
+									'        <div class="layui-input-block">\n' +
+									'            <textarea id="data" name="data"  required lay-verify="required"  placeholder="请输入内容" class="layui-textarea"></textarea>\n' +
+									'        </div>\n' +
+									'    </div>\n' +
+									'    <div class="layui-form-item">\n' +
+									'        <div class="layui-input-block">\n' +
+									'            <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>\n' +
+									'            <button type="reset" class="layui-btn layui-btn-primary">重置</button>\n' +
+									'        </div>\n' +
+									'    </div>\n' +
+									'</form>'
 						});
 					}
 				});

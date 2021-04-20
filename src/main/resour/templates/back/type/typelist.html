@@ -146,9 +146,28 @@
                     formType: 2,
                     value: data.tyName
                 }, function (value, index) {
-                    obj.update({
-                        tyName: value
+                    var typeid = data.id;
+                    $.ajax({
+                        url: "/updateTypeName"
+                        , type: 'get'
+                        , async: false
+                        , data: {
+                            id: typeid,
+                            name: value
+                        }
+                        , success: function (res) {
+                            if (res === "1") {
+                                obj.update({
+                                    tyName: value
+                                });
+                                layer.msg("修改成功")
+                                layer.close(index);
+                            } else if (res === "0") {
+                                layer.msg("修改失败")
+                            }
+                        }
                     });
+
                     layer.close(index);
                 });
             }
