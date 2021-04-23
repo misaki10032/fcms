@@ -4,6 +4,7 @@ import com.cxy.fcms.pojo.ComUser;
 import com.cxy.fcms.pojo.SysAdmin;
 import com.cxy.fcms.service.LoginService;
 import com.cxy.fcms.util.IDUtil;
+import com.cxy.fcms.util.ShiroMd5Util;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.LockedAccountException;
@@ -60,15 +61,18 @@ public class LoginController {
                 model.addAttribute("msg", "没有用户名为-->" + token.getPrincipal());
                 return "login";
             }
-        }catch (UnknownAccountException uae) {
-            model.addAttribute("msg","没有用户名为-->" + token.getPrincipal());
+        } catch (UnknownAccountException uae) {
+            model.addAttribute("msg", "没有用户名为-->" + token.getPrincipal());
             return "login";
         } catch (IncorrectCredentialsException ice) {
             model.addAttribute("msg", "账号或密码错误!");
             return "login";
         } catch (LockedAccountException lae) {
-            model.addAttribute("msg","用户名 : " + token.getPrincipal() + ",被锁定了.请联系您的管理员解锁.");
+            model.addAttribute("msg", "用户名 : " + token.getPrincipal() + ",被锁定了.请联系您的管理员解锁.");
             return "login";
+        } catch (Exception e) {
+            model.addAttribute("msg", "系统发生未知错误!");
+            return "userlogin";
         }
     }
     @GetMapping("/logOut")
@@ -112,9 +116,11 @@ public class LoginController {
     @GetMapping("/resiger")
     public String resigerOk(String phone, String number, String pwd, String name) {
         HashMap<String, String> map = new HashMap<>();
+        //加密
+        String pwdMd5 = ShiroMd5Util.toPwdMd5(number, pwd);
         map.put("id", IDUtil.getID());
         map.put("num", number);
-        map.put("pwd", pwd);
+        map.put("pwd", pwdMd5);
         map.put("name", name);
         map.put("phone", phone);
         loginService.addAdmin(map);
@@ -156,6 +162,9 @@ public class LoginController {
             return "userlogin";
         } catch (LockedAccountException lae) {
             model.addAttribute("msg", "用户名 : " + token.getPrincipal() + ",被锁定了.请联系您的管理员解锁.");
+            return "userlogin";
+        } catch (Exception e) {
+            model.addAttribute("msg", "系统发生未知错误!");
             return "userlogin";
         }
     }

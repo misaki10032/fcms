@@ -45,6 +45,7 @@ public class MyRealm extends AuthorizingRealm {
         List<SysAdmin> admins = loginService.getAdmins();
         UsernamePasswordToken userToken = (UsernamePasswordToken)token;
         String username = userToken.getUsername();
+        String realmName = getName();
         for (SysAdmin admin : admins) {
             if (admin.getAdminNum().equals(username)) {
                 System.out.println("------->admin------->ok");
@@ -52,7 +53,9 @@ public class MyRealm extends AuthorizingRealm {
                 Session session = subject.getSession();
                 session.setAttribute("admin", admin);
                 session.setAttribute("isAdmin", true);
-                return new SimpleAuthenticationInfo("", admin.getAdminPwd(), "");
+                //盐值
+                ByteSource salt = ByteSource.Util.bytes(admin.getAdminNum());
+                return new SimpleAuthenticationInfo(admin, admin.getAdminPwd(), salt, realmName);
             }
         }
         System.out.println("===============================开始用户认证===============================");
@@ -67,7 +70,9 @@ public class MyRealm extends AuthorizingRealm {
                 Session session = subject.getSession();
                 session.setAttribute("user", user);
                 session.setAttribute("isAdmin", false);
-                return new SimpleAuthenticationInfo("", user.getUserPwd(), "");
+                //盐值
+                ByteSource salt = ByteSource.Util.bytes(user.getUserPhone());
+                return new SimpleAuthenticationInfo(user, user.getUserPwd(), salt, realmName);
             }
         }
         return null;

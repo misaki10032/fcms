@@ -5,6 +5,7 @@ import com.cxy.fcms.pojo.SysAdmin;
 import com.cxy.fcms.service.UserService;
 import com.cxy.fcms.util.IDUtil;
 import com.cxy.fcms.util.LayuiReplay;
+import com.cxy.fcms.util.ShiroMd5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -73,8 +74,10 @@ public class UserController {
     @GetMapping("/userResiger")
     public String UserResigerOk(String phone, String pwd, String name) {
         HashMap<String, String> map = new HashMap<>();
+        //用账号作为盐值进行加密
+        String saltPassWord = ShiroMd5Util.toPwdMd5(phone, pwd);
         map.put("id", IDUtil.getID());
-        map.put("userPwd", pwd);
+        map.put("userPwd", saltPassWord);
         map.put("userName", name);
         map.put("userPhone", phone);
         userService.addUser(map);
@@ -106,8 +109,6 @@ public class UserController {
         /*
             需要携带的数据
          */
-
-
         return "reception/rev";
     }
 
