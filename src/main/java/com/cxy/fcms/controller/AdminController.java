@@ -80,6 +80,10 @@ public class AdminController {
     @GetMapping("/sendAdminEmil")
     public void SendAdminEmil(String emil, HttpServletResponse rep) throws IOException {
         PrintWriter out = rep.getWriter();
+        if (!emil.matches("^[a-zA-Z0-9_]+@[0-9a-z]+(\\\\.[a-z]+)+")) {
+            out.print("1");
+            return;
+        }
         if (emil != null && !emil.equals("")) {
             String msg = IDUtil.getID().substring(0, 6);
             String title = "【验证码】";
