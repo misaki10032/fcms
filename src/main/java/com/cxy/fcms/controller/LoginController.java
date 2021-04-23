@@ -105,10 +105,12 @@ public class LoginController {
                 }
             }
             if(pwd.length()<3){
-                out.println("密码太短了哦~");
-            }else if(!pwd.equals(pwd2)){
-                out.println("两次密码不一致");
-            }else{
+                out.println("密码太短了!");
+            }else if (!pwd.equals(pwd2)) {
+                out.println("两次密码不一致!");
+            } else if (number.matches("^\\d*$")) {
+                out.print("账号不能只是数字组成!");
+            } else {
                 out.print("ok");
             }
         }
@@ -151,7 +153,7 @@ public class LoginController {
                 model.addAttribute("username", user.getUserName());
                 return "index";
             } else {
-                model.addAttribute("msg", "没有用户名为->" + token.getPrincipal());
+                model.addAttribute("msg", "系统发生位置错误!");
                 return "userlogin";
             }
         } catch (UnknownAccountException uae) {
