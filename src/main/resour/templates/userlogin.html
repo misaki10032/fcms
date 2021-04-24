@@ -13,6 +13,19 @@
 	<script th:src="@{boot/js/bootstrap.min.js}"></script>
 	<script type="text/javascript">
 		function SendEmil() {
+			$("#btn_send").attr("disabled", "disabled");
+			var submitButtonText = "重发";
+			var second = 60;
+			var intervalObj = setInterval(function () {
+				$("#btn_send").text(submitButtonText + "(" + second + ")");
+				if (second == 0) {
+					$("#btn_send").text(submitButtonText);
+					$("#btn_send").removeAttr("disabled");//将按钮可用
+					/* 清除已设置的setInterval对象 */
+					clearInterval(intervalObj);
+				}
+				second--;
+			}, 1000);
 			$.ajax({
 				url: "/sendAdminEmil"
 				, type: 'get'
@@ -23,24 +36,8 @@
 				, success: function (res) {
 					if (res === '0') {
 						$("#msg").html("邮件发送不成功，请重试");
-					}
-					if (res === '1') {
-						$("#msg").html("邮箱格式错误!");
 					} else {
 						$("#msg").html(res);
-						$("#btn_send").attr("disabled", "disabled");
-						var submitButtonText = "重发";
-						var second = 60;
-						var intervalObj = setInterval(function () {
-							$("#btn_send").text(submitButtonText + "(" + second + ")");
-							if (second == 0) {
-								$("#btn_send").text(submitButtonText);
-								$("#btn_send").removeAttr("disabled");//将按钮可用
-								/* 清除已设置的setInterval对象 */
-								clearInterval(intervalObj);
-							}
-							second--;
-						}, 1000);
 					}
 				}
 			});

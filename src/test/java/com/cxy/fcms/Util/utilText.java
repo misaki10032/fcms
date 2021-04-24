@@ -42,6 +42,12 @@ public class utilText {
         redisUtil.set("111", msg);
         String o = (String) redisUtil.get("111");
         System.out.println(o);
+    }
 
+    @Test
+    void ttt1() {
+        String emil = "1069664381@qq.com";
+        boolean matches = emil.matches("^\\w+@\\w{2,6}\\.\\w{2,6}$");
+        System.out.println(matches);
     }
 }

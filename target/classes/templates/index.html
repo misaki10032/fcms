@@ -12,36 +12,42 @@
 	<script>
 		layui.use('element', function () {
 			var element = layui.element;
-			});
-		</script>
-	</head>
-	<body>
-		<div class="layui-fluid" style="padding: 0;">
-			<ul class="layui-nav layui-row">
-				<li class="layui-nav-item layui-col-md1 layui-col-lg1 layui-col-xs1 layui-col-sm1">
-					<a href="/">首页</a>
-				</li>
-				<li class="layui-nav-item layui-col-md1 layui-col-lg1 layui-col-xs1 layui-col-sm1">
-					<a>热门</a>
-				</li>
-				<li class="layui-nav-item layui-col-md1 layui-col-lg1 layui-col-xs1 layui-col-sm1">
-					<a>排行</a>
-				</li>
+		});
+	</script>
+</head>
+<style>
+	body {
+		background: #e3dbd2;
+	}
+
+</style>
+<body>
+<div class="layui-container" style="padding: 0;background: #FFFFFF">
+	<ul class="layui-nav layui-row">
+		<li class="layui-nav-item layui-col-md1 layui-col-lg1 layui-col-xs1 layui-col-sm1">
+			<a href="/">首页</a>
+		</li>
+		<li class="layui-nav-item layui-col-md1 layui-col-lg1 layui-col-xs1 layui-col-sm1">
+			<a>热门</a>
+		</li>
+		<li class="layui-nav-item layui-col-md1 layui-col-lg1 layui-col-xs1 layui-col-sm1">
+			<a>排行</a>
+		</li>
 				<li class="layui-nav-item layui-col-md1 layui-col-lg1 layui-col-xs1 layui-col-sm1">
 					<a>分类</a>
 				</li>
-				<li class="layui-nav-item layui-col-md1 layui-col-lg1 layui-col-xs1 layui-col-sm1 layui-col-lg-offset7 layui-col-xs-offset7 layui-col-md-offset7 layui-col-sm-offset7">
-					<a shiro:guest="">login</a>
-					<dl shiro:guest="" class="layui-nav-child">
-						<dd><a href="/tologin">管理员登录</a></dd>
-						<dd><a href="/usertologin">用户登录</a></dd>
-					</dl>
-					<a shiro:user="" th:text="${username}"></a>
-					<dl shiro:user="" class="layui-nav-child">
-						<dd><a href="/toUserHome">小屋</a></dd>
-						<dd><a href="/logOut">退出</a></dd>
-					</dl>
-				</li>
+		<li class="layui-nav-item layui-col-md1 layui-col-lg1 layui-col-xs1 layui-col-sm1 layui-col-lg-offset7 layui-col-xs-offset7 layui-col-md-offset7 layui-col-sm-offset7">
+			<a shiro:guest="">login</a>
+			<dl shiro:guest="" class="layui-nav-child">
+				<dd><a href="/tologin">管理员登录</a></dd>
+				<dd><a href="/usertologin">用户登录</a></dd>
+			</dl>
+			<a shiro:user="" th:text="${session.user.getUserName()}"></a>
+			<dl shiro:user="" class="layui-nav-child">
+				<dd><a href="/toUserHome">小屋</a></dd>
+				<dd><a href="/logOut">退出</a></dd>
+			</dl>
+		</li>
 			</ul>
 			<div class="layui-row">
 				<div class="layui-col-md2 layui-col-xs2" style="background-color: #ffb09c;height:420px">
@@ -63,7 +69,6 @@
 					广告
 				</div>
 			</div>
-
 			<script>
 				layui.use('carousel', function () {
 					var carousel = layui.carousel;
@@ -80,14 +85,19 @@
 					});
 				});
 			</script>
-		</div>
-		<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
-		  <legend>热门</legend>
-		</fieldset>
-		<div class="layui-fluid">
-			<ul class="flow-default layui-nav layui-row " style="background-color: white;" id="hostFiction">
-			</ul>
-		</div>
+	<blockquote class="layui-elem-quote">热门</blockquote>
+	<hr class="layui-border-orange">
+	<div class="layui-fluid" style="background: #FFFFFF">
+		<ul class="flow-default layui-nav layui-row " style="background-color: #FFFFFF;" id="hostFiction">
+		</ul>
+	</div>
+	<blockquote class="layui-elem-quote">最新</blockquote>
+	<hr class="layui-border-orange">
+	<div class="layui-fluid" style="background: #FFFFFF">
+		<ul class="flow-default layui-nav layui-row " style="background-color: #FFFFFF;" id="newFiction">
+		</ul>
+	</div>
+</div>
 		<script type="text/javascript">
 			layui.use('flow', function() {
 				var flow = layui.flow;
@@ -103,7 +113,7 @@
 							var lis = [];
 							for (var i = 0; i < 3; i++) {
 								lis.push(
-										'<a href="#" style="color:#FFFFFF;">' +
+										'<a href="#" style="color:white;">' +
 										'<li class="layui-nav-item layui-col-xs4 layui-col-xs-offset0  layui-col-lg4 layui-col-lg-offset0" onmouseover="overit(this)" onclick="toFicHost(this,' + page + ',' + i + ');">' +
 										'<img class="layui-col-xs10 layui-col-xs-offset1 layui-col-lg10 layui-col-lg-offset1" src="img/now2.png" width="80%" height="250px" style="padding:20px">' +
 										'<span class="layui-col-xs10 layui-col-xs-offset1 layui-col-lg10 layui-col-lg-offset1" style="position: absolute;background-color:#505658;z-index:13;height:40px;' +
@@ -118,13 +128,6 @@
 				});
 			});
 		</script>
-		<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
-			<legend>新上架</legend>
-		</fieldset>
-		<div class="layui-fluid">
-			<ul class="flow-default layui-nav layui-row " style="background-color: white;" id="newFiction">
-			</ul>
-		</div>
 		<script type="text/javascript">
 			layui.use('flow', function () {
 				var flow = layui.flow;
@@ -140,7 +143,7 @@
 							var lis = [];
 							for (var i = 0; i < 3; i++) {
 								lis.push(
-										'<a style="color:#FFFFFF;">' +
+										'<a style="color:white;">' +
 										'<li class="layui-nav-item layui-col-xs4 layui-col-xs-offset0  layui-col-lg4 layui-col-lg-offset0" onmouseover="overit(this)" onclick="toXX(this,' + page + ',' + i + ')" >' +
 										'<img class="layui-col-xs10 layui-col-xs-offset1 layui-col-lg10 layui-col-lg-offset1" src="img/now2.png" width="80%" height="250px" style="padding:20px">' +
 										'<span class="layui-col-xs10 layui-col-xs-offset1 layui-col-lg10 layui-col-lg-offset1" style="position: absolute;background-color:#505658;z-index:13;height:40px;' +

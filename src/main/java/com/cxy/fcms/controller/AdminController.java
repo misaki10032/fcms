@@ -80,28 +80,26 @@ public class AdminController {
     @GetMapping("/sendAdminEmil")
     public void SendAdminEmil(String emil, HttpServletResponse rep) throws IOException {
         PrintWriter out = rep.getWriter();
-        if (!emil.matches("^[a-zA-Z0-9_]+@[0-9a-z]+(\\\\.[a-z]+)+")) {
-            out.print("1");
+        if (emil == null || !emil.matches("^\\w+@\\w{2,6}\\.\\w{2,6}$")) {
+            out.print("0");
             return;
         }
-        if (emil != null && !emil.equals("")) {
-            String msg = IDUtil.getID().substring(0, 6);
-            String title = "【验证码】";
-            String text = "【FCMS小说网】您的验证码为" + msg + "，3分中以内有效";
-            SimpleMailMessage mailMessage = new SimpleMailMessage();
-            mailMessage.setSubject(title);
-            mailMessage.setText(text);
-            mailMessage.setTo(emil);
-            mailMessage.setFrom("1069664381@qq.com");
-            mailSender.send(mailMessage);
-//            EmilUtil.sendEmal(title,text,emil);
-            //存入redis，设置60*3秒后过期
+        String msg = IDUtil.getID().substring(0, 6);
+        String title = "【验证码】";
+        String text = "【FCMS小说网】您的验证码为" + msg + "，3分中以内有效";
+        SimpleMailMessage mailMessage = new SimpleMailMessage();
+        mailMessage.setSubject(title);
+        mailMessage.setText(text);
+        mailMessage.setTo(emil);
+        mailMessage.setFrom("1069664381@qq.com");
+        mailSender.send(mailMessage);
+        try {
             redisUtil.set(emil + "_msg", msg);
-            redisUtil.expire(emil + "_msg", 3, TimeUnit.MINUTES);
-            out.print("已发送");
-        } else {
+            redisUtil.expire(emil + "_msg", 360, TimeUnit.SECONDS);
+        } catch (Exception e) {
             out.print("0");
         }
+        out.print("已发送");
     }
 
 
