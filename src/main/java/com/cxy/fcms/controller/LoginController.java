@@ -14,10 +14,7 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.Mapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -29,23 +26,25 @@ import java.util.List;
 public class LoginController {
     @Autowired
     LoginService loginService;
+
     //起始页
-    @GetMapping({"/","hello"})
-    public String welcome(){
+    @GetMapping({"/", "hello"})
+    public String welcome() {
         return "index";
     }
+
     /**
      * 登录相关
      */
     @GetMapping("/tologin")
-    public String toLogin(){
+    public String toLogin() {
         return "login";
     }
 
     @PostMapping("/login")
-    public String Login(Model model, String nums, String pwd){
+    public String Login(Model model, String nums, String pwd) {
         Subject subject = SecurityUtils.getSubject();//获取用户信息
-        UsernamePasswordToken token = new UsernamePasswordToken(nums,pwd);//封装
+        UsernamePasswordToken token = new UsernamePasswordToken(nums, pwd);//封装
         try {
             subject.login(token);
             //通过subject取
@@ -55,24 +54,32 @@ public class LoginController {
             if (isAdmin) {
                 SysAdmin admin = (SysAdmin) session.getAttribute("admin");
                 model.addAttribute("adminName", admin.getAdminName());
+                /* 调用record  service */
+
+
                 return "back/adminHome";
             } else {
                 model.addAttribute("msg", "没有用户名为-->" + token.getPrincipal());
                 return "login";
             }
-        }catch (UnknownAccountException uae) {
-            model.addAttribute("msg","没有用户名为-->" + token.getPrincipal());
+        } catch (UnknownAccountException uae) {
+            model.addAttribute("msg", "没有用户名为-->" + token.getPrincipal());
+            /* record */
+
             return "login";
         } catch (IncorrectCredentialsException ice) {
             model.addAttribute("msg", "账号或密码错误!");
+            /* record */
+
             return "login";
         } catch (LockedAccountException lae) {
-            model.addAttribute("msg","用户名 : " + token.getPrincipal() + ",被锁定了.请联系您的管理员解锁.");
+            model.addAttribute("msg", "用户名 : " + token.getPrincipal() + ",被锁定了.请联系您的管理员解锁.");
             return "login";
         }
     }
+
     @GetMapping("/logOut")
-    public String logOut(){
+    public String logOut() {
         Subject subject = SecurityUtils.getSubject();
         subject.logout();
         return "index";
@@ -87,28 +94,29 @@ public class LoginController {
         List<SysAdmin> admins = loginService.getAdmins();
         if (phone == null || number == null || pwd == null || pwd2 == null || name == null) {
             out.println("发生了系统故障!");
-        }else if(phone.equals("")||number.equals("")||pwd.equals("")||pwd2.equals("")||name.equals("")){
+        } else if (phone.equals("") || number.equals("") || pwd.equals("") || pwd2.equals("") || name.equals("")) {
             out.println("您的表单没有填完哦!");
-        }else {
+        } else {
             for (SysAdmin admin : admins) {
-                if(admin.getAdminNum().equals(number)){
+                if (admin.getAdminNum().equals(number)) {
                     out.println("账号已存在!");
                     return;
                 }
-                if(admin.getAdminPhone().equals(phone)){
+                if (admin.getAdminPhone().equals(phone)) {
                     out.println("手机号已存在!");
                     return;
                 }
             }
-            if(pwd.length()<3){
+            if (pwd.length() < 3) {
                 out.println("密码太短了哦~");
-            }else if(!pwd.equals(pwd2)){
+            } else if (!pwd.equals(pwd2)) {
                 out.println("两次密码不一致");
-            }else{
+            } else {
                 out.print("ok");
             }
         }
     }
+
     @GetMapping("/resiger")
     public String resigerOk(String phone, String number, String pwd, String name) {
         HashMap<String, String> map = new HashMap<>();

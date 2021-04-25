@@ -18,6 +18,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.Hashtable;
+import java.util.LinkedList;
 import java.util.List;
 
 @Controller
@@ -26,7 +28,8 @@ public class FictionController {
     FictionService fictionService;
     @Autowired
     ComTypeMapper typeMapper;
-
+    
+    
     @GetMapping("/getfictions")
     @ResponseBody//数据请求接口
     public Object  getAllFictions() throws JSONException {
