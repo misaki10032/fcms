@@ -5,7 +5,7 @@
 	  lang="en">
 	<head>
 		<meta charset="utf-8">
-		<title>Layui</title>
+		<title>详情页</title>
 		<meta name="renderer" content="webkit">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -14,12 +14,39 @@
 		<script src="/layui-v2.6.4/layui/layui.js" charset="utf-8"></script>
 	</head>
 	<body>
-		<script type="text/javascript">
-			layui.use('layer',function(){
-				var layer = layui.layer;
-				layer.msg("您正在试读斗破苍穹")
-			})
-		</script>
+	<script type="text/javascript">
+		layui.use('layer', function () {
+			var layer = layui.layer;
+			layer.msg("您正在试读斗破苍穹")
+		})
+	</script>
+	<div class="layui-fluid" style="padding: 0;background: #FFFFFF">
+		<ul class="layui-nav layui-row">
+			<li class="layui-nav-item layui-col-md1 layui-col-lg1 layui-col-xs1 layui-col-sm1">
+				<a href="/">首页</a>
+			</li>
+			<li class="layui-nav-item layui-col-md1 layui-col-lg1 layui-col-xs1 layui-col-sm1">
+				<a>热门</a>
+			</li>
+			<li class="layui-nav-item layui-col-md1 layui-col-lg1 layui-col-xs1 layui-col-sm1">
+				<a>排行</a>
+			</li>
+			<li class="layui-nav-item layui-col-md1 layui-col-lg1 layui-col-xs1 layui-col-sm1">
+				<a>分类</a>
+			</li>
+			<li class="layui-nav-item layui-col-md1 layui-col-lg1 layui-col-xs1 layui-col-sm1 layui-col-lg-offset7 layui-col-xs-offset7 layui-col-md-offset7 layui-col-sm-offset7">
+				<a shiro:guest="">login</a>
+				<dl shiro:guest="" class="layui-nav-child">
+					<dd><a href="/tologin">管理员登录</a></dd>
+					<dd><a href="/usertologin">用户登录</a></dd>
+				</dl>
+				<a shiro:user="" th:text="${session.user.getUserName()}"></a>
+				<dl shiro:user="" class="layui-nav-child">
+					<dd><a href="/toUserHome">小屋</a></dd>
+					<dd><a href="/logOut">退出</a></dd>
+				</dl>
+			</li>
+		</ul>
 		<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
 			<legend>热门</legend>
 		</fieldset>
@@ -33,46 +60,46 @@
 					<div class="layui-panel">
 						<ul class="layui-menu">
 							<li lay-options="{id: 100}">
-								<div class="layui-menu-body-title"><a href="/info"><i class="layui-icon layui-icon-read"></i> 目录</a></div>
+								<div class="layui-menu-body-title"><a onclick="shang()"><i
+										class="layui-icon layui-icon-read"></i> 目录</a></div>
 							</li>
 							<li lay-options="{id: 101}">
 								<div class="layui-menu-body-title">
-									<a href="#"><a href=""><i class="layui-icon layui-icon-cellphone"></i> 手机</a></span></a>
+									<a href="#"><a href=""><i class="layui-icon layui-icon-cellphone"></i> 手机</a></span>
+									</a>
 								</div>
 							</li>
 							<li lay-options="{id: 104}">
-								<div class="layui-menu-body-title"><a id="set" href="javaScript:void(0)"><i class="layui-icon layui-icon-set"></i> 设置</a></div>
+								<div class="layui-menu-body-title"><a id="set" href="javaScript:void(0)"><i
+										class="layui-icon layui-icon-set"></i> 设置</a></div>
 							</li>
 							<li lay-options="{id: 106}">
-								<div class="layui-menu-body-title"><a href="/toContentPage"><i class="layui-icon layui-icon-refresh"></i> 刷新</a></div>
+								<div class="layui-menu-body-title"><a href="/toContentPage"><i
+										class="layui-icon layui-icon-refresh"></i> 刷新</a></div>
 							</li>
 						</ul>
 					</div>
 				</div>
 				<div class="layui-col-md10 layui-col-xs8">
-					<textarea id="centences" cols="93" rows="20" readonly="readonly" style="border: 0;background: white;font-size: 20px; resize: none;">
-								名门正派的我怎么成了魔皇
-
-
-										剪水II著
-										玄幻
-										类型
-										2021.03.25
-										上架
-										13.68万
-					</textarea>
+					<p th:text="${fiction.getFicName()}"></p>
+					<p th:text="'文章类型:'+${fiction.getFicType()}"></p>
+					<p th:text="'发表时间:'+${fiction.getCreateTime()}"></p>
+					<p th:text="'作者:'+${fiction.getFicAuthor()}"></p>
 				</div>
 				<div class="layui-col-md1 layui-col-xs5">
 					<div class="layui-panel">
 						<ul class="layui-menu">
 							<li>
-								<div class="layui-menu-body-title"><a href=""><i class="layui-icon layui-icon-gift"></i> 打赏</a></div>
+								<div class="layui-menu-body-title"><a href=""><i class="layui-icon layui-icon-gift"></i>
+									打赏</a></div>
 							</li>
 							<li>
-								<div class="layui-menu-body-title"><a href=""><i class="layui-icon layui-icon-cols"></i> 投票</a></div>
+								<div class="layui-menu-body-title"><a href=""><i class="layui-icon layui-icon-cols"></i>
+									投票</a></div>
 							</li>
 							<li>
-								<div class="layui-menu-body-title"><span title="返回顶部"><i class="layui-icon layui-icon-top"></i> top</span></div>
+								<div class="layui-menu-body-title"><span title="返回顶部"><i
+										class="layui-icon layui-icon-top"></i> top</span></div>
 							</li>
 						</ul>
 					</div>
@@ -83,7 +110,7 @@
 			<form id="contro" action="/toContentPage" method="get" class="layui-form">
 				<div class="layui-form-item">
 					<div class="layui-input-block">
-						<input type = "hidden">
+						<input type="hidden">
 					</div>
 				</div>
 				<div class="layui-form-item">
@@ -129,29 +156,34 @@
 				</div>
 			</form>
 		</div>
-		<script type="text/javascript">
-			layui.use(['layer', 'form', "jquery"], function () {
-				var
-						layer = layui.layer //弹层
-						, form = layui.form //表单
-						, $ = layui.jquery
-				$('#set').on("click", function () {
-					layer.open({
-						//调整弹框的大小
+	</div>
+	<script type="text/javascript">
+		layui.use(['layer', 'form', "jquery"], function () {
+			var
+					layer = layui.layer //弹层
+					, form = layui.form //表单
+					, $ = layui.jquery
+			$('#set').on("click", function () {
+				layer.open({
+					//调整弹框的大小
 						area: ['500px', '380px'],
 						//点击旁边地方自动关闭
 						shadeClose: true,
-						//动画
-						anim: 2,
-						//弹出层的基本类型，页面层
-						type: 1,
-						//刚才定义的弹窗页面
-						//content: '/addNewWindowOfSettings'//路由地址
-						content:$("#outpage")
-					});
+					//动画
+					anim: 2,
+					//弹出层的基本类型，页面层
+					type: 1,
+					//刚才定义的弹窗页面
+					//content: '/addNewWindowOfSettings'//路由地址
+					content: $("#outpage")
 				});
 			});
-		</script>
+		});
+
+		function shang() {
+			window.history.back();
+		}
+	</script>
 
 	</body>
 </html>

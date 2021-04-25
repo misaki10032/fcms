@@ -36,7 +36,7 @@
 					, success: function (res) {
 						if (res === '0') {
 							$("#msg").html("邮件发送不成功，请重试");
-						}else {
+						} else {
 							$("#msg").html(res);
 						}
 					}
@@ -105,7 +105,10 @@
 								<br>
 								<div class="row">
 									<div class="col-lg-4 col-lg-offset-1  col-xs-4 col-xs-offset-1">
-			-							<button  style="width: 80px;" class="btn btn-success " type="button" data-toggle="modal" data-target="#myModal">注册</button>
+										-
+										<button style="width: 80px;" class="btn btn-success " type="button"
+												data-toggle="modal" data-target="#myModal">注册
+										</button>
 									</div>
 									<div class="col-lg-4  col-lg-offset-1  col-xs-4 col-xs-offset-1" >
 										<input class="btn btn-info " type="submit" value="登录" style="width: 80px;" />
@@ -142,7 +145,7 @@
 								<label class="col-lg-2 col-xs-2 control-label">邮箱</label>
 								<div class="col-lg-8 col-xs-8">
 									<input type="text" id="emil" name="emil" class="form-control"
-										   placeholder="个人联系方式"/>
+										   placeholder="个人邮箱地址"/>
 								</div>
 								<button id="btn_send" onclick="SendEmil()">发送</button>
 							</div>

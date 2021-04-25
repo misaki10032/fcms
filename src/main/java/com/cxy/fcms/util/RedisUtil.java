@@ -188,10 +188,11 @@ public class RedisUtil {
 
     /**
      * 设置指定 key 的值
+     *
      * @param key
      * @param value
      */
-    public void set(String key, String value) {
+    public void set(String key, Object value) {
         redisTemplate.opsForValue().set(key, value);
     }
 

@@ -1,5 +1,6 @@
 package com.cxy.fcms.service;
 
+import com.cxy.fcms.pojo.ComFicDate;
 import com.cxy.fcms.pojo.ComFiction;
 
 import java.util.HashMap;
@@ -21,4 +22,6 @@ public interface FictionService {
     void delFiction(String id);
 
     List<String> getFictionsByType(String id);
+
+    ComFicDate getFictionDataById(String id);
 }

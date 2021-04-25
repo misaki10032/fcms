@@ -1,38 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cxy.fcms.mapper.ComFictionMapper">
 
     <insert id="addFiction" parameterType="map">
         insert into
         com_fiction(
-            id,
-            fic_name,
-            <if test="ficAuthor!=null">
-                    fic_author,
-            </if>
-            gmt_create,
-            gmt_modified
+        id,
+        fic_name,
+        <if test="ficAuthor!=null">
+            fic_author,
+        </if>
+        gmt_create,
+        gmt_modified
         ) values (
-            #{id},
-            #{ficName},
-            <if test="ficAuthor!=null">
-                  #{ficAuthor},
-            </if>
-            now(),
-            now()
+        #{id},
+        #{ficName},
+        <if test="ficAuthor!=null">
+            #{ficAuthor},
+        </if>
+        now(),
+        now()
         );
     </insert>
     <insert id="addFictionData">
         insert into com_fiction_data
-            (id, fic_id, fic_data, gmt_create, gmt_modified,is_deleted)
-        VALUE
-            (#{id},#{ficId},#{text},now(),now(),0);
+            (id, fic_id, fic_data, gmt_create, gmt_modified, is_deleted)
+            VALUE
+            (#{id}, #{ficId}, #{text}, now(), now(), 0);
     </insert>
     <insert id="addFictionType">
         insert into com_fiction_type
-            (id, fic_id, fic_type, gmt_create, gmt_modified,is_deleted)
-        value
-            (#{id},#{ficId},#{typeId},now(),now(),0);
+            (id, fic_id, fic_type, gmt_create, gmt_modified, is_deleted)
+            value
+            (#{id}, #{ficId}, #{typeId}, now(), now(), 0);
     </insert>
     <select id="getFictions" resultType="ComFiction">
         SELECT f.id           AS id,
@@ -107,4 +108,14 @@
                  inner join com_fiction_type t on f.id = t.fic_id
         where t.fic_type = #{tid};
     </select>
+
+    <select id="getFictionDataById" resultType="ComFicDate">
+        select id           AS id
+             , fic_data     AS ficData
+             , gmt_create   AS createTime
+             , gmt_modified AS updateTime
+        from com_fiction_data
+        where fic_id = #{id};
+    </select>
+
 </mapper>

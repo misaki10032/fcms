@@ -1,6 +1,8 @@
 package com.cxy.fcms.controller;
 
+import com.cxy.fcms.mapper.ComFictionMapper;
 import com.cxy.fcms.mapper.ComTypeMapper;
+import com.cxy.fcms.pojo.ComFicDate;
 import com.cxy.fcms.pojo.ComFiction;
 import com.cxy.fcms.pojo.ComType;
 import com.cxy.fcms.service.FictionService;
@@ -28,8 +30,7 @@ public class FictionController {
     FictionService fictionService;
     @Autowired
     ComTypeMapper typeMapper;
-    
-    
+
     @GetMapping("/getfictions")
     @ResponseBody//数据请求接口
     public Object  getAllFictions() throws JSONException {
@@ -73,18 +74,25 @@ public class FictionController {
     public String toFictionXX(String index) {
         List<ComFiction> fictionOrderByTime = fictionService.getFictionOrderByTime();
         int index2 = Integer.parseInt(index);
+
+
         return fictionOrderByTime.get(index2 - 1).toString();
     }
 
     @GetMapping("/tofictionhost")
-    @ResponseBody
-    public String toFictionHost(String index) {
+    public String toFictionHost(String index, Model model) {
         List<ComFiction> fictions = fictionService.getFictionsOrderByHost();
         for (ComFiction fiction : fictions) {
             System.out.println(fiction);
         }
         int index2 = Integer.parseInt(index);
-        return fictions.get(index2 - 1).toString();
+        ComFiction comFiction = fictions.get(index2 - 1);
+        //发送数据
+        model.addAttribute("ficBook", comFiction);
+        //查询内容信息
+        ComFicDate data = fictionService.getFictionDataById(comFiction.getId());
+        model.addAttribute("data", data);
+        return "/front/fiction/info";
     }
 
     @GetMapping("/delfic")

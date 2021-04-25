@@ -2,6 +2,7 @@ package com.cxy.fcms.service.impl;
 
 import com.cxy.fcms.mapper.ComFictionMapper;
 import com.cxy.fcms.mapper.ComTypeMapper;
+import com.cxy.fcms.pojo.ComFicDate;
 import com.cxy.fcms.pojo.ComFiction;
 import com.cxy.fcms.pojo.ComType;
 import com.cxy.fcms.pojo.SysAdmin;
@@ -157,6 +158,35 @@ public class FictionServiceImpl implements FictionService {
     public List<String> getFictionsByType(String id) {
         System.out.println("----正在查找书id");
         return fictionMapper.getFictionByTypeId(id);
+    }
+
+    @Override
+    public ComFicDate getFictionDataById(String id) {
+        try {
+            //从redis查询
+            ComFicDate redisData = (ComFicDate) redisUtil.get("Data" + id);
+            System.out.println("===================尝试redis读取数据=========================");
+            //不为空则读取,为空则查询数据库
+            if (redisData != null) {
+                System.out.println("=====================从Redis中读取数据=======================");
+                ComFicDate comFicDate = new ComFicDate();
+                comFicDate = redisData;
+                return comFicDate;
+            } else {
+                System.out.println("===================== Redis 中没有数据=======================");
+                System.out.println("=====================从MySQL中读取数据=======================");
+                ComFicDate data = fictionMapper.getFictionDataById(id);
+                System.out.println("=====================向 Redis 中存数据=======================");
+                redisUtil.set("Data" + id, data);
+                redisUtil.expire("Data" + id, TimeOutSetting.REDIS_TIME_OUT, TimeUnit.SECONDS);
+                System.out.println("=====================  设置300s后过期 =======================");
+                return data;
+            }
+        } catch (Exception e) {
+            System.out.println("=====================   Redis 宕机   =======================");
+            System.out.println("=====================从MySQL中读取数据=======================");
+            return fictionMapper.getFictionDataById(id);
+        }
     }
 
 

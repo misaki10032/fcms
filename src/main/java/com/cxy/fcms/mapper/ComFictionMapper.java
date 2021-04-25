@@ -1,5 +1,6 @@
 package com.cxy.fcms.mapper;
 
+import com.cxy.fcms.pojo.ComFicDate;
 import com.cxy.fcms.pojo.ComFiction;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
@@ -39,5 +40,7 @@ public interface ComFictionMapper extends BaseMapper<ComFiction> {
     int delFicData(String id);
 
     List<String> getFictionByTypeId(String tid);
+
+    ComFicDate getFictionDataById(String id);
 
 }

@@ -1,187 +1,187 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:th="http://www.thymeleaf.org"
-	  xmlns:shiro="http://www.pollix.at/thymeleaf/shiro"
-	  lang="en">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro"
+      lang="en">
 <head>
-	<meta charset="utf-8">
-	<title></title>
-	<script src="js/jquery-3.5.1.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="layui-v2.6.4/layui/css/layui.css"/>
-	<script src="layui-v2.6.4/layui/layui.js" type="text/javascript" charset="utf-8"></script>
-	<script>
-		layui.use('element', function () {
-			var element = layui.element;
-		});
-	</script>
+    <meta charset="utf-8">
+    <title>-首页-</title>
+    <script src="js/jquery-3.5.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="layui-v2.6.4/layui/css/layui.css"/>
+    <script src="layui-v2.6.4/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+        layui.use('element', function () {
+            var element = layui.element;
+        });
+    </script>
 </head>
 <style>
-	body {
-		background: #e3dbd2;
-	}
+    body {
+        background: #e3dbd2;
+    }
 
 </style>
 <body>
-<div class="layui-container" style="padding: 0;background: #FFFFFF">
-	<ul class="layui-nav layui-row">
-		<li class="layui-nav-item layui-col-md1 layui-col-lg1 layui-col-xs1 layui-col-sm1">
-			<a href="/">首页</a>
-		</li>
-		<li class="layui-nav-item layui-col-md1 layui-col-lg1 layui-col-xs1 layui-col-sm1">
-			<a>热门</a>
-		</li>
-		<li class="layui-nav-item layui-col-md1 layui-col-lg1 layui-col-xs1 layui-col-sm1">
-			<a>排行</a>
-		</li>
-				<li class="layui-nav-item layui-col-md1 layui-col-lg1 layui-col-xs1 layui-col-sm1">
-					<a>分类</a>
-				</li>
-		<li class="layui-nav-item layui-col-md1 layui-col-lg1 layui-col-xs1 layui-col-sm1 layui-col-lg-offset7 layui-col-xs-offset7 layui-col-md-offset7 layui-col-sm-offset7">
-			<a shiro:guest="">login</a>
-			<dl shiro:guest="" class="layui-nav-child">
-				<dd><a href="/tologin">管理员登录</a></dd>
-				<dd><a href="/usertologin">用户登录</a></dd>
-			</dl>
-			<a shiro:user="" th:text="${session.user.getUserName()}"></a>
-			<dl shiro:user="" class="layui-nav-child">
-				<dd><a href="/toUserHome">小屋</a></dd>
-				<dd><a href="/logOut">退出</a></dd>
-			</dl>
-		</li>
-			</ul>
-			<div class="layui-row">
-				<div class="layui-col-md2 layui-col-xs2" style="background-color: #ffb09c;height:420px">
-					新闻
-				</div>
-				<div class="layui-col-md8 layui-col-xs8" style="background-color: #beff9b;">
-					<div class="layui-carousel" id="test1">
-						<div carousel-item>
-							<div style="background-color: #338bff">条目1</div>
-							<div style="background-color: #5b9ba4">条目2</div>
-							<div style="background-color: #765bbf">条目3</div>
-							<div style="background-color: #ff0bfb">条目4</div>
-							<div style="background-color: #7b9b5e">条目5</div>
-							<div style="background-color: #8f5a55">条目6</div>
-						</div>
-					</div>
-				</div>
-				<div class="layui-col-md2 layui-col-xs2" style="background-color: #ffb09c;height:420px">
-					广告
-				</div>
-			</div>
-			<script>
-				layui.use('carousel', function () {
-					var carousel = layui.carousel;
-					//建造实例
-					carousel.render({
-						elem: '#test1',
-						width: '100%' //设置容器宽度
-						,
-						height: '420px',
-						arrow: 'hover' //始终显示箭头
-						// ,anim: 'updown' //切换动画方式
-						,
-						interval: 3000
-					});
-				});
-			</script>
-	<blockquote class="layui-elem-quote">热门</blockquote>
-	<hr class="layui-border-orange">
-	<div class="layui-fluid" style="background: #FFFFFF">
-		<ul class="flow-default layui-nav layui-row " style="background-color: #FFFFFF;" id="hostFiction">
-		</ul>
-	</div>
-	<blockquote class="layui-elem-quote">最新</blockquote>
-	<hr class="layui-border-orange">
-	<div class="layui-fluid" style="background: #FFFFFF">
-		<ul class="flow-default layui-nav layui-row " style="background-color: #FFFFFF;" id="newFiction">
-		</ul>
-	</div>
+<div class="layui-fluid" style="padding: 0;background: #FFFFFF">
+    <ul class="layui-nav layui-row">
+        <li class="layui-nav-item layui-col-md1 layui-col-lg1 layui-col-xs1 layui-col-sm1">
+            <a href="/">首页</a>
+        </li>
+        <li class="layui-nav-item layui-col-md1 layui-col-lg1 layui-col-xs1 layui-col-sm1">
+            <a>热门</a>
+        </li>
+        <li class="layui-nav-item layui-col-md1 layui-col-lg1 layui-col-xs1 layui-col-sm1">
+            <a>排行</a>
+        </li>
+        <li class="layui-nav-item layui-col-md1 layui-col-lg1 layui-col-xs1 layui-col-sm1">
+            <a>分类</a>
+        </li>
+        <li class="layui-nav-item layui-col-md1 layui-col-lg1 layui-col-xs1 layui-col-sm1 layui-col-lg-offset7 layui-col-xs-offset7 layui-col-md-offset7 layui-col-sm-offset7">
+            <a shiro:guest="">login</a>
+            <dl shiro:guest="" class="layui-nav-child">
+                <dd><a href="/tologin">管理员登录</a></dd>
+                <dd><a href="/usertologin">用户登录</a></dd>
+            </dl>
+            <a shiro:user="" th:text="${session.user.getUserName()}"></a>
+            <dl shiro:user="" class="layui-nav-child">
+                <dd><a href="/toUserHome">小屋</a></dd>
+                <dd><a href="/logOut">退出</a></dd>
+            </dl>
+        </li>
+    </ul>
+    <div class="layui-row">
+        <div class="layui-col-md2 layui-col-xs2" style="background-color: #ffb09c;height:420px">
+            新闻
+        </div>
+        <div class="layui-col-md8 layui-col-xs8" style="background-color: #beff9b;">
+            <div class="layui-carousel" id="test1">
+                <div carousel-item>
+                    <div style="background-color: #338bff">条目1</div>
+                    <div style="background-color: #5b9ba4">条目2</div>
+                    <div style="background-color: #765bbf">条目3</div>
+                    <div style="background-color: #ff0bfb">条目4</div>
+                    <div style="background-color: #7b9b5e">条目5</div>
+                    <div style="background-color: #8f5a55">条目6</div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md2 layui-col-xs2" style="background-color: #ffb09c;height:420px">
+            广告
+        </div>
+    </div>
+    <script>
+        layui.use('carousel', function () {
+            var carousel = layui.carousel;
+            //建造实例
+            carousel.render({
+                elem: '#test1',
+                width: '100%' //设置容器宽度
+                ,
+                height: '420px',
+                arrow: 'hover' //始终显示箭头
+                // ,anim: 'updown' //切换动画方式
+                ,
+                interval: 3000
+            });
+        });
+    </script>
+    <blockquote class="layui-elem-quote">热门</blockquote>
+    <hr class="layui-border-orange">
+    <div class="layui-fluid" style="background: #FFFFFF">
+        <ul class="flow-default layui-nav layui-row " style="background-color: #FFFFFF;" id="hostFiction">
+        </ul>
+    </div>
+    <blockquote class="layui-elem-quote">最新</blockquote>
+    <hr class="layui-border-orange">
+    <div class="layui-fluid" style="background: #FFFFFF">
+        <ul class="flow-default layui-nav layui-row " style="background-color: #FFFFFF;" id="newFiction">
+        </ul>
+    </div>
 </div>
-		<script type="text/javascript">
-			layui.use('flow', function() {
-				var flow = layui.flow;
-				flow.load({
-					elem: '#hostFiction', //流加载容器
-					scrollElem: '#hostFiction', //滚动条所在元素，一般不用填，此处只是演示需要。
-					isAuto: true,
-					isLazyimg: true,
-					end: '到底了哦',
-					done: function (page, next) { //加载下一页
-						//模拟插入
-						setTimeout(function () {
-							var lis = [];
-							for (var i = 0; i < 3; i++) {
-								lis.push(
-										'<a href="#" style="color:white;">' +
-										'<li class="layui-nav-item layui-col-xs4 layui-col-xs-offset0  layui-col-lg4 layui-col-lg-offset0" onmouseover="overit(this)" onclick="toFicHost(this,' + page + ',' + i + ');">' +
-										'<img class="layui-col-xs10 layui-col-xs-offset1 layui-col-lg10 layui-col-lg-offset1" src="img/now2.png" width="80%" height="250px" style="padding:20px">' +
-										'<span class="layui-col-xs10 layui-col-xs-offset1 layui-col-lg10 layui-col-lg-offset1" style="position: absolute;background-color:#505658;z-index:13;height:40px;' +
-										'text-align:center;bottom:20px;display:none;">名字</span>' +
-										'</li>' +
-										'</a>'
-								)
-							}
-							next(lis.join(''), page < 4); //假设总页数为 6
-						}, 500);
-					}
-				});
-			});
-		</script>
-		<script type="text/javascript">
-			layui.use('flow', function () {
-				var flow = layui.flow;
-				flow.load({
-					elem: '#newFiction', //流加载容器
-					scrollElem: '#newFiction', //滚动条所在元素，一般不用填，此处只是演示需要。
-					isAuto: true,
-					isLazyimg: true,
-					end: '到底了哦',
-					done: function (page, next) { //加载下一页
-						//模拟插入
-						setTimeout(function () {
-							var lis = [];
-							for (var i = 0; i < 3; i++) {
-								lis.push(
-										'<a style="color:white;">' +
-										'<li class="layui-nav-item layui-col-xs4 layui-col-xs-offset0  layui-col-lg4 layui-col-lg-offset0" onmouseover="overit(this)" onclick="toXX(this,' + page + ',' + i + ')" >' +
-										'<img class="layui-col-xs10 layui-col-xs-offset1 layui-col-lg10 layui-col-lg-offset1" src="img/now2.png" width="80%" height="250px" style="padding:20px">' +
-										'<span class="layui-col-xs10 layui-col-xs-offset1 layui-col-lg10 layui-col-lg-offset1" style="position: absolute;background-color:#505658;z-index:13;height:40px;' +
-										'text-align:center;bottom:20px;display:none;">名字</span>' +
-										'</li>' +
-										'</a>'
-								)
-							}
-							next(lis.join(''), page < 4); //假设总页数为 6
-						}, 500);
-					}
-				});
-			});
-		</script>
-		<script type="text/javascript">
-			function overit(ele) {
-				// $.ajax({
-				// 	 url:
-				// 	,
-				// })
-				//
+<script type="text/javascript">
+    layui.use('flow', function () {
+        var flow = layui.flow;
+        flow.load({
+            elem: '#hostFiction', //流加载容器
+            scrollElem: '#hostFiction', //滚动条所在元素，一般不用填，此处只是演示需要。
+            isAuto: true,
+            isLazyimg: true,
+            end: '到底了哦',
+            done: function (page, next) { //加载下一页
+                //模拟插入
+                setTimeout(function () {
+                    var lis = [];
+                    for (var i = 0; i < 3; i++) {
+                        lis.push(
+                            '<a href="#" style="color:white;">' +
+                            '<li class="layui-nav-item layui-col-xs4 layui-col-xs-offset0  layui-col-lg4 layui-col-lg-offset0" onmouseover="overit(this)" onclick="toFicHost(this,' + page + ',' + i + ');">' +
+                            '<img class="layui-col-xs10 layui-col-xs-offset1 layui-col-lg10 layui-col-lg-offset1" src="img/now2.png" width="80%" height="250px" style="padding:20px">' +
+                            '<span class="layui-col-xs10 layui-col-xs-offset1 layui-col-lg10 layui-col-lg-offset1" style="position: absolute;background-color:#505658;z-index:13;height:40px;' +
+                            'text-align:center;bottom:20px;display:none;">名字</span>' +
+                            '</li>' +
+                            '</a>'
+                        )
+                    }
+                    next(lis.join(''), page < 4); //假设总页数为 6
+                }, 500);
+            }
+        });
+    });
+</script>
+<script type="text/javascript">
+    layui.use('flow', function () {
+        var flow = layui.flow;
+        flow.load({
+            elem: '#newFiction', //流加载容器
+            scrollElem: '#newFiction', //滚动条所在元素，一般不用填，此处只是演示需要。
+            isAuto: true,
+            isLazyimg: true,
+            end: '到底了哦',
+            done: function (page, next) { //加载下一页
+                //模拟插入
+                setTimeout(function () {
+                    var lis = [];
+                    for (var i = 0; i < 3; i++) {
+                        lis.push(
+                            '<a style="color:white;">' +
+                            '<li class="layui-nav-item layui-col-xs4 layui-col-xs-offset0  layui-col-lg4 layui-col-lg-offset0" onmouseover="overit(this)" onclick="toXX(this,' + page + ',' + i + ')" >' +
+                            '<img class="layui-col-xs10 layui-col-xs-offset1 layui-col-lg10 layui-col-lg-offset1" src="img/now2.png" width="80%" height="250px" style="padding:20px">' +
+                            '<span class="layui-col-xs10 layui-col-xs-offset1 layui-col-lg10 layui-col-lg-offset1" style="position: absolute;background-color:#505658;z-index:13;height:40px;' +
+                            'text-align:center;bottom:20px;display:none;">名字</span>' +
+                            '</li>' +
+                            '</a>'
+                        )
+                    }
+                    next(lis.join(''), page < 4); //假设总页数为 6
+                }, 500);
+            }
+        });
+    });
+</script>
+<script type="text/javascript">
+    function overit(ele) {
+        // $.ajax({
+        // 	 url:
+        // 	,
+        // })
+        //
 
-				$(ele).hover(function () {
-					$(ele).find("span").css("display", "block");
-				}, function () {
-					$(ele).find("span").css("display", "none");
-				});
-			}
+        $(ele).hover(function () {
+            $(ele).find("span").css("display", "block");
+        }, function () {
+            $(ele).find("span").css("display", "none");
+        });
+    }
 
-			function toXX(ele, page, i) {
-				var index = eval((page - 1) * 3 + i + 1);
-				location.assign("http://192.168.31.225:9898/tofictionxx?index=" + index);
-			}
+    function toXX(ele, page, i) {
+        var index = eval((page - 1) * 3 + i + 1);
+        location.assign("http://192.168.31.225:9898/tofictionxx?index=" + index);
+    }
 
-			function toFicHost(ele, page, i) {
-				var index = eval((page - 1) * 3 + i + 1);
-				location.assign("http://192.168.31.225:9898/tofictionhost?index=" + index);
-			}
-		</script>
-	</body>
+    function toFicHost(ele, page, i) {
+        var index = eval((page - 1) * 3 + i + 1);
+        location.assign("http://192.168.31.225:9898/tofictionhost?index=" + index);
+    }
+</script>
+</body>
 </html>
