@@ -98,7 +98,8 @@
         </ul>
     </div>
 </div>
-<script type="text/javascript">
+<script type="text/javascript" th:inline="javascript">
+    var hostlist = /*[[${session.byhost}]]*/ [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
     layui.use('flow', function () {
         var flow = layui.flow;
         flow.load({
@@ -117,7 +118,7 @@
                             '<li class="layui-nav-item layui-col-xs4 layui-col-xs-offset0  layui-col-lg4 layui-col-lg-offset0" onmouseover="overit(this)" onclick="toFicHost(this,' + page + ',' + i + ');">' +
                             '<img class="layui-col-xs10 layui-col-xs-offset1 layui-col-lg10 layui-col-lg-offset1" src="img/now2.png" width="80%" height="250px" style="padding:20px">' +
                             '<span class="layui-col-xs10 layui-col-xs-offset1 layui-col-lg10 layui-col-lg-offset1" style="position: absolute;background-color:#505658;z-index:13;height:40px;' +
-                            'text-align:center;bottom:20px;display:none;">名字</span>' +
+                            'text-align:center;bottom:20px;display:none;">' + hostlist[eval((page - 1) * 3 + i)] + '</span>' +
                             '</li>' +
                             '</a>'
                         )
@@ -128,7 +129,8 @@
         });
     });
 </script>
-<script type="text/javascript">
+<script type="text/javascript" th:inline="javascript">
+    var timelist = /*[[${session.bytime}]]*/ [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
     layui.use('flow', function () {
         var flow = layui.flow;
         flow.load({
@@ -147,7 +149,7 @@
                             '<li class="layui-nav-item layui-col-xs4 layui-col-xs-offset0  layui-col-lg4 layui-col-lg-offset0" onmouseover="overit(this)" onclick="toXX(this,' + page + ',' + i + ')" >' +
                             '<img class="layui-col-xs10 layui-col-xs-offset1 layui-col-lg10 layui-col-lg-offset1" src="img/now2.png" width="80%" height="250px" style="padding:20px">' +
                             '<span class="layui-col-xs10 layui-col-xs-offset1 layui-col-lg10 layui-col-lg-offset1" style="position: absolute;background-color:#505658;z-index:13;height:40px;' +
-                            'text-align:center;bottom:20px;display:none;">名字</span>' +
+                            'text-align:center;bottom:20px;display:none;">' + timelist[eval((page - 1) * 3 + i)] + '</span>' +
                             '</li>' +
                             '</a>'
                         )

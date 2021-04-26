@@ -1,7 +1,9 @@
 package com.cxy.fcms.controller;
 
+import com.cxy.fcms.pojo.ComFiction;
 import com.cxy.fcms.pojo.ComUser;
 import com.cxy.fcms.pojo.SysAdmin;
+import com.cxy.fcms.service.FictionService;
 import com.cxy.fcms.service.LoginService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -16,21 +18,41 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Controller
 public class LoginController {
     @Autowired
     LoginService loginService;
+    @Autowired
+    FictionService fictionService;
+
     //起始页
-    @GetMapping({"/","hello"})
-    public String welcome(){
+    @GetMapping({"/", "hello"})
+    public String welcome(Model model, HttpSession session) {
+        List<ComFiction> fictionsOrderByHost = fictionService.getFictionsOrderByHost();
+        List<ComFiction> fictionOrderByTime = fictionService.getFictionOrderByTime();
+        List<String> host = new ArrayList<>();
+        List<String> time = new ArrayList<>();
+        for (ComFiction fiction : fictionsOrderByHost) {
+            host.add(fiction.getFicName());
+        }
+        for (ComFiction fiction : fictionOrderByTime) {
+            time.add(fiction.getFicName());
+        }
+        session.setAttribute("byhost", host);
+        session.setAttribute("bytime", time);
         return "index";
     }
+
     /**
      * 管理员登录相关
      */
     @GetMapping("/tologin")
-    public String toLogin(){
+    public String toLogin() {
         return "login";
     }
 
