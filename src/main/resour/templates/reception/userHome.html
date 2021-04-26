@@ -38,9 +38,9 @@
 			<a>分类</a>
 		</li>
 		<li class="layui-nav-item layui-col-lg-offset8">
-			<a shiro:user="" th:text="${session.user.getUserName()}"></a>
+			<a shiro:user="" th:text="${adminInfo.getAdminName()}"></a>
 			<dl shiro:user="" class="layui-nav-child">
-				<dd><a href="/toUserHome">小屋</a></dd>
+				<dd><a th:href="@{/toUserHome(id=${adminInfo.getAdminId()})}" >小屋</a></dd>
 				<dd><a href="/logOut">退出</a></dd>
 			</dl>
 		</li>
@@ -52,7 +52,7 @@
 		<div class="layui-col-md12 layui-row" style="height: 17%;">
 
 		</div>
-		<div class="layui-col-md8  layui-col-lg-offset2 layui-row" style="height: 66%; width: 50%;">
+		<div class="layui-col-md8  layui-col-lg-offset2 layui-row" style="height: 66%; width: 66%;">
 			<img class="layui-col-md12 layui-circle" style="height: 100%;" src="/img/now2.png"/>
 		</div>
 		<div class="layui-col-md12 layui-row" style="height: 17%;">
@@ -66,25 +66,26 @@
 			<!-- 第二 -->
 			<div class="layui-col-md12 layui-row" style="height: 30%;">
 				<div class="layui-col-md5" style="height: 100%; font-size:20px;">
-					<b>我是一条鱼</b>
+					<b><div th:text="${adminInfo.getAdminCall()}"></div></b>
 				</div>
 				<div class="layui-col-md1 layui-col-lg-offset5" style="height: 100%;width:10%">
 					<button type="button" class="layui-btn  layui-btn-xs layui-col-md12"
-							style="height: 45%;background-color: #D32F2F;	">
+							style="height: 45%;background-color: #d32f2f;	">
 						<a href="/revUser" target="ifram" style="color: white;"><b style="font-size:1px;">账户信息修改</b></a>
 					</button>
 				</div>
 			</div>
 			<!-- 第三 -->
 			<div class="layui-col-md12" style="height: 20%;">
-				<b style="font-size: 2px;color: #999999;">简介:&nbsp;&nbsp;</b><b style="font-size: 2px;color:#666666 ;">咕噜咕噜咕噜咕噜咕噜</b>
+					<b style="font-size: 2px;color: #999999;">简介:&nbsp;&nbsp;</b><b style="font-size: 2px;color:#666666 ;" th:text="${adminInfo.getAdminDec()}"></b>
 			</div>
 			<!-- 第四 -->
 			<div class="layui-col-md12" style="height: 30%;">
 				<div class="layui-col-md12" style="height:50%"></div>
-				<div class="layui-col-md4" style="height:50%;color: #999999;font-size:14px;">账户等级:VIP</div>
-				<div class="layui-col-md4" style="height:50%;color: #999999;font-size:14px;">我的余额:100$</div>
+				<div class="layui-col-md4" th:text="'账户等级:'+${adminInfo.getAdminStar()}" style="height:50%;color: #999999;font-size:14px;"></div>
+				<div class="layui-col-md4" th:text="'我的余额:'+${adminInfo.getAdminMoney()}"  style="height:50%;color: #999999;font-size:14px;"></div>
 				<div class="layui-col-md4" style="height:50%;color: #999999;font-size:14px;">我的月票:</div>
+
 			</div>
 		</div>
 		<!-- 第四 -->
@@ -96,11 +97,14 @@
 		<ul class="layui-nav layui-nav-tree layui-inline" lay-filter="demo"
 			style="margin-right:10px;width: 100%;height:350px; background-color:#F7F7F7 ;">
 			<li class="layui-nav-item layui-this">
-				<a href="rev.html" target="ifram" style="color: #333333;">账户信息修改</a>
+
+				<a th:href="@{/revUser(id=${adminInfo.getAdminId()})}"  target="ifram" name="id"  style="color: #333333;">账户信息修改</a>
 			</li>
+
 			<li class="layui-nav-item">
-				<a href="collect.html" target="ifram" style="color: #333333;">我的收藏</a>
+				<a href="collect.html"  target="ifram" style="color: #333333;">我的收藏</a>
 			</li>
+
 			<li class="layui-nav-item">
 				<a href="comment.html" target="ifram" style="color: #333333;">我的书评</a>
 			</li>
