@@ -2,7 +2,9 @@ package com.cxy.fcms.controller;
 
 import com.cxy.fcms.pojo.ComUser;
 import com.cxy.fcms.pojo.SysAdmin;
+import com.cxy.fcms.pojo.SysAdminInfo;
 import com.cxy.fcms.service.LoginService;
+import com.cxy.fcms.service.UserInfoService;
 import com.cxy.fcms.util.IDUtil;
 import com.cxy.fcms.util.ShiroMd5Util;
 import org.apache.shiro.SecurityUtils;
@@ -20,7 +22,9 @@ import org.springframework.web.bind.annotation.Mapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
@@ -30,6 +34,9 @@ import java.util.List;
 public class LoginController {
     @Autowired
     LoginService loginService;
+
+    @Autowired
+    UserInfoService userInfoService;
     //起始页
     @GetMapping({"/","hello"})
     public String welcome(){
@@ -138,7 +145,7 @@ public class LoginController {
     }
 
     @PostMapping("/userlogin")
-    public String userLogin(Model model, String nums, String pwd) {
+    public String userLogin(Model model, String nums, String pwd, HttpServletRequest request) {
         Subject subject = SecurityUtils.getSubject();//获取用户信息
         UsernamePasswordToken token = new UsernamePasswordToken(nums, pwd);//封装
         try {
@@ -149,8 +156,12 @@ public class LoginController {
             System.out.println("isAdmin" + isAdmin);
             if (!isAdmin) {
                 ComUser user = (ComUser) session.getAttribute("user");
+                SysAdminInfo sysAdminInfo = userInfoService.selAdmin(user.getId());
                 session.setAttribute("user", user);
                 model.addAttribute("username", user.getUserName());
+                model.addAttribute("userId",user.getId());
+                HttpSession session1 = request.getSession();
+                session1.setAttribute("adminInfo",sysAdminInfo);
                 return "index";
             } else {
                 model.addAttribute("msg", "系统发生位置错误!");

@@ -36,31 +36,33 @@
 						<dd><a href="/tologin">管理员登录</a></dd>
 						<dd><a href="/usertologin">用户登录</a></dd>
 					</dl>
-					<a shiro:user="" th:text="${username}"></a>
+					<a shiro:user="" >
+                       <div th:text="${username}"></div>
+					</a>
 					<dl shiro:user="" class="layui-nav-child">
-						<dd><a href="/toUserHome">小屋</a></dd>
+						<dd><a th:href="@{/toUserHome(id=${userId})}" >小屋</a></dd>
 						<dd><a href="/logOut">退出</a></dd>
 					</dl>
 				</li>
 			</ul>
 			<div class="layui-row">
-				<div class="layui-col-md2 layui-col-xs2" style="background-color: #ffb09c;height:420px">
-					新闻
+				<div class="layui-col-md2 layui-col-xs2 layui-row"  style=" background-color: #ffb09c;height:420px">
+					<a href="http://bdtg.37.com/s/1/1044/108239.html?s=40&t=1&v=U1NghmXRmxTDdBjlor8.&c=8951&cg=15377&b=33106&n=1&sz=-1&uid=1865643&wd=&bd_vid=8122237212186340346&keywordid=85133650098&trig=nm&site_id=231&ad_type=503" ><img class="layui-col-md12" style="height: 100%;" src="/img/img1.png"/></a>
 				</div>
 				<div class="layui-col-md8 layui-col-xs8" style="background-color: #beff9b;">
 					<div class="layui-carousel" id="test1">
 						<div carousel-item>
-							<div style="background-color: #338bff">条目1</div>
-							<div style="background-color: #5b9ba4">条目2</div>
-							<div style="background-color: #765bbf">条目3</div>
-							<div style="background-color: #ff0bfb">条目4</div>
-							<div style="background-color: #7b9b5e">条目5</div>
-							<div style="background-color: #8f5a55">条目6</div>
+							<div style="background-color: #338bff"><img class="layui-col-md12" style="height: 100%;" src="/img/2.png"/></div>
+							<div style="background-color: #5b9ba4"><img class="layui-col-md12" style="height: 100%;" src="/img/3.png"/></div>
+							<div style="background-color: #765bbf"><img class="layui-col-md12" style="height: 100%;" src="/img/4.png"/></div>
+							<div style="background-color: #ff0bfb"><img class="layui-col-md12" style="height: 100%;" src="/img/5.png"/></div>
+							<div style="background-color: #7b9b5e"><img class="layui-col-md12" style="height: 100%;" src="/img/6.png"/></div>
+							<div style="background-color: #8f5a55"><img class="layui-col-md12" style="height: 100%;" src="/img/7.png"/></div>
 						</div>
 					</div>
 				</div>
 				<div class="layui-col-md2 layui-col-xs2" style="background-color: #ffb09c;height:420px">
-					广告
+					<a  href="http://bdtg.37.com/s/1/1044/103259.html?s=40&t=1&v=U1NghmXRmxTDdBjlor8.&c=7142&cg=13469&b=33668&n=1&sz=-1&uid=1865643&wd=&bd_vid=8122237212186340346&keywordid=85133650098&trig=nm&site_id=231&ad_type=303"><img class="layui-col-md12" style="height: 100%;" src="/img/img2.png"/></a>
 				</div>
 			</div>
 

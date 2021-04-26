@@ -2,21 +2,31 @@ package com.cxy.fcms.controller;
 
 import com.cxy.fcms.pojo.ComUser;
 import com.cxy.fcms.pojo.SysAdmin;
+import com.cxy.fcms.pojo.SysAdminInfo;
 import com.cxy.fcms.service.UserService;
+import com.cxy.fcms.service.impl.UserInfoServiceImpl;
 import com.cxy.fcms.util.IDUtil;
 import com.cxy.fcms.util.LayuiReplay;
 import com.cxy.fcms.util.ShiroMd5Util;
+import com.google.gson.Gson;
+import io.lettuce.core.ScriptOutputType;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnJava;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.jws.WebParam;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @ClassName UserController
@@ -30,7 +40,8 @@ import java.util.List;
 public class UserController {
     @Autowired
     UserService userService;
-
+    @Autowired
+    UserInfoServiceImpl userInfoService;
     @GetMapping("/getUsers")
     @ResponseBody
     public Object getAllUsers() {
@@ -100,16 +111,42 @@ public class UserController {
     }
 
     @GetMapping("/toUserHome")
-    public String toUserHome() {
+    public String toUserHome(String id,Model model) {
+
+/*        SysAdminInfo adminInfo = (SysAdminInfo)request.getSession().getAttribute("adminInfo");
+        String adminId = adminInfo.getAdminId();*/
+        SysAdminInfo sysAdminInfo = userInfoService.selAdmin(id);
+        model.addAttribute("adminInfo",sysAdminInfo);
         return "reception/userHome";
     }
 
     @GetMapping("/revUser")
-    public String RevUser(String id) {
-        /*
-            需要携带的数据
-         */
+    public String RevUser(String id, Model model) {
+        SysAdminInfo sysAdminInfo = userInfoService.selAdmin(id);
+        model.addAttribute("userInfo",sysAdminInfo);
         return "reception/rev";
     }
+    @GetMapping("/submitRev")
+    @ResponseBody
+    public String submitRev(String hidden,String call,String name,String adminSex,String adminAge,String adminAddress,
+                            String adminDec,String adminEmail,Model model){
+        /*String hidden,String call,String name,String adminSex,String adminAge,String adminAddress,
+        String adminDec,String adminEmail,Model model*/
+        System.out.println("hidden的值是"+hidden);
+        Map<String, Object> map = new HashMap<>();
+        map.put("adminName",name);
+        map.put("adminAge",adminAge);
+        map.put("adminSex",adminSex);
+        map.put("adminAddress",adminAddress);
+        map.put("adminDec",adminDec);
+        map.put("adminCall",call);
+        map.put("adminEmail",adminEmail);
+        map.put("id",hidden);
+        userInfoService.revAdmin(map);
+        SysAdminInfo sysAdminInfo = userInfoService.selAdmin(hidden);
+        model.addAttribute("adminInfo",sysAdminInfo);
+        return "";
+    }
+
 
 }

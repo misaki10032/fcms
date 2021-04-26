@@ -36,23 +36,24 @@
 
 					if (isok) {
 						return true;
-					}else {
+					} else {
 						return false;
 					}
 				}
 		</script>
 	</head>
-	<body background="img/bg.jpg" style="background-size: 1680px;">
-		<div class="container">
-			<div class="">
-				<div style="height:0px;padding-bottom:13%">
-				</div>
-				<div class="row">
-					<div class="col-lg-4 col-lg-offset-4 row  col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3" style="border: 1px solid #bbfffa;border-radius: 15px;backdrop-filter: blur(19px);">
-						<form th:action="@{/login}" method="post">
-							<h2 align="center" style="color: #bdffdc;">Welcome !</h2>
-							<br>
-							<p class="text-danger" align="center"  th:text="${msg}"></p>
+	<body background="img/bg.jpg" style="background-size: 1880px;">
+	<div class="container">
+		<div class="">
+			<div style="height:0px;padding-bottom:13%">
+			</div>
+			<div class="row">
+				<div class="col-lg-4 col-lg-offset-4 row  col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3"
+					 style="border: 1px solid #bbfffa;border-radius: 15px;backdrop-filter: blur(19px);">
+					<form th:action="@{/login}" method="post">
+						<h2 align="center" style="color: #bdffdc;">Welcome !</h2>
+						<br>
+						<p class="text-danger" align="center" th:text="${msg}"></p>
 							<div class="col-lg-10 col-lg-offset-1">
 								<label class="container-fluid">
 									<h4 style="color: #bdffdc;">
@@ -99,19 +100,22 @@
 							<div class="form-group">
 								<label class="col-lg-2 control-label">手机号</label>
 								<div class="col-lg-8">
-									<input type="text" id="phone" name="phone" class="form-control"/>
+									<input type="text" id="phone" name="phone" class="form-control"
+										   placeholder="个人联系方式"/>
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-lg-2 control-label">用户名</label>
 								<div class="col-lg-8">
-									<input type="text" id="number" name="number" class="form-control" />
+									<input type="text" id="number" name="number" class="form-control"
+										   placeholder="由字母和数字组成"/>
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-lg-2 control-label">密码</label>
 								<div class="col-lg-8">
-									<input type="password" id="pwd1" name="pwd" class="form-control"/>
+									<input type="password" id="pwd1" name="pwd" class="form-control"
+										   placeholder="3~12位的数字字母下划线"/>
 								</div>
 							</div>
 							<div class="form-group">
