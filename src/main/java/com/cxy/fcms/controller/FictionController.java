@@ -1,6 +1,5 @@
 package com.cxy.fcms.controller;
 
-import com.cxy.fcms.mapper.ComFictionMapper;
 import com.cxy.fcms.mapper.ComTypeMapper;
 import com.cxy.fcms.pojo.ComFicDate;
 import com.cxy.fcms.pojo.ComFiction;
@@ -20,8 +19,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
-import java.util.Hashtable;
-import java.util.LinkedList;
 import java.util.List;
 
 @Controller
