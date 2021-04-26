@@ -17,9 +17,9 @@
 </head>
 <style>
     body {
-        background: #e3dbd2;
+        height: 100%;
+        background: linear-gradient(90deg, #818181, #C9CACB, #C9CACB, white, white, white, white, white, white, white, white, #C9CACB, #C9CACB, #818181);
     }
-
 </style>
 <body>
 <div class="layui-fluid" style="padding: 0;background: #FFFFFF">
@@ -49,8 +49,10 @@
             </dl>
         </li>
     </ul>
+</div>
+<div class="layui-container">
     <div class="layui-row">
-        <div class="layui-col-md2 layui-col-xs2" style="background-color: #ffb09c;height:420px">
+        <div class="layui-col-md2 layui-col-xs2" style="background-color: #ffb09c;height:300px">
             新闻
         </div>
         <div class="layui-col-md8 layui-col-xs8" style="background-color: #beff9b;">
@@ -64,7 +66,7 @@
                 </div>
             </div>
         </div>
-        <div class="layui-col-md2 layui-col-xs2" style="background-color: #ffb09c;height:420px">
+        <div class="layui-col-md2 layui-col-xs2" style="background-color: #ffb09c;height:300px">
             广告
         </div>
     </div>
@@ -76,7 +78,7 @@
                 elem: '#test1',
                 width: '100%' //设置容器宽度
                 ,
-                height: '420px',
+                height: '300px',
                 arrow: 'hover' //始终显示箭头
                 // ,anim: 'updown' //切换动画方式
                 ,
@@ -84,15 +86,21 @@
             });
         });
     </script>
-    <blockquote class="layui-elem-quote">热门</blockquote>
-    <hr class="layui-border-orange">
-    <div class="layui-fluid" style="background: #FFFFFF">
+    <blockquote class="layui-elem-quote" style="margin: 0;padding: 5px">
+        <fieldset class="layui-elem-field layui-field-title" style="margin: 10px;padding: 0px">
+            <legend>热门</legend>
+        </fieldset>
+    </blockquote>
+    <div class="layui-fluid" style="background: #FFFFFF;margin-top: 10px;">
         <ul class="flow-default layui-nav layui-row " style="background-color: #FFFFFF;" id="hostFiction">
         </ul>
     </div>
-    <blockquote class="layui-elem-quote">最新</blockquote>
-    <hr class="layui-border-orange">
-    <div class="layui-fluid" style="background: #FFFFFF">
+    <blockquote class="layui-elem-quote" style="margin: 0;padding: 5px">
+        <fieldset class="layui-elem-field layui-field-title" style="margin: 10px;padding: 0px;">
+            <legend>最新</legend>
+        </fieldset>
+    </blockquote>
+    <div class="layui-fluid" style="background: #FFFFFF;margin-top: 10px;">
         <ul class="flow-default layui-nav layui-row " style="background-color: #FFFFFF;" id="newFiction">
         </ul>
     </div>
@@ -116,7 +124,7 @@
                         lis.push(
                             '<a href="#" style="color:white;">' +
                             '<li class="layui-nav-item layui-col-xs4 layui-col-xs-offset0  layui-col-lg4 layui-col-lg-offset0" onmouseover="overit(this)" onclick="toFicHost(this,' + page + ',' + i + ');">' +
-                            '<img class="layui-col-xs10 layui-col-xs-offset1 layui-col-lg10 layui-col-lg-offset1" src="img/fiction/' + himglist[eval((page - 1) * 3 + i)] + '" width="80%" height="250px" style="padding:20px">' +
+                            '<img class="layui-col-xs10 layui-col-xs-offset1 layui-col-lg10 layui-col-lg-offset1" src="img/fiction/' + himglist[eval((page - 1) * 3 + i)] + '" width="80%" height="224px" style="padding:20px">' +
                             '<span class="layui-col-xs10 layui-col-xs-offset1 layui-col-lg10 layui-col-lg-offset1" style="position: absolute;background-color:#505658;z-index:13;height:40px;' +
                             'text-align:center;bottom:20px;display:none;">' + hostlist[eval((page - 1) * 3 + i)] + '</span>' +
                             '</li>' +

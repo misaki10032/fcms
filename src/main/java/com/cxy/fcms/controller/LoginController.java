@@ -18,6 +18,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
@@ -141,9 +143,32 @@ public class LoginController {
     }
 
     @GetMapping("/logOut")
-    public String logOut() {
+    public String logOut(HttpServletRequest req) {
         Subject subject = SecurityUtils.getSubject();
         subject.logout();
+        HttpSession session = req.getSession();
+        List<ComFiction> fictionsOrderByHost = fictionService.getFictionsOrderByHost();
+        List<ComFiction> fictionOrderByTime = fictionService.getFictionOrderByTime();
+        List<String> host = new ArrayList<>();
+        List<String> time = new ArrayList<>();
+        List<String> timeimg = new ArrayList<>();
+        List<String> hostimg = new ArrayList<>();
+        for (ComFiction fiction : fictionsOrderByHost) {
+            host.add(fiction.getFicName());
+            hostimg.add(fiction.getFicImg());
+        }
+        for (ComFiction fiction : fictionOrderByTime) {
+            time.add(fiction.getFicName());
+            timeimg.add(fiction.getFicImg());
+
+        }
+        System.out.println(timeimg);
+        System.out.println(hostimg);
+        session.setAttribute("byhost", host);
+        session.setAttribute("bytime", time);
+        session.setAttribute("timeimg", timeimg);
+        session.setAttribute("hostimg", hostimg);
+
         return "index";
     }
 

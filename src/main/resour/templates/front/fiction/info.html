@@ -3,160 +3,168 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:shiro="http://www.pollix.at/thymeleaf/shiro"
       lang="en">
-    <head>
-        <meta charset="utf-8">
-        <title th:text="${ficBook.getFicName()}"></title>
-        <meta name="renderer" content="webkit">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-        <link rel="stylesheet" href="/layui-v2.6.4/layui/css/layui.css" media="all">
-        <script src="/js/jquery-3.5.1.min.js" charset="UTF-8"></script>
-        <script src="/layui-v2.6.4/layui/layui.js" charset="utf-8"></script>
-    </head>
-    <body>
-    <script type="text/javascript" th:inline="javascript">
-        var fic_img = /*[[${ficBook.getFicImg()}]]*/ "fengmian.png";
-        $(function () {
-            $("#fic_fengmian").attr('src', 'img/fiction/' + fic_img);
-        })
-        layui.use('layer', function () {
-            var layer = layui.layer;
-            // 信息框   信息，  参数，  回调函数
-            layer.msg('斗破苍穹', {offset: '260px', icon: 6}, function () {
-                //  弹出框   信息， 参数， 回调函数
-                layer.alert("您已经回到首页", {icon: 1, time: 2000, offset: '360px', closeBtn: 2, title: '友情提示！'})
-            })
-            // layer.msg("斗破苍穹")
-        })
+<head>
+    <meta charset="utf-8">
+    <title th:text="${ficBook.getFicName()}"></title>
+    <!--    <meta name="renderer" content="webkit">-->
+    <!--    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">-->
+    <!--    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">-->
+    <script src="/layui-v2.6.4/layui/layui.js" charset="utf-8"></script>
+    <script src="js/jquery-3.5.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="layui-v2.6.4/layui/css/layui.css"/>
+    <script src="layui-v2.6.4/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+        layui.use('element', function () {
+            var element = layui.element;
+        });
     </script>
-        <div class="layui-fluid" style="padding: 0;background: #FFFFFF">
-            <ul class="layui-nav layui-row">
-                <li class="layui-nav-item layui-col-md1 layui-col-lg1 layui-col-xs1 layui-col-sm1">
-                    <a href="/">首页</a>
-                </li>
-                <li class="layui-nav-item layui-col-md1 layui-col-lg1 layui-col-xs1 layui-col-sm1">
-                    <a>热门</a>
-                </li>
-                <li class="layui-nav-item layui-col-md1 layui-col-lg1 layui-col-xs1 layui-col-sm1">
-                    <a>排行</a>
-                </li>
-                <li class="layui-nav-item layui-col-md1 layui-col-lg1 layui-col-xs1 layui-col-sm1">
-                    <a>分类</a>
-                </li>
-                <li class="layui-nav-item layui-col-md1 layui-col-lg1 layui-col-xs1 layui-col-sm1 layui-col-lg-offset7 layui-col-xs-offset7 layui-col-md-offset7 layui-col-sm-offset7">
-                    <a shiro:guest="">login</a>
-                    <dl shiro:guest="" class="layui-nav-child">
-                        <dd><a href="/tologin">管理员登录</a></dd>
-                        <dd><a href="/usertologin">用户登录</a></dd>
-                    </dl>
-                    <a shiro:user="" th:text="${session.user.getUserName()}"></a>
-                    <dl shiro:user="" class="layui-nav-child">
-                        <dd><a href="/toUserHome">小屋</a></dd>
-                        <dd><a href="/logOut">退出</a></dd>
-                    </dl>
-                </li>
-            </ul>
-            <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
-                <legend>热门</legend>
-            </fieldset>
-            <div class="layui-container">
-                <ul class="flow-default layui-nav layui-row " style="background-color: white;" id="hostFiction"></ul>
-            </div>
-            <div class="layui-row layui-col-space10">
-                <!-- 列嵌套，向左偏移3个，以达到中间  -->
-                <div class="layui-col-md-offset3 layui-col-xs-offset6">
-                    <!-- 栅格内边距10px  -->
-                    <div class="layui-row grid-demo layui-col-space10">
-                        <!-- 书籍图片1/3 -->
-                        <div class="layui-col-md3 layui-col-xs5">
-                            <img id="fic_fengmian" src="img/fiction/fengmian.png" width="100%">
-                        </div>
-                        <!-- 书籍信息2/3 -->
-                        <div class="layui-col-md8 layui-col-xs8">
-                            <br>
-                            <h1 th:text="${ficBook.getFicName()}"></h1>
-                            <br>
-                            <p>
-                                <button class="layui-btn layui-btn-xs layui-btn-warm"><a
-                                        href="https://www.qidian.com/finish">完结</a></button>
-                                <button class="layui-btn layui-btn-xs layui-btn-normal"><a
-                                        href="https://www.qidian.com/free">免费</a></button>
-                            </p>
-                            <br>
-                            <p th:text="${ficBook.getFicType()+','+data.getFicData().substring(0,8)}"></p>
-                            <br>
-                            <p>124万字 | 12424总推荐 |2420周推荐</p>
-                            <br>
-                            <p>
-                                <button class="layui-btn layui-btn-xs layui-btn-primary layui-border-blue layui-btn-radius">
-                                    <a th:href="@{/toContentPage(bid=${ficBook.getId()})}"><i
-                                            class="layui-icon layui-icon-read"></i>免费试读</a>
-                                </button>
-                                <button class="layui-icon layui-btn layui-btn-xs layui-btn-primary layui-border-blue layui-btn-radius">
-                                    <a href=""><i class="layui-icon layui-icon-add-circle-fine"></i>加入书架</a>
-                                </button>
-                                <button class="layui-btn layui-btn-xs layui-border-blue layui-btn-primary layui-btn-radius">
-                                    <a href=""><i class="layui-icon layui-icon-chat"></i>投推荐票</a>
-                                </button>
-                                <button class="layui-btn layui-border-red layui-btn-xs layui-btn-disabled layui-btn-radius">
-                                    <i class="layui-icon layui-icon-tips"></i>投诉
-                                </button>
-                            </p>
-                        </div>
-                    </div>
+    <style>
+        body {
+            height: 100%;
+            background: linear-gradient(90deg, #818181, #C9CACB, #C9CACB, white, white, white, white, white, white, white, white, #C9CACB, #C9CACB, #818181);
+        }
+    </style>
+</head>
+<body>
+<div class="layui-fluid" style="padding: 0;background: #FFFFFF">
+    <ul class="layui-nav layui-row">
+        <li class="layui-nav-item layui-col-md1 layui-col-lg1 layui-col-xs1 layui-col-sm1">
+            <a href="/">首页</a>
+        </li>
+        <li class="layui-nav-item layui-col-md1 layui-col-lg1 layui-col-xs1 layui-col-sm1">
+            <a>热门</a>
+        </li>
+        <li class="layui-nav-item layui-col-md1 layui-col-lg1 layui-col-xs1 layui-col-sm1">
+            <a>排行</a>
+        </li>
+        <li class="layui-nav-item layui-col-md1 layui-col-lg1 layui-col-xs1 layui-col-sm1">
+            <a>分类</a>
+        </li>
+        <li class="layui-nav-item layui-col-md1 layui-col-lg1 layui-col-xs1 layui-col-sm1 layui-col-lg-offset7 layui-col-xs-offset7 layui-col-md-offset7 layui-col-sm-offset7">
+            <a shiro:guest="">login</a>
+            <dl shiro:guest="" class="layui-nav-child">
+                <dd><a href="/tologin">管理员登录</a></dd>
+                <dd><a href="/usertologin">用户登录</a></dd>
+            </dl>
+            <a shiro:user="" th:text="${session.user.getUserName()}"></a>
+            <dl shiro:user="" class="layui-nav-child">
+                <dd><a href="/toUserHome">小屋</a></dd>
+                <dd><a href="/logOut">退出</a></dd>
+            </dl>
+        </li>
+    </ul>
+</div>
+<script type="text/javascript" th:inline="javascript">
+    var fic_img = /*[[${ficBook.getFicImg()}]]*/ "fengmian.png";
+    $(function () {
+        $("#fic_fengmian").attr('src', 'img/fiction/' + fic_img);
+    })
+    layui.use('layer', function () {
+        var layer = layui.layer;
+        // 信息框   信息，  参数，  回调函数
+        layer.msg([[${ficBook.getFicName()}]], {offset: '260px', icon: 6}, function () {
+            //  弹出框   信息， 参数， 回调函数
+            layer.msg("您已经回到首页", {icon: 1, time: 2000, offset: '360px', closeBtn: 2, title: '友情提示！'})
+        })
+        // layer.msg("斗破苍穹")
+    })
+</script>
+<div class="layui-fluid" style="padding: 0;">
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+        <legend>热门</legend>
+    </fieldset>
+    <div class="layui-container">
+        <ul class="flow-default layui-nav layui-row " style="background-color: white;" id="hostFiction"></ul>
+    </div>
+    <div class="layui-row layui-col-space10">
+        <!-- 列嵌套，向左偏移3个，以达到中间  -->
+        <div class="layui-col-md-offset2 layui-col-xs-offset1">
+            <!-- 栅格内边距10px  -->
+            <div class="layui-row grid-demo layui-col-space10">
+                <!-- 书籍图片1/3 -->
+                <div class="layui-col-lg3 layui-col-md4 layui-col-xs11 layui-col-sm4">
+                    <img id="fic_fengmian" src="img/fiction/fengmian.png" width="100%">
+                </div>
+                <!-- 书籍信息2/3 -->
+                <div class="layui-col-lg8 layui-col-md7 layui-col-xs12 layui-col-sm7">
+                    <br>
+                    <h1 th:text="${ficBook.getFicName()}"></h1>
+                    <br>
+                    <p>
+                        <button class="layui-btn layui-btn-xs layui-btn-warm"><a
+                                href="https://www.qidian.com/finish">完结</a></button>
+                        <button class="layui-btn layui-btn-xs layui-btn-normal"><a
+                                href="https://www.qidian.com/free">免费</a></button>
+                    </p>
+                    <br>
+                    <p th:text="${ficBook.getFicType()+','+data.getFicData().substring(0,8)}"></p>
+                    <br>
+                    <p>124万字 | 12424总推荐 |2420周推荐</p>
+                    <br>
+                    <p>
+                        <button class="layui-btn layui-btn-xs layui-btn-primary layui-border-blue layui-btn-radius">
+                            <a th:href="@{/toContentPage(bid=${ficBook.getId()})}"><i
+                                    class="layui-icon layui-icon-read"></i>免费试读</a>
+                        </button>
+                        <button class="layui-icon layui-btn layui-btn-xs layui-btn-primary layui-border-blue layui-btn-radius">
+                            <a href=""><i class="layui-icon layui-icon-add-circle-fine"></i>加入书架</a>
+                        </button>
+                        <button class="layui-btn layui-btn-xs layui-border-blue layui-btn-primary layui-btn-radius">
+                            <a href=""><i class="layui-icon layui-icon-chat"></i>投推荐票</a>
+                        </button>
+                        <button class="layui-btn layui-border-red layui-btn-xs layui-btn-disabled layui-btn-radius">
+                            <i class="layui-icon layui-icon-tips"></i>投诉
+                        </button>
+                    </p>
                 </div>
             </div>
-            <!-- 定位到书籍信息下放 -->
-            <div class="layui-row layui-col-space10">
-                <div class="layui-col-md-offset2 layui-col2">
-                    <div class="layui-col-md-offset1 layui-col-xs3">
-                        <!-- 选项卡支持 过滤器 -->
-                        <div class="layui-tab" lay-filter="docDemoTabBrief">
-                            <ul class="layui-tab-title">
-                                <li class="layui-this">信息</li>
-                                <li>目录</li>
-                            </ul>
-                            <div class="layui-tab-content">
-                                <div class="layui-tab-item layui-show">
-								<textarea cols="130" rows="15" readonly="readonly"
-                                          style="border: 0;background:  white;font-size: 20px; resize: none;"
-                                          th:text="${data.getFicData()}">
-
-								</textarea>
-                                </div>
-                                <div class="layui-tab-item">
-                                    <table class="layui-table" lay-even lay-skin="nob">
-                                        <colgroup>
-                                            <col width="400">
-                                            <col width="400">
-                                            <col width="400">
-                                            <col>
-                                        </colgroup>
-                                        <tbody>
-                                        <tr>
-                                            <td><a href="/toContentPage"><i class="layui-icon layui-icon-read"></i>
-                                                第一章：乌坦城</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td><a href="/toContentPage"><i class="layui-icon layui-icon-read"></i>
-                                                第二章：莫欺少年穷</a></td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
+        </div>
+    </div>
+    <!-- 定位到书籍信息下放 -->
+    <div class="layui-row layui-col-space10">
+        <div class="layui-col-md-offset1 layui-col2">
+            <div class="layui-col-md-offset1 layui-col-xs-offset1  layui-col-xs10 layui-col-md10">
+                <!-- 选项卡支持 过滤器 -->
+                <div class="layui-tab" lay-filter="docDemoTabBrief">
+                    <ul class="layui-tab-title">
+                        <li class="layui-this">信息</li>
+                        <li>目录</li>
+                    </ul>
+                    <div class="layui-tab-content">
+                        <div class="layui-tab-item layui-show">
+                            <p th:text="${data.getFicData()}"></p>
+                            <!--								<textarea cols="130" rows="15" readonly="readonly"-->
+                            <!--                                          style="border: 0;background:  white;font-size: 20px; resize: none;"-->
+                            <!--                                          th:text="${data.getFicData()}">-->
+                            <!--								</textarea>-->
                         </div>
-                        <script>
-                            //注意：选项卡 依赖 element 模块，否则无法进行功能性操作
-                            layui.use('element', function () {
-                                var element = layui.element;
-
-                                //…
-                            });
-                        </script>
+                        <div class="layui-tab-item">
+                            <table class="layui-table" lay-even lay-skin="nob" style="background-color: #fff0;">
+                                <colgroup>
+                                    <col width="400">
+                                    <col width="400">
+                                    <col width="400">
+                                    <col>
+                                </colgroup>
+                                <tbody>
+                                <tr style="background-color: #fff0;">
+                                    <td style="background-color: #fff0;"><a href="/toContentPage"><i
+                                            class="layui-icon layui-icon-read"></i>
+                                        第一章：乌坦城</a></td>
+                                </tr>
+                                <tr style="background-color: #fff0;">
+                                    <td style="background-color: #fff0;"><a href="/toContentPage"><i
+                                            class="layui-icon layui-icon-read"></i>
+                                        第二章：莫欺少年穷</a></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </body>
+    </div>
+</div>
+</body>
 </html>
