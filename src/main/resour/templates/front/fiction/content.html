@@ -81,10 +81,12 @@
 					</div>
 				</div>
 				<div class="layui-col-md10 layui-col-xs8">
-					<p th:text="${fiction.getFicName()}"></p>
-					<p th:text="'文章类型:'+${fiction.getFicType()}"></p>
-					<p th:text="'发表时间:'+${fiction.getCreateTime()}"></p>
-					<p th:text="'作者:'+${fiction.getFicAuthor()}"></p>
+					<h1 th:text="${fiction.getFicName()}" style="text-align: center"></h1>
+					<h5 th:text="'文章类型:'+${fiction.getFicType()}" style="text-align: center"></h5>
+					<p style="text-align: center"
+					   th:text="'发表时间:'+${fiction.getCreateTime()}+'&nbsp;&nbsp;&nbsp;&nbsp;'+'作者:'+${fiction.getFicAuthor()}"></p>
+					<p>正文:</p>
+					<p style="text-align: justify" th:text="${data.getFicData()}"></p>
 				</div>
 				<div class="layui-col-md1 layui-col-xs5">
 					<div class="layui-panel">

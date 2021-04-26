@@ -2,6 +2,7 @@ package com.cxy.fcms.pojo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.cxy.fcms.util.DateUtil;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -33,6 +34,14 @@ public class ComFicDate {
 
     private String createTime;
 
-    private Date updateTime;
+    private String updateTime;
+
+    public void setGmtCreate(Date createTime) {
+        this.createTime = DateUtil.dateToString(createTime);
+    }
+
+    public void setGmtModified(Date updateTime) {
+        this.updateTime = DateUtil.dateToString(updateTime);
+    }
 
 }

@@ -1,9 +1,14 @@
 package com.cxy.fcms.pojo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+
 import java.util.Date;
+
 import com.baomidou.mybatisplus.annotation.TableId;
+
 import java.io.Serializable;
+
+import com.cxy.fcms.util.DateUtil;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -52,12 +57,12 @@ public class ComFiction implements Serializable {
     /**
      * 创建时间
      */
-    private Date createTime;
+    private String createTime;
 
     /**
      * 修改时间
      */
-    private Date updateTime;
+    private String updateTime;
 
     /**
      * 逻辑删除
@@ -68,4 +73,12 @@ public class ComFiction implements Serializable {
      * 热度
      */
     private Integer ficHost;
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = DateUtil.dateToString(createTime);
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.createTime = DateUtil.dateToString(updateTime);
+    }
 }

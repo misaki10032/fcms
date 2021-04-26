@@ -14,17 +14,21 @@
         <script src="/layui-v2.6.4/layui/layui.js" charset="utf-8"></script>
     </head>
     <body>
-        <script type="text/javascript">
-            layui.use('layer', function () {
-                var layer = layui.layer;
-                // 信息框   信息，  参数，  回调函数
-                layer.msg('斗破苍穹', {offset: '260px', icon: 6}, function () {
-                    //  弹出框   信息， 参数， 回调函数
-                    layer.alert("您已经回到首页", {icon: 1, time: 2000, offset: '360px', closeBtn: 2, title: '友情提示！'})
-                })
-                // layer.msg("斗破苍穹")
+    <script type="text/javascript" th:inline="javascript">
+        var fic_img = /*[[${ficBook.getFicImg()}]]*/ "fengmian.png";
+        $(function () {
+            $("#fic_fengmian").attr('src', 'img/fiction/' + fic_img);
+        })
+        layui.use('layer', function () {
+            var layer = layui.layer;
+            // 信息框   信息，  参数，  回调函数
+            layer.msg('斗破苍穹', {offset: '260px', icon: 6}, function () {
+                //  弹出框   信息， 参数， 回调函数
+                layer.alert("您已经回到首页", {icon: 1, time: 2000, offset: '360px', closeBtn: 2, title: '友情提示！'})
             })
-        </script>
+            // layer.msg("斗破苍穹")
+        })
+    </script>
         <div class="layui-fluid" style="padding: 0;background: #FFFFFF">
             <ul class="layui-nav layui-row">
                 <li class="layui-nav-item layui-col-md1 layui-col-lg1 layui-col-xs1 layui-col-sm1">
@@ -65,12 +69,12 @@
                     <div class="layui-row grid-demo layui-col-space10">
                         <!-- 书籍图片1/3 -->
                         <div class="layui-col-md3 layui-col-xs5">
-                            <img src="img/bg.jpg" width="100%">
+                            <img id="fic_fengmian" src="img/fiction/fengmian.png" width="100%">
                         </div>
                         <!-- 书籍信息2/3 -->
                         <div class="layui-col-md8 layui-col-xs8">
                             <br>
-                            <p th:text="${ficBook.getFicName()}"></p>
+                            <h1 th:text="${ficBook.getFicName()}"></h1>
                             <br>
                             <p>
                                 <button class="layui-btn layui-btn-xs layui-btn-warm"><a

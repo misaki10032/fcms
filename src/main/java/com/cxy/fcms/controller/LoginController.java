@@ -37,14 +37,23 @@ public class LoginController {
         List<ComFiction> fictionOrderByTime = fictionService.getFictionOrderByTime();
         List<String> host = new ArrayList<>();
         List<String> time = new ArrayList<>();
+        List<String> timeimg = new ArrayList<>();
+        List<String> hostimg = new ArrayList<>();
         for (ComFiction fiction : fictionsOrderByHost) {
             host.add(fiction.getFicName());
+            hostimg.add(fiction.getFicImg());
         }
         for (ComFiction fiction : fictionOrderByTime) {
             time.add(fiction.getFicName());
+            timeimg.add(fiction.getFicImg());
+
         }
+        System.out.println(timeimg);
+        System.out.println(hostimg);
         session.setAttribute("byhost", host);
         session.setAttribute("bytime", time);
+        session.setAttribute("timeimg", timeimg);
+        session.setAttribute("hostimg", hostimg);
         return "index";
     }
 
