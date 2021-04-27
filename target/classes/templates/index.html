@@ -54,11 +54,38 @@
 <div class="layui-container">
     <div class="layui-row">
         <div class="layui-col-md2 layui-col-xs2" style="background-color: #ffb09c;height:300px">
-            新闻
+            <div id="demo" style="clear:both; overflow:hidden; height:100%;width:100%;margin:0 auto;">
+                <div id="demo1" style="width: 100%">
+                    <!-- 定义图片 -->
+                    <ul style="width: 100%;">
+                        <li style="width: 100%" ><img style="width: 100%" src="./img/img1.png" /></li>
+                        <li style="width: 100%"><img style="width: 100%" src="./img/img2.png"  /></li>
+                        <li style="width: 100%"><img style="width: 100%" src="./img/img3.png" /></li>
+                        <li style="width: 100%"><img style="width: 100%" src="./img/img4.png" /></li>
+                    </ul>
+                 </div>
+                <div id="demo2" style="width: 100%;"></div>
+            </div>
+            <script>
+                var speed=30
+                document.getElementById("demo2").innerHTML=document.getElementById("demo1").innerHTML
+                function Marquee(){
+                    if(document.getElementById("demo2").offsetTop-document.getElementById("demo").scrollTop<=0)
+                        document.getElementById("demo").scrollTop-=document.getElementById("demo1").offsetHeight
+                    else{
+                        document.getElementById("demo").scrollTop++
+                    }
+                }
+                var MyMar=setInterval(Marquee,speed)
+                document.getElementById("demo").onmouseout=function() {clearInterval(MyMar)}
+                document.getElementById("demo").onmouseout=function() {MyMar=setInterval(Marquee,speed)}
+            </script>
         </div>
+
+
         <div class="layui-col-md8 layui-col-xs8" style="background-color: #beff9b;">
             <div class="layui-carousel" id="test1">
-                <div carousel-item>
+                <div carousel-item="">
                     <div style="background:url('img/index/hua1.png');background-size: 100% 100%; "></div>
                     <div style="background:url('img/index/hua2.png');background-size: 100% 100%; "></div>
                     <div style="background:url('img/index/hua3.png');background-size: 100% 100%; "></div>
@@ -68,7 +95,32 @@
             </div>
         </div>
         <div class="layui-col-md2 layui-col-xs2" style="background-color: #ffb09c;height:300px">
-            广告
+            <div id="demo3" style="clear:both; overflow:hidden; height:100%;width:100%;margin:0 auto;">
+                <div id="demo4" style="width: 100%">
+                    <!-- 定义图片 -->
+                    <ul style="width: 100%;">
+                        <li style="width: 100%" ><img style="width: 100%" src="./img/img1.png" /></li>
+                        <li style="width: 100%"><img style="width: 100%" src="./img/img2.png"  /></li>
+                        <li style="width: 100%"><img style="width: 100%" src="./img/img3.png" /></li>
+                        <li style="width: 100%"><img style="width: 100%" src="./img/img4.png" /></li>
+                    </ul>
+                </div>
+                <div id="demo5" style="width: 100%;"></div>
+            </div>
+            <script>
+                var speed=30
+                document.getElementById("demo5").innerHTML=document.getElementById("demo4").innerHTML
+                function Marquee(){
+                    if(document.getElementById("demo5").offsetTop-document.getElementById("demo3").scrollTop<=0)
+                        document.getElementById("demo3").scrollTop-=document.getElementById("demo4").offsetHeight
+                    else{
+                        document.getElementById("demo3").scrollTop++
+                    }
+                }
+                var MyMar=setInterval(Marquee,speed)
+                document.getElementById("demo3").onmouseout=function() {clearInterval(MyMar)}
+                document.getElementById("demo3").onmouseout=function() {MyMar=setInterval(Marquee,speed)}
+            </script>
         </div>
     </div>
     <script>
