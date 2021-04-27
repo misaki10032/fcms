@@ -3,8 +3,11 @@ package com.cxy.fcms;
 import com.cxy.fcms.mapper.ComFictionMapper;
 import com.cxy.fcms.mapper.ComTypeMapper;
 import com.cxy.fcms.pojo.ComLink;
+import com.cxy.fcms.pojo.ComType;
+import com.cxy.fcms.pojo.SysAdminInfo;
 import com.cxy.fcms.service.impl.LinkServiceImpl;
 import com.cxy.fcms.service.impl.TypeServiceImpl;
+import com.cxy.fcms.service.impl.UserInfoServiceImpl;
 import com.cxy.fcms.util.IDUtil;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +24,8 @@ class FcmsApplicationTests {
     ComTypeMapper typeMapper;
     @Autowired
     LinkServiceImpl linkService;
+    @Autowired
+    UserInfoServiceImpl userInfoService;
     @Test
     void insertFic() {
         HashMap<String,String> map = new HashMap<>();
@@ -55,8 +60,8 @@ class FcmsApplicationTests {
 
     @Test
     public  void fa(){
-        int i = linkService.showLink("123");
-        System.out.println(i);
+        SysAdminInfo sysAdminInfo = userInfoService.selAdmin("1fc12857fb7c405cb64e9aa1cf0f037a");
+        System.out.println(sysAdminInfo);
     }
 
 }

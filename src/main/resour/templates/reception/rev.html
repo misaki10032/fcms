@@ -22,7 +22,7 @@
 		}
 	</style>
 </head>
-<body>
+<body id="bod">
 <div class="layui-main" style="padding: 0;width: 100%;background-color: #F7F7F7;height: 100%;">
 	<div class="layui-tab">
 		<ul class="layui-tab-title">
@@ -30,67 +30,105 @@
 		</ul>
 		<div class="layui-tab-content">
 			<div class="layui-main" style="padding: 0;width: 100%;background-color: #F7F7F7;height: 100%;">
-				<form class="layui-form" action="">
+				<form class="layui-form"   method="get">
+                      <input type="hidden" name="hidden" id="hidden" th:value="${userInfo?.getAdminId()}">
+
 					<div class="layui-form-item">
-						<label class="layui-form-label">id</label>
-						<div class="layui-input-block">
-							<input type="text" name="title" required lay-verify="required" readonly="readonly"
-								   autocomplete="off" class="layui-input" style="width: 20%;">
-						</div>
-					</div>
-					<div class="layui-form-item">
-						<label class="layui-form-label">电话号</label>
+						<label class="layui-form-label">昵称</label>
 						<div class="layui-input-inline">
-							<input type="text" name="title" required lay-verify="required" readonly="readonly"
+							<input type="text" th:value="${userInfo?.getAdminCall()}" id="call" name="call" required lay-verify="required"
 								   autocomplete="off" class="layui-input">
 						</div>
 					</div>
 					<div class="layui-form-item">
 						<label class="layui-form-label">姓名</label>
 						<div class="layui-input-inline">
-							<input type="text" name="text" required lay-verify="required" placeholder="请输入姓名"
+							<input type="text" th:value="${userInfo?.getAdminName()}"  id="name" name="name" required lay-verify="required" placeholder="请输入姓名"
 								   autocomplete="off" class="layui-input">
 						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label">性别</label>
+						<div class="layui-input-block">
+							<input type="radio" th:checked="${userInfo?.getAdminSex().equals('男')}"  name="adminSex" value="男" title="男">
+							<input type="radio" th:checked="${userInfo?.getAdminSex().equals('女')}"  name="adminSex" value="女" title="女" checked>
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label">年龄</label>
+						<div class="layui-input-inline">
+							<input type="text" th:value="${userInfo?.getAdminAge()	}" id="adminAge"  name="adminAge" required lay-verify="required" placeholder="请输入姓名"
+								   autocomplete="off" class="layui-input">
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label">电子邮箱</label>
+						<div class="layui-input-inline">
+							<input type="text" th:value="${userInfo?.getAdminEmail()	}"  id="adminEmail" name="adminEmail" required lay-verify="required"
+								   autocomplete="off" class="layui-input">
+						</div>
+					</div>
 						<div class="layui-form-item">
-							<label class="layui-form-label">性别</label>
-							<div class="layui-input-block">
-								<input type="radio" name="sex" value="男" title="男">
-								<input type="radio" name="sex" value="女" title="女" checked>
+							<label class="layui-form-label">地址</label>
+							<div class="layui-input-inline">
+								<input type="text" th:value="${userInfo?.getAdminAddress()	}" id="adminAddress"  name="adminAddress" required lay-verify="required" placeholder="请输入姓名"
+									   autocomplete="off" class="layui-input">
 							</div>
 						</div>
+
 						<div class="layui-form-item">
-							<label class="layui-form-label">注册时间</label>
+							<label class="layui-form-label">星级</label>
 							<div class="layui-input-inline">
-								<input type="text" name="text" required lay-verify="required" readonly="readonly"
+								<input type="text" th:value="${userInfo?.getAdminStar()}" name="adminStar" required lay-verify="required" readonly="readonly"
 									   autocomplete="off" class="layui-input">
 							</div>
 						</div>
 						<div class="layui-form-item layui-form-text">
 							<label class="layui-form-label">个人宣言</label>
 							<div class="layui-input-block">
-								<textarea name="desc" placeholder="请输入内容" class="layui-textarea"
+								<textarea  th:text="${userInfo?.getAdminDec()}" id="adminDec"  name="adminDec" placeholder="请输入内容" class="layui-textarea"
 										  style="width: 40%;"></textarea>
 							</div>
 						</div>
 						<div class="layui-form-item">
 							<div class="layui-input-block">
-								<button class="layui-btn" lay-submit lay-filter="formDemo">确认修改</button>
+								<input class="layui-btn layui-btn-primary" type="button" onclick="resigned()" value="确认修改">
+								<!--<button class="layui-btn" onclick="ac()" lay-submit lay-filter="formDemo">确认修改</button>-->
 								<button type="reset" class="layui-btn layui-btn-primary">重置</button>
 							</div>
 						</div>
+
 				</form>
-
-				<script>
-					//Demo
-					layui.use('form', function () {
-						var form = layui.form;
-
-						//监听提交
-						form.on('submit(formDemo)', function (data) {
-							layer.msg(JSON.stringify(data.field));
-							return false;
+				<script >
+					function resigned() {
+						$.ajax({
+							url: "/submitRev"
+							, type: 'get'
+							, async: false
+							,data: {
+							hidden:$("#hidden").val()
+									,call: $("#call").val()
+									, name: $("#name").val()
+									, adminSex: $("input[name='adminSex']:checked").val()
+									, adminAge: $("#adminAge").val()
+									, adminAddress: $("#adminAddress").val()
+									, adminDec: $("#adminDec").val()
+									, adminEmail: $("#adminEmail").val()
+						}
+							, success: function (a) {
+								ac()
+								$("#bod").reload();
+							}
 						});
-					});
+					}
+					function ac (){
+						layui.use(['layer', 'form'], function(){
+							var layer = layui.layer
+									,form = layui.form;
+
+							layer.msg('修改成功');
+						});
+					}
 				</script>
 			</div>
 		</div>

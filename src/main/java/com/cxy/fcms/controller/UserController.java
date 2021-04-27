@@ -5,21 +5,10 @@ import com.cxy.fcms.pojo.SysAdmin;
 import com.cxy.fcms.service.UserService;
 import com.cxy.fcms.util.IDUtil;
 import com.cxy.fcms.util.LayuiReplay;
-import com.cxy.fcms.util.RedisUtil;
 import com.cxy.fcms.util.ShiroMd5Util;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.IncorrectCredentialsException;
-import org.apache.shiro.authc.LockedAccountException;
-import org.apache.shiro.authc.UnknownAccountException;
-import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.session.Session;
-import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -42,8 +31,7 @@ public class UserController {
     @Autowired
     UserService userService;
     @Autowired
-    RedisUtil redisUtil;
-
+    UserInfoServiceImpl userInfoService;
     @GetMapping("/getUsers")
     @ResponseBody
     public Object getAllUsers() {
@@ -60,7 +48,7 @@ public class UserController {
      * 用户注册
      */
     @GetMapping("/userWithResiger")
-    public void userResiger(String phone, String pwd, String pwd2, String name, String emil, String emilRes, HttpServletResponse resp) throws IOException {
+    public void userResiger(String phone, String pwd, String pwd2, String name, HttpServletResponse resp) throws IOException {
         PrintWriter out = resp.getWriter();
         List<ComUser> users = userService.selUser();
         if (phone == null || pwd == null || pwd2 == null || name == null) {
@@ -68,11 +56,6 @@ public class UserController {
         } else if (phone.equals("") || pwd.equals("") || pwd2.equals("") || name.equals("")) {
             out.println("您的表单没有填完哦!");
         } else {
-            String msg = (String) redisUtil.get(emil + "_msg");
-            if (msg == null || msg.equals("") || !emilRes.equals(msg)) {
-                out.print("验证码错误，或已过期");
-                return;
-            }
             for (ComUser user : users) {
                 if (user.getUserPhone().equals(phone)) {
                     out.println("手机号已存在!");
@@ -118,16 +101,42 @@ public class UserController {
     }
 
     @GetMapping("/toUserHome")
-    public String toUserHome() {
+    public String toUserHome(String id,Model model) {
+
+/*        SysAdminInfo adminInfo = (SysAdminInfo)request.getSession().getAttribute("adminInfo");
+        String adminId = adminInfo.getAdminId();*/
+        SysAdminInfo sysAdminInfo = userInfoService.selAdmin(id);
+        model.addAttribute("adminInfo",sysAdminInfo);
         return "reception/userHome";
     }
 
     @GetMapping("/revUser")
-    public String RevUser(String id) {
-        /*
-            需要携带的数据
-         */
+    public String RevUser(String id, Model model) {
+        SysAdminInfo sysAdminInfo = userInfoService.selAdmin(id);
+        model.addAttribute("userInfo",sysAdminInfo);
         return "reception/rev";
     }
+    @GetMapping("/submitRev")
+    @ResponseBody
+    public String submitRev(String hidden,String call,String name,String adminSex,String adminAge,String adminAddress,
+                            String adminDec,String adminEmail,Model model){
+        /*String hidden,String call,String name,String adminSex,String adminAge,String adminAddress,
+        String adminDec,String adminEmail,Model model*/
+        System.out.println("hidden的值是"+hidden);
+        Map<String, Object> map = new HashMap<>();
+        map.put("adminName",name);
+        map.put("adminAge",adminAge);
+        map.put("adminSex",adminSex);
+        map.put("adminAddress",adminAddress);
+        map.put("adminDec",adminDec);
+        map.put("adminCall",call);
+        map.put("adminEmail",adminEmail);
+        map.put("id",hidden);
+        userInfoService.revAdmin(map);
+        SysAdminInfo sysAdminInfo = userInfoService.selAdmin(hidden);
+        model.addAttribute("adminInfo",sysAdminInfo);
+        return "";
+    }
+
 
 }
