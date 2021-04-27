@@ -38,7 +38,7 @@
 
 
     <insert id="addAdmin" parameterType="map">
-        insert into sys_info (admin_id, admin_call)
-        values (#{adminId}, #{adminCall})
+        insert into sys_info (admin_id, admin_call, admin_email)
+        values (#{adminId}, #{adminCall}, #{emil})
     </insert>
 </mapper>
