@@ -72,7 +72,6 @@ public class UserController {
             } else if (!pwd.equals(pwd2)) {
                 out.println("两次密码不一致");
             } else {
-
                 out.print("ok");
             }
         }

@@ -24,44 +24,59 @@
 <body>
 <div class="div_top" th:replace="include/top"></div>
 <hr/>
-<div class="layui-main layui-row" style="height: 190px; background-color: #F7F7F7;">
-	<div class="layui-col-md2 layui-row" style="height: 100%;">
-		<div class="layui-col-md12 layui-row" style="height: 17%;">
+<div class="layui-row" style="height: 190px; background-color: #F7F7F7;">
+	<div class="layui-col-md2 layui-col-lg2 layui-col-sm2 layui-col-xs2 layui-row" style="height: 100%;">
+		<div class="layui-col-md12 layui-col-lg12 layui-col-sm12 layui-col-xs12 layui-row" style="height: 17%;">
 
 		</div>
-		<div class="layui-col-md8  layui-col-lg-offset2 layui-row" style="height: 66%; width: 66%;">
-			<img class="layui-col-md12 layui-circle" style="height: 100%;" src="/img/now2.png"/>
+		<div class="layui-col-md8  layui-col-md-offset2 layui-col-lg8  layui-col-lg-offset2 layui-col-sm8  layui-col-sm-offset2 layui-col-xs8  layui-col-xs-offset2 layui-row"
+			 style="height: 66%; width: 66%;">
+			<img class="layui-col-md12 layui-col-lg12 layui-col-sm12 layui-col-xs12 layui-circle" style="height: 100%;"
+				 src="/img/now2.png"/>
 		</div>
-		<div class="layui-col-md12 layui-row" style="height: 17%;">
+		<div class="layui-col-md12 layui-col-lg12 layui-col-sm12 layui-col-xs12 layui-row" style="height: 17%;">
 
 		</div>
 	</div>
-	<div class="layui-col-md10  " style="height: 100%;">
+	<div class="layui-col-md10 layui-col-lg10 layui-col-sm10 layui-col-xs10 " style="height: 100%;">
 		<div class="layui-row" style="height: 83%;">
 			<!-- 空白1 -->
-			<div class="layui-col-md12" style="height: 20%;"></div>
+			<div class="layui-col-md12 layui-col-lg12 layui-col-sm12 layui-col-xs12 " style="height: 20%;"></div>
 			<!-- 第二 -->
-			<div class="layui-col-md12 layui-row" style="height: 30%;">
-				<div class="layui-col-md5" style="height: 100%; font-size:20px;">
-					<b><div th:text="${adminInfo.getAdminCall()}"></div></b>
+			<div class="layui-col-md12 layui-col-lg12 layui-col-sm12 layui-col-xs12  layui-row" style="height: 30%;">
+				<div class="layui-col-md5  layui-col-lg5 layui-col-sm5 layui-col-xs5 "
+					 style="height: 100%; font-size:20px;">
+					<b>
+						<div th:text="${adminInfo.getAdminCall()}"></div>
+					</b>
 				</div>
-				<div class="layui-col-md1 layui-col-lg-offset5" style="height: 100%;width:10%">
-					<button type="button" class="layui-btn  layui-btn-xs layui-col-md12"
+				<div class="layui-col-md1 layui-col-md-offset5 layui-col-lg1 layui-col-lg-offset5 layui-col-sm1 layui-col-sm-offset5 layui-col-xs1 layui-col-xs-offset5"
+					 style="height: 100%;width:10%">
+					<button type="button"
+							class="layui-btn  layui-btn-xs layui-col-md12 layui-col-lg12 layui-col-sm12 layui-col-xs12"
 							style="height: 45%;background-color: #d32f2f;	">
-						<a href="/revUser" target="ifram" style="color: white;"><b style="font-size:1px;">账户信息修改</b></a>
+						<a th:href="@{/revUser(id=${adminInfo.getAdminId()})}" target="ifram" style="color: white;"><b
+								style="font-size:1px;">账户信息修改</b></a>
 					</button>
 				</div>
 			</div>
 			<!-- 第三 -->
-			<div class="layui-col-md12" style="height: 20%;">
-					<b style="font-size: 2px;color: #999999;">简介:&nbsp;&nbsp;</b><b style="font-size: 2px;color:#666666 ;" th:text="${adminInfo.getAdminDec()}"></b>
+			<div class="layui-col-md12  layui-col-lg12 layui-col-sm12 layui-col-xs12" style="height: 20%;">
+				<b style="font-size: 2px;color: #999999;">简介:&nbsp;&nbsp;</b><b style="font-size: 2px;color:#666666 ;"
+																				th:text="${adminInfo.getAdminDec()}"></b>
 			</div>
 			<!-- 第四 -->
-			<div class="layui-col-md12" style="height: 30%;">
-				<div class="layui-col-md12" style="height:50%"></div>
-				<div class="layui-col-md4" th:text="'账户等级:'+${adminInfo.getAdminStar()}" style="height:50%;color: #999999;font-size:14px;"></div>
-				<div class="layui-col-md4" th:text="'我的余额:'+${adminInfo.getAdminMoney()}"  style="height:50%;color: #999999;font-size:14px;"></div>
-				<div class="layui-col-md4" style="height:50%;color: #999999;font-size:14px;">我的月票:</div>
+			<div class="layui-col-md12 layui-col-lg12 layui-col-sm12 layui-col-xs12" style="height: 30%;">
+				<div class="layui-col-md12 layui-col-lg12 layui-col-sm12 layui-col-xs12" style="height:50%"></div>
+				<div class="layui-col-md4 layui-col-lg4 layui-col-sm4 layui-col-xs4"
+					 th:text="'账户等级:'+${adminInfo.getAdminStar()}"
+					 style="height:50%;color: #999999;font-size:14px;"></div>
+				<div class="layui-col-md4 layui-col-lg4 layui-col-sm4 layui-col-xs4"
+					 th:text="'我的余额:'+${adminInfo.getAdminMoney()}"
+					 style="height:50%;color: #999999;font-size:14px;"></div>
+				<div class="layui-col-md4 layui-col-lg4 layui-col-sm4 layui-col-xs4"
+					 style="height:50%;color: #999999;font-size:14px;">我的月票:
+				</div>
 
 			</div>
 		</div>
@@ -69,17 +84,17 @@
 	</div>
 </div>
 <hr style="width:85%; text-align: center;margin: auto;height: 2px;"/>
-<div class="layui-main layui-row" style="height: auto;background-color: #F7F7F7;">
-	<div class="layui-col-md2">
+<div class="layui-row" style="height: auto;background-color: #F7F7F7;">
+	<div class="layui-col-md2 layui-col-lg2 layui-col-sm2 layui-col-xs2">
 		<ul class="layui-nav layui-nav-tree layui-inline" lay-filter="demo"
 			style="margin-right:10px;width: 100%;height:350px; background-color:#F7F7F7 ;">
 			<li class="layui-nav-item layui-this">
 
-				<a th:href="@{/revUser(id=${adminInfo.getAdminId()})}"  target="ifram" name="id"  style="color: #333333;">账户信息修改</a>
+				<a th:href="@{/revUser(id=${adminInfo.getAdminId()})}" target="ifram" name="id" style="color: #333333;">账户信息修改</a>
 			</li>
 
 			<li class="layui-nav-item">
-				<a href="collect.html"  target="ifram" style="color: #333333;">我的收藏</a>
+				<a href="collect.html" target="ifram" style="color: #333333;">我的收藏</a>
 			</li>
 
 			<li class="layui-nav-item">
@@ -88,8 +103,9 @@
 
 		</ul>
 	</div>
-	<div class="layui-col-md10" style="height: 500px;">
-		<iframe name="ifram" width="100%" height="100%" frameborder="0"></iframe>
+	<div class="layui-col-md10 layui-col-lg10 layui-col-sm10 layui-col-xs10" style="height: 500px;">
+		<iframe name="ifram" width="100%" height="100%" th:href="@{/revUser(id=${adminInfo.getAdminId()})}"
+				frameborder="0"></iframe>
 	</div>
 </div>
 
