@@ -3,8 +3,10 @@ package com.cxy.fcms.controller;
 import com.cxy.fcms.pojo.ComFiction;
 import com.cxy.fcms.pojo.ComUser;
 import com.cxy.fcms.pojo.SysAdmin;
+import com.cxy.fcms.pojo.SysAdminInfo;
 import com.cxy.fcms.service.FictionService;
 import com.cxy.fcms.service.LoginService;
+import com.cxy.fcms.service.UserInfoService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.LockedAccountException;
@@ -31,6 +33,9 @@ public class LoginController {
     LoginService loginService;
     @Autowired
     FictionService fictionService;
+
+    @Autowired
+    UserInfoService userInfoService;
 
     //起始页
     @GetMapping({"/", "hello"})
@@ -120,8 +125,11 @@ public class LoginController {
             System.out.println("isAdmin" + isAdmin);
             if (!isAdmin) {
                 ComUser user = (ComUser) session.getAttribute("user");
+                SysAdminInfo sysAdminInfo = userInfoService.selAdmin(user.getId());
                 session.setAttribute("user", user);
                 model.addAttribute("username", user.getUserName());
+                model.addAttribute("userId", user.getId());
+                session.setAttribute("adminInfo", sysAdminInfo);
                 return "index";
             } else {
                 model.addAttribute("msg", "系统发生位置错误!");

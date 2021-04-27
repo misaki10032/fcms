@@ -2,6 +2,7 @@ package com.cxy.fcms.service.impl;
 
 import com.cxy.fcms.mapper.ComUserMapper;
 import com.cxy.fcms.pojo.ComUser;
+import com.cxy.fcms.pojo.SysAdminInfo;
 import com.cxy.fcms.service.UserService;
 import com.cxy.fcms.util.RedisUtil;
 import com.cxy.fcms.util.TimeOutSetting;
@@ -119,5 +120,10 @@ public class UserServiceImpl implements UserService {
         } catch (Exception e) {
             return comUserMapper.selUser();
         }
+    }
+
+    @Override
+    public ComUser selUserByPhone(String userPhone) {
+        return comUserMapper.selUserByPhone(userPhone);
     }
 }

@@ -2,6 +2,7 @@ package com.cxy.fcms.mapper;
 
 import com.cxy.fcms.pojo.ComUser;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.cxy.fcms.pojo.SysAdminInfo;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
@@ -46,5 +47,10 @@ public interface ComUserMapper extends BaseMapper<ComUser> {
     /**
      * 查询所有用户
      */
-     List<ComUser> selUser();
+    List<ComUser> selUser();
+
+    /**
+     * 根据电话号查询用户信息
+     */
+    ComUser selUserByPhone(String userPhone);
 }

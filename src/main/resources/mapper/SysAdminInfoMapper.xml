@@ -3,34 +3,42 @@
 <mapper namespace="com.cxy.fcms.mapper.SysAdminInfoMapper">
 
     <select id="selAdmin" parameterType="string" resultType="com.cxy.fcms.pojo.SysAdminInfo">
-        select * from sys_info where admin_id = #{adminId}
+        select *
+        from sys_info
+        where admin_id = #{adminId}
     </select>
 
-    <update id="revAdmin" parameterType="map" >
+    <update id="revAdmin" parameterType="map">
         update sys_info
-<set>
-    <if test="adminName!=null">
-        admin_name = #{adminName},
-    </if>
-    <if test="adminAge!=null">
-        admin_age = #{adminAge},
-    </if>
-    <if test="adminSex!=null">
-        admin_sex = #{adminSex},
-    </if>
-    <if test="adminAddress!=null">
-        admin_address = #{adminAddress},
-    </if>
-    <if test="adminDec!=null">
-        admin_dec = #{adminDec},
-    </if>
-    <if test="adminCall!=null">
-        admin_call = #{adminCall},
-    </if>
-    <if test="adminEmail!=null">
-        admin_email = #{adminEmail}
-    </if>
-</set>
-    where admin_id = #{id}
+        <set>
+            <if test="adminName!=null">
+                admin_name = #{adminName},
+            </if>
+            <if test="adminAge!=null">
+                admin_age = #{adminAge},
+            </if>
+            <if test="adminSex!=null">
+                admin_sex = #{adminSex},
+            </if>
+            <if test="adminAddress!=null">
+                admin_address = #{adminAddress},
+            </if>
+            <if test="adminDec!=null">
+                admin_dec = #{adminDec},
+            </if>
+            <if test="adminCall!=null">
+                admin_call = #{adminCall},
+            </if>
+            <if test="adminEmail!=null">
+                admin_email = #{adminEmail}
+            </if>
+        </set>
+        where admin_id = #{id}
     </update>
+
+
+    <insert id="addAdmin" parameterType="map">
+        insert into sys_info (admin_id, admin_call)
+        values (#{adminId}, #{adminCall})
+    </insert>
 </mapper>

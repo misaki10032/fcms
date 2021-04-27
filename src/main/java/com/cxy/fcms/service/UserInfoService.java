@@ -7,5 +7,10 @@ import java.util.Map;
 public interface UserInfoService {
     SysAdminInfo selAdmin(String id);
 
-    int revAdmin(Map<String,Object> map);
+    int revAdmin(Map<String, Object> map);
+
+    /**
+     * 添加
+     */
+    int addAdmin(Map<String, Object> map);
 }

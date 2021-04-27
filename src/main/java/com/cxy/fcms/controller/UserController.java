@@ -8,6 +8,7 @@ import com.cxy.fcms.service.UserService;
 import com.cxy.fcms.util.IDUtil;
 import com.cxy.fcms.util.LayuiReplay;
 import com.cxy.fcms.util.ShiroMd5Util;
+import org.apache.ibatis.annotations.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -71,6 +72,7 @@ public class UserController {
             } else if (!pwd.equals(pwd2)) {
                 out.println("两次密码不一致");
             } else {
+
                 out.print("ok");
             }
         }
@@ -86,6 +88,14 @@ public class UserController {
         map.put("userName", name);
         map.put("userPhone", phone);
         userService.addUser(map);
+        ComUser comUser = userService.selUserByPhone(phone);
+        Map<String, Object> map1 = new HashMap<>();
+        map1.put("adminId", comUser.getId());
+        map1.put("adminCall", comUser.getUserName());
+        userInfoService.addAdmin(map1);
+        //info
+
+
         return "userlogin";
     }
 

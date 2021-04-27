@@ -27,34 +27,6 @@
 </head>
 <body>
 <div class="div_top" th:replace="include/top"></div>
-<div class="layui-fluid" style="padding: 0;background: #FFFFFF">
-    <ul class="layui-nav layui-row">
-        <li class="layui-nav-item layui-col-md1 layui-col-lg1 layui-col-xs1 layui-col-sm1">
-            <a href="/">首页</a>
-        </li>
-        <li class="layui-nav-item layui-col-md1 layui-col-lg1 layui-col-xs1 layui-col-sm1">
-            <a>热门</a>
-        </li>
-        <li class="layui-nav-item layui-col-md1 layui-col-lg1 layui-col-xs1 layui-col-sm1">
-            <a>排行</a>
-        </li>
-        <li class="layui-nav-item layui-col-md1 layui-col-lg1 layui-col-xs1 layui-col-sm1">
-            <a>分类</a>
-        </li>
-        <li class="layui-nav-item layui-col-md1 layui-col-lg1 layui-col-xs1 layui-col-sm1 layui-col-lg-offset7 layui-col-xs-offset7 layui-col-md-offset7 layui-col-sm-offset7">
-            <a shiro:guest="">login</a>
-            <dl shiro:guest="" class="layui-nav-child">
-                <dd><a href="/tologin">管理员登录</a></dd>
-                <dd><a href="/usertologin">用户登录</a></dd>
-            </dl>
-            <a shiro:user="" th:text="${session.user.getUserName()}"></a>
-            <dl shiro:user="" class="layui-nav-child">
-                <dd><a href="/toUserHome">小屋</a></dd>
-                <dd><a href="/logOut">退出</a></dd>
-            </dl>
-        </li>
-    </ul>
-</div>
 <script type="text/javascript" th:inline="javascript">
     var fic_img = /*[[${ficBook.getFicImg()}]]*/ "fengmian.png";
     $(function () {
