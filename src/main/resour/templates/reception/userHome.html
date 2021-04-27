@@ -38,9 +38,9 @@
 			<a>分类</a>
 		</li>
 		<li class="layui-nav-item layui-col-lg-offset8">
-			<a shiro:user="" th:text="${adminInfo.getAdminName()}"></a>
+			<a shiro:user="" th:text="${session.user.getUserName()}"></a>
 			<dl shiro:user="" class="layui-nav-child">
-				<dd><a th:href="@{/toUserHome(id=${adminInfo.getAdminId()})}" >小屋</a></dd>
+				<dd><a th:href="@{/toUserHome(id=${adminInfo.getAdminId()})}">小屋</a></dd>
 				<dd><a href="/logOut">退出</a></dd>
 			</dl>
 		</li>

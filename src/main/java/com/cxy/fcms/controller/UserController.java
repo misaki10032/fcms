@@ -2,12 +2,15 @@ package com.cxy.fcms.controller;
 
 import com.cxy.fcms.pojo.ComUser;
 import com.cxy.fcms.pojo.SysAdmin;
+import com.cxy.fcms.pojo.SysAdminInfo;
+import com.cxy.fcms.service.UserInfoService;
 import com.cxy.fcms.service.UserService;
 import com.cxy.fcms.util.IDUtil;
 import com.cxy.fcms.util.LayuiReplay;
 import com.cxy.fcms.util.ShiroMd5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -17,6 +20,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @ClassName UserController
@@ -31,7 +35,7 @@ public class UserController {
     @Autowired
     UserService userService;
     @Autowired
-    UserInfoServiceImpl userInfoService;
+    UserInfoService userInfoService;
     @GetMapping("/getUsers")
     @ResponseBody
     public Object getAllUsers() {
@@ -101,19 +105,18 @@ public class UserController {
     }
 
     @GetMapping("/toUserHome")
-    public String toUserHome(String id,Model model) {
-
-/*        SysAdminInfo adminInfo = (SysAdminInfo)request.getSession().getAttribute("adminInfo");
-        String adminId = adminInfo.getAdminId();*/
+    public String toUserHome(String id, Model model) {
         SysAdminInfo sysAdminInfo = userInfoService.selAdmin(id);
-        model.addAttribute("adminInfo",sysAdminInfo);
+        model.addAttribute("adminInfo", sysAdminInfo);
+        System.out.println(sysAdminInfo);
         return "reception/userHome";
     }
 
     @GetMapping("/revUser")
     public String RevUser(String id, Model model) {
         SysAdminInfo sysAdminInfo = userInfoService.selAdmin(id);
-        model.addAttribute("userInfo",sysAdminInfo);
+        System.out.println(sysAdminInfo);
+        model.addAttribute("userInfo", sysAdminInfo);
         return "reception/rev";
     }
     @GetMapping("/submitRev")
