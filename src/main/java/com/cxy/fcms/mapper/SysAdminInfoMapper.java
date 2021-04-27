@@ -10,13 +10,18 @@ import java.util.Map;
 public interface SysAdminInfoMapper extends BaseMapper<SysAdminInfo> {
     /**
      * 根据id查询用户信息
-     * */
+     */
     SysAdminInfo selAdmin(String id);
+
     /**
      * 修改信息
-     * */
-    int revAdmin(Map<String,Object> map);
+     */
+    int revAdmin(Map<String, Object> map);
 
+    /**
+     * 添加
+     */
+    int addAdmin(Map<String, Object> map);
 
 
 }

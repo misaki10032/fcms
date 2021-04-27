@@ -1,6 +1,7 @@
 package com.cxy.fcms.service;
 
 import com.cxy.fcms.pojo.ComUser;
+import com.cxy.fcms.pojo.SysAdminInfo;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -36,6 +37,11 @@ public interface UserService {
 
     /**
      * 查询所有用户
-     * */
+     */
     List<ComUser> selUser();
+
+    /**
+     * 根据电话号查询用户信息
+     */
+    ComUser selUserByPhone(String userPhone);
 }

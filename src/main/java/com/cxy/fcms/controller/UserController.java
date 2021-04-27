@@ -2,12 +2,16 @@ package com.cxy.fcms.controller;
 
 import com.cxy.fcms.pojo.ComUser;
 import com.cxy.fcms.pojo.SysAdmin;
+import com.cxy.fcms.pojo.SysAdminInfo;
+import com.cxy.fcms.service.UserInfoService;
 import com.cxy.fcms.service.UserService;
 import com.cxy.fcms.util.IDUtil;
 import com.cxy.fcms.util.LayuiReplay;
 import com.cxy.fcms.util.ShiroMd5Util;
+import org.apache.ibatis.annotations.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -17,11 +21,12 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @ClassName UserController
  * @Description TODO
- * @Author 码农天宇
+ * @Author 码农天宇 陈新予 李文博
  * @Date 2021/4/17 18:11
  * @Version 1.0
  */
@@ -31,7 +36,7 @@ public class UserController {
     @Autowired
     UserService userService;
     @Autowired
-    UserInfoServiceImpl userInfoService;
+    UserInfoService userInfoService;
     @GetMapping("/getUsers")
     @ResponseBody
     public Object getAllUsers() {
@@ -67,13 +72,14 @@ public class UserController {
             } else if (!pwd.equals(pwd2)) {
                 out.println("两次密码不一致");
             } else {
+
                 out.print("ok");
             }
         }
     }
 
     @GetMapping("/userResiger")
-    public String UserResigerOk(String phone, String pwd, String name) {
+    public String UserResigerOk(String phone, String pwd, String name, String emil) {
         HashMap<String, String> map = new HashMap<>();
         //用账号作为盐值进行加密
         String saltPassWord = ShiroMd5Util.toPwdMd5(phone, pwd);
@@ -82,6 +88,15 @@ public class UserController {
         map.put("userName", name);
         map.put("userPhone", phone);
         userService.addUser(map);
+        ComUser comUser = userService.selUserByPhone(phone);
+        Map<String, Object> map1 = new HashMap<>();
+        map1.put("adminId", comUser.getId());
+        map1.put("emil", emil);
+        map1.put("adminCall", comUser.getUserName());
+        userInfoService.addAdmin(map1);
+        //info
+
+
         return "userlogin";
     }
 
@@ -101,27 +116,24 @@ public class UserController {
     }
 
     @GetMapping("/toUserHome")
-    public String toUserHome(String id,Model model) {
-
-/*        SysAdminInfo adminInfo = (SysAdminInfo)request.getSession().getAttribute("adminInfo");
-        String adminId = adminInfo.getAdminId();*/
+    public String toUserHome(String id, Model model) {
         SysAdminInfo sysAdminInfo = userInfoService.selAdmin(id);
-        model.addAttribute("adminInfo",sysAdminInfo);
+        model.addAttribute("adminInfo", sysAdminInfo);
+        System.out.println(sysAdminInfo);
         return "reception/userHome";
     }
 
     @GetMapping("/revUser")
     public String RevUser(String id, Model model) {
         SysAdminInfo sysAdminInfo = userInfoService.selAdmin(id);
-        model.addAttribute("userInfo",sysAdminInfo);
+        System.out.println(sysAdminInfo);
+        model.addAttribute("userInfo", sysAdminInfo);
         return "reception/rev";
     }
     @GetMapping("/submitRev")
     @ResponseBody
     public String submitRev(String hidden,String call,String name,String adminSex,String adminAge,String adminAddress,
                             String adminDec,String adminEmail,Model model){
-        /*String hidden,String call,String name,String adminSex,String adminAge,String adminAddress,
-        String adminDec,String adminEmail,Model model*/
         System.out.println("hidden的值是"+hidden);
         Map<String, Object> map = new HashMap<>();
         map.put("adminName",name);

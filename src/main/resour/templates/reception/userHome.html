@@ -23,29 +23,6 @@
 </head>
 <body>
 <div class="div_top" th:replace="include/top"></div>
-<div class="layui-fluid" style="padding: 0;">
-	<ul class="layui-nav">
-		<li class="layui-nav-item">
-			<a href="/">首页</a>
-		</li>
-		<li class="layui-nav-item">
-			<a>热门</a>
-		</li>
-		<li class="layui-nav-item">
-			<a>排行</a>
-		</li>
-		<li class="layui-nav-item">
-			<a>分类</a>
-		</li>
-		<li class="layui-nav-item layui-col-lg-offset8">
-			<a shiro:user="" th:text="${adminInfo.getAdminName()}"></a>
-			<dl shiro:user="" class="layui-nav-child">
-				<dd><a th:href="@{/toUserHome(id=${adminInfo.getAdminId()})}" >小屋</a></dd>
-				<dd><a href="/logOut">退出</a></dd>
-			</dl>
-		</li>
-	</ul>
-</div>
 <hr/>
 <div class="layui-main layui-row" style="height: 190px; background-color: #F7F7F7;">
 	<div class="layui-col-md2 layui-row" style="height: 100%;">

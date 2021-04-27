@@ -14,9 +14,9 @@ import java.util.Map;
 public class UserInfoServiceImpl implements UserInfoService {
     @Autowired
     SysAdminInfoMapper sysAdminInfoMapper;
-
     @Autowired
     RedisUtil redisUtil;
+
     @Override
     public SysAdminInfo selAdmin(String id) {
         return sysAdminInfoMapper.selAdmin(id);
@@ -26,5 +26,11 @@ public class UserInfoServiceImpl implements UserInfoService {
     public int revAdmin(Map<String, Object> map) {
         return sysAdminInfoMapper.revAdmin(map);
     }
+
+    @Override
+    public int addAdmin(Map<String, Object> map) {
+        return sysAdminInfoMapper.addAdmin(map);
+    }
+
 
 }

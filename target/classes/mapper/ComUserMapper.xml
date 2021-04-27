@@ -88,4 +88,11 @@
             </if>
         </where>
     </select>
+
+    <!--根据电话号查询用户-->
+    <select id="selUserByPhone" parameterType="string" resultType="com.cxy.fcms.pojo.ComUser">
+        select *
+        from com_user
+        where user_phone = #{userPhone}
+    </select>
 </mapper>
