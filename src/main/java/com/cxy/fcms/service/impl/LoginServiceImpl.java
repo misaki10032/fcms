@@ -15,7 +15,12 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-
+/**
+ * @ClassName UserController
+ * @Author 陈新予
+ * @Date 2021/4/16 15:22
+ * @Version 1.0
+ */
 @Service
 public class LoginServiceImpl implements LoginService {
     @Autowired

@@ -10,7 +10,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-
+/**
+ * @ClassName UserController
+ * @Author 陈新予
+ * @Date 2021/4/16 15:22
+ * @Version 1.0
+ */
 @Configuration
 @EnableTransactionManagement
 @Component

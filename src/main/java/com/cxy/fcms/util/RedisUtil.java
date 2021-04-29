@@ -14,7 +14,11 @@ import java.util.Map.Entry;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Redis工具类*/
+ * @ClassName UserController
+ * @Author 陈新予
+ * @Date 2021/4/25 20:21
+ * @Version 1.0
+ */
 @Component
 @SuppressWarnings("all")
 public class RedisUtil {

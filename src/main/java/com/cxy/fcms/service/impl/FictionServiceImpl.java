@@ -17,7 +17,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-
+/**
+ * @ClassName UserController
+ * @Author 陈新予
+ * @Date 2021/4/18 16:22
+ * @Version 1.0
+ */
 @Service
 public class FictionServiceImpl implements FictionService {
     @Autowired

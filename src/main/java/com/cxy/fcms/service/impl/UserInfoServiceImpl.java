@@ -9,7 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
-
+/**
+ * @ClassName UserController
+ * @Author 李文博
+ * @Date 2021/4/18 16:22
+ * @Version 1.0
+ */
 @Service
 public class UserInfoServiceImpl implements UserInfoService {
     @Autowired

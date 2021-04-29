@@ -23,7 +23,12 @@ import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.LinkedList;
 import java.util.List;
-
+/**
+ * @ClassName UserController
+ * @Author 陈新予
+ * @Date 2021/4/29 18:11
+ * @Version 1.0
+ */
 @Controller
 public class FictionController {
     @Autowired

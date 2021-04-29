@@ -10,7 +10,12 @@ import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
-
+/**
+ * @ClassName UserController
+ * @Author 陈新予
+ * @Date 2021/4/16 15:22
+ * @Version 1.0
+ */
 @Configuration
 public class RedisConfig {
     //自己的redisTemplate

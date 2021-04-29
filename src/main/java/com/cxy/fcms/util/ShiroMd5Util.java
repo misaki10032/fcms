@@ -2,7 +2,12 @@ package com.cxy.fcms.util;
 
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.util.ByteSource;
-
+/**
+ * @ClassName UserController
+ * @Author 陈新予
+ * @Date 2021/4/25 20:21
+ * @Version 1.0
+ */
 public class ShiroMd5Util {
     //添加user的密码加密方法
     public static String toPwdMd5(String username, String password) {

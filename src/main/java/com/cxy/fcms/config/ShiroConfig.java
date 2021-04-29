@@ -12,7 +12,12 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
-
+/**
+ * @ClassName UserController
+ * @Author 陈新予
+ * @Date 2021/4/16 15:22
+ * @Version 1.0
+ */
 @Configuration
 public class ShiroConfig {
     //MD5加密

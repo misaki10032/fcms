@@ -3,7 +3,12 @@ package com.cxy.fcms.util;
 import com.google.gson.Gson;
 
 import java.util.List;
-
+/**
+ * @ClassName UserController
+ * @Author 陈新予
+ * @Date 2021/4/25 20:21
+ * @Version 1.0
+ */
 public class LayuiReplay <T> {
     private int code;
     private String msg;
