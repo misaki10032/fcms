@@ -31,7 +31,6 @@ public class TypeServiceImpl implements TypeService {
         try {
             List<Object> comTypes = redisUtil.lRange("comTypes", 0, -1);
             if (!comTypes.isEmpty()) {
-                System.out.println("=====================从Redis中读取数据=======================");
                 List<ComType> comTypes1 = new ArrayList<>();
                 for (Object type : comTypes) {
                     comTypes1.add((ComType) type);
@@ -56,9 +55,7 @@ public class TypeServiceImpl implements TypeService {
             int i = comTypeMapper.addType(map);//添加新注册的用户
             List<ComType> comTypes = comTypeMapper.selType();//更新redis信息
             redisUtil.delete("comTypes");//删除原来的list
-            System.out.println("=====================从MySQL中读取数据=======================");
             List<ComType> comType = comTypeMapper.selType();
-            System.out.println("=====================向 Redis 中存数据=======================");
             for (ComType type : comType) {
                 redisUtil.lLeftPush("comTypes", type);
             }
@@ -84,9 +81,7 @@ public class TypeServiceImpl implements TypeService {
             int i = comTypeMapper.revType(map);//添加新注册的用户
             List<ComType> comTypes = comTypeMapper.selType();//更新redis信息
             redisUtil.delete("comTypes");//删除原来的list
-            System.out.println("=====================从MySQL中读取数据=======================");
             List<ComType> comType = comTypeMapper.selType();
-            System.out.println("=====================向 Redis 中存数据=======================");
             for (ComType type : comType) {
                 redisUtil.lLeftPush("comTypes", type);
             }
@@ -108,9 +103,7 @@ public class TypeServiceImpl implements TypeService {
             int i = comTypeMapper.delType(id);//id删除分区类型
             List<ComType> comTypes = comTypeMapper.selType();//更新redis信息
             redisUtil.delete("comTypes");//删除原来的list
-            System.out.println("=====================从MySQL中读取数据=======================");
             List<ComType> comType = comTypeMapper.selType();
-            System.out.println("=====================向 Redis 中存数据=======================");
             for (ComType type : comType) {
                 redisUtil.lLeftPush("comTypes", type);
             }

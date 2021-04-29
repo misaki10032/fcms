@@ -31,20 +31,15 @@ public class FictionServiceImpl implements FictionService {
         try {
             //从redis查询
             List<Object> redisFic = redisUtil.lRange("fictions", 0, -1);
-            System.out.println("===================尝试redis读取数据=========================");
             //不为空则读取,为空则查询数据库
             if(!redisFic.isEmpty()){
-                System.out.println("=====================从Redis中读取数据=======================");
                 List<ComFiction> fictions = new ArrayList<>();
                 for (Object fiction: redisFic) {
                     fictions.add((ComFiction)fiction);
                 }
                 return fictions;
             }else{
-                System.out.println("===================== Redis 中没有数据=======================");
-                System.out.println("=====================从MySQL中读取数据=======================");
                 List<ComFiction> fictions = fictionMapper.getFictions();
-                System.out.println("=====================向 Redis 中存数据=======================");
                 for (ComFiction fiction:fictions) {
                     redisUtil.lLeftPush("fictions",fiction);
                 }
@@ -53,7 +48,6 @@ public class FictionServiceImpl implements FictionService {
             }
         }catch (Exception e){
             System.out.println("=====================   Redis 宕机   =======================");
-            System.out.println("=====================从MySQL中读取数据=======================");
             return fictionMapper.getFictions();
         }
 
@@ -67,7 +61,6 @@ public class FictionServiceImpl implements FictionService {
         //更新redis
         redisUtil.delete("fictions");//删除原来的list
         List<ComFiction> fictions = fictionMapper.getFictions();
-        System.out.println("=====================更新 Redis  数据=======================");
         for (ComFiction fiction : fictions) {
             redisUtil.lRightPush("fictions", fiction);
         }
@@ -79,20 +72,15 @@ public class FictionServiceImpl implements FictionService {
         try {
             //从redis查询
             List<Object> redisFic = redisUtil.lRange("fictionsOrderByTime", 0, -1);
-            System.out.println("===================尝试redis读取数据=========================");
             //不为空则读取,为空则查询数据库
             if (!redisFic.isEmpty()) {
-                System.out.println("=====================从Redis中读取数据=======================");
                 List<ComFiction> fictions = new ArrayList<>();
                 for (Object fiction : redisFic) {
                     fictions.add((ComFiction) fiction);
                 }
                 return fictions;
             } else {
-                System.out.println("===================== Redis 中没有数据=======================");
-                System.out.println("=====================从MySQL中读取数据=======================");
                 List<ComFiction> fictions = fictionMapper.getFictionsOrderByTime();
-                System.out.println("=====================向 Redis 中存数据=======================");
                 for (ComFiction fiction : fictions) {
                     redisUtil.lRightPush("fictionsOrderByTime", fiction);
                 }
@@ -102,7 +90,6 @@ public class FictionServiceImpl implements FictionService {
             }
         } catch (Exception e) {
             System.out.println("=====================   Redis 宕机   =======================");
-            System.out.println("=====================从MySQL中读取数据=======================");
             return fictionMapper.getFictionsOrderByTime();
         }
     }
@@ -111,30 +98,23 @@ public class FictionServiceImpl implements FictionService {
         try {
             //从redis查询
             List<Object> redisFic = redisUtil.lRange("fictionsOrderByHost", 0, -1);
-            System.out.println("===================尝试redis读取数据=========================");
             //不为空则读取,为空则查询数据库
             if (!redisFic.isEmpty()) {
-                System.out.println("=====================从Redis中读取数据=======================");
                 List<ComFiction> fictions = new ArrayList<>();
                 for (Object fiction : redisFic) {
                     fictions.add((ComFiction) fiction);
                 }
                 return fictions;
             } else {
-                System.out.println("===================== Redis 中没有数据=======================");
-                System.out.println("=====================从MySQL中读取数据=======================");
                 List<ComFiction> fictions = fictionMapper.getFictionsOrderByHost();
-                System.out.println("=====================向 Redis 中存数据=======================");
                 for (ComFiction fiction : fictions) {
                     redisUtil.lRightPush("fictionsOrderByHost", fiction);
                 }
                 redisUtil.expire("fictionsOrderByHost", TimeOutSetting.REDIS_TIME_OUT, TimeUnit.SECONDS);
-                System.out.println("=====================  设置300s后过期 =======================");
                 return fictions;
             }
         } catch (Exception e) {
             System.out.println("=====================   Redis 宕机   =======================");
-            System.out.println("=====================从MySQL中读取数据=======================");
             return fictionMapper.getFictionsOrderByHost();
         }
     }
@@ -147,7 +127,6 @@ public class FictionServiceImpl implements FictionService {
         //更新redis
         redisUtil.delete("fictions");//删除原来的list
         List<ComFiction> fictions = fictionMapper.getFictions();
-        System.out.println("=====================更新 Redis  数据=======================");
         for (ComFiction fiction : fictions) {
             redisUtil.lRightPush("fictions", fiction);
         }
@@ -165,26 +144,19 @@ public class FictionServiceImpl implements FictionService {
         try {
             //从redis查询
             ComFicDate redisData = (ComFicDate) redisUtil.get("Data" + id);
-            System.out.println("===================尝试redis读取数据=========================");
             //不为空则读取,为空则查询数据库
             if (redisData != null) {
-                System.out.println("=====================从Redis中读取数据=======================");
                 ComFicDate comFicDate = new ComFicDate();
                 comFicDate = redisData;
                 return comFicDate;
             } else {
-                System.out.println("===================== Redis 中没有数据=======================");
-                System.out.println("=====================从MySQL中读取数据=======================");
                 ComFicDate data = fictionMapper.getFictionDataById(id);
-                System.out.println("=====================向 Redis 中存数据=======================");
                 redisUtil.set("Data" + id, data);
                 redisUtil.expire("Data" + id, TimeOutSetting.REDIS_TIME_OUT, TimeUnit.SECONDS);
-                System.out.println("=====================  设置300s后过期 =======================");
                 return data;
             }
         } catch (Exception e) {
             System.out.println("=====================   Redis 宕机   =======================");
-            System.out.println("=====================从MySQL中读取数据=======================");
             return fictionMapper.getFictionDataById(id);
         }
     }

@@ -103,7 +103,6 @@ public class UserServiceImpl implements UserService {
         try {
             List<Object> comUsers = redisUtil.lRange("comUsers", 0, -1);
             if (!comUsers.isEmpty()) {
-                System.out.println("=====================从Redis中读取数据=======================");
                 List<ComUser> comUsers1 = new ArrayList<>();
                 for (Object user : comUsers) {
                     comUsers1.add((ComUser) user);

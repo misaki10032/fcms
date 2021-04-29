@@ -1,14 +1,12 @@
 package com.cxy.fcms.controller;
 
 import com.cxy.fcms.pojo.ComUser;
-import com.cxy.fcms.pojo.SysAdmin;
 import com.cxy.fcms.pojo.SysAdminInfo;
 import com.cxy.fcms.service.UserInfoService;
 import com.cxy.fcms.service.UserService;
 import com.cxy.fcms.util.IDUtil;
 import com.cxy.fcms.util.LayuiReplay;
 import com.cxy.fcms.util.ShiroMd5Util;
-import org.apache.ibatis.annotations.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -53,7 +51,8 @@ public class UserController {
      * 用户注册
      */
     @GetMapping("/userWithResiger")
-    public void userResiger(String phone, String pwd, String pwd2, String name, HttpServletResponse resp) throws IOException {
+    public void userResiger(String phone, String pwd, String pwd2, String name, HttpServletResponse resp)
+            throws IOException {
         PrintWriter out = resp.getWriter();
         List<ComUser> users = userService.selUser();
         if (phone == null || pwd == null || pwd2 == null || name == null) {
@@ -87,15 +86,13 @@ public class UserController {
         map.put("userName", name);
         map.put("userPhone", phone);
         userService.addUser(map);
+        //info
         ComUser comUser = userService.selUserByPhone(phone);
         Map<String, Object> map1 = new HashMap<>();
         map1.put("adminId", comUser.getId());
         map1.put("emil", emil);
         map1.put("adminCall", comUser.getUserName());
         userInfoService.addAdmin(map1);
-        //info
-
-
         return "userlogin";
     }
 
