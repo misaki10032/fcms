@@ -4,26 +4,15 @@
 学习练习
 
 #### Software Architecture
-Software architecture description
-
-#### Installation
-
-1.  xxxx
-2.  xxxx
-3.  xxxx
-
-#### Instructions
-
-1.  xxxx
-2.  xxxx
-3.  xxxx
+Based on SpringBoot, thymeleaf, shiro, build a novel website, for their learning practice
+Database using MySQL
+Redis makes the cache
 
 #### Contribution
 
-1.  Fork the repository
-2.  Create Feat_xxx branch
-3.  Commit your code
-4.  Create Pull Request
+1.  廖廖清梦-gitee/misaki10032-github
+2.  未来战士
+3.  天yu
 
 
 #### Gitee Feature

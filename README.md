@@ -4,28 +4,15 @@
 学习练习
 
 #### 软件架构
-软件架构说明
-
-
-#### 安装教程
-
-1.  xxxx
-2.  xxxx
-3.  xxxx
-
-#### 使用说明
-
-1.  xxxx
-2.  xxxx
-3.  xxxx
+基于SpringBoot,thymeleaf,shiro,搭建的小说网站,用于自己学习练习
+数据库使用mysql
+redis制作缓存区
 
 #### 参与贡献
 
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
-
+1.  廖廖清梦-gitee/misaki10032-github
+2.  未来战士
+3.  天yu
 
 #### 特技
 
