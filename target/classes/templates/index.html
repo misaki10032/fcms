@@ -49,7 +49,7 @@
                     }
                 }
                 var MyMar=setInterval(Marquee,speed)
-                document.getElementById("demo").onmouseout=function() {clearInterval(MyMar)}
+                document.getElementById("demo").onmouseover=function() {clearInterval(MyMar)}
                 document.getElementById("demo").onmouseout=function() {MyMar=setInterval(Marquee,speed)}
             </script>
         </div>
@@ -66,6 +66,7 @@
                 </div>
             </div>
         </div>
+
         <div class="layui-col-md2 layui-col-xs2" style="background-color: #ffb09c;height:300px">
             <div id="demo3" style="clear:both; overflow:hidden; height:100%;width:100%;margin:0 auto;">
                 <div id="demo4" style="width: 100%">
@@ -80,20 +81,21 @@
                 <div id="demo5" style="width: 100%;"></div>
             </div>
             <script>
-                var speed=30
+                var speed1=30
                 document.getElementById("demo5").innerHTML=document.getElementById("demo4").innerHTML
-                function Marquee(){
+                function Marquee1(){
                     if(document.getElementById("demo5").offsetTop-document.getElementById("demo3").scrollTop<=0)
                         document.getElementById("demo3").scrollTop-=document.getElementById("demo4").offsetHeight
                     else{
                         document.getElementById("demo3").scrollTop++
                     }
                 }
-                var MyMar=setInterval(Marquee,speed)
-                document.getElementById("demo3").onmouseout=function() {clearInterval(MyMar)}
-                document.getElementById("demo3").onmouseout=function() {MyMar=setInterval(Marquee,speed)}
+                var MyMar1=setInterval(Marquee1,speed1)
+                document.getElementById("demo3").onmouseover=function() {clearInterval(MyMar1)}
+                document.getElementById("demo3").onmouseout=function() {MyMar1=setInterval(Marquee1,speed1)}
             </script>
         </div>
+    </div>
     </div>
     <script>
         layui.use('carousel', function () {

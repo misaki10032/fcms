@@ -24,17 +24,17 @@
 <body>
 <div class="div_top" th:replace="include/top"></div>
 <hr/>
-<div class="layui-row" style="height: 190px; background-color: #F7F7F7;">
-	<div class="layui-col-md2 layui-col-lg2 layui-col-sm2 layui-col-xs2 layui-row" style="height: 100%;">
-		<div class="layui-col-md12 layui-col-lg12 layui-col-sm12 layui-col-xs12 layui-row" style="height: 17%;">
+<div class="layui-container layui-row" style="height: 190px; background-color: #F7F7F7;">
+    <div class="layui-col-md2 layui-col-lg2 layui-col-sm2 layui-col-xs2 layui-row" style="height: 100%;">
+        <div class="layui-col-md12 layui-col-lg12 layui-col-sm12 layui-col-xs12 layui-row" style="height: 17%;">
 
-		</div>
-		<div class="layui-col-md8  layui-col-md-offset2 layui-col-lg8  layui-col-lg-offset2 layui-col-sm8  layui-col-sm-offset2 layui-col-xs8  layui-col-xs-offset2 layui-row"
-			 style="height: 66%; width: 66%;">
-			<img class="layui-col-md12 layui-col-lg12 layui-col-sm12 layui-col-xs12 layui-circle" style="height: 100%;"
-				 src="/img/now2.png"/>
-		</div>
-		<div class="layui-col-md12 layui-col-lg12 layui-col-sm12 layui-col-xs12 layui-row" style="height: 17%;">
+        </div>
+        <div class="layui-col-md8  layui-col-md-offset2 layui-col-lg8  layui-col-lg-offset2 layui-col-sm8  layui-col-sm-offset2 layui-col-xs8  layui-col-xs-offset2 layui-row"
+             style="height: 66%; width: 66%;">
+            <img class="layui-col-md12 layui-col-lg12 layui-col-sm12 layui-col-xs12 layui-circle" style="height: 100%;"
+                 src="/img/now2.png"/>
+        </div>
+        <div class="layui-col-md12 layui-col-lg12 layui-col-sm12 layui-col-xs12 layui-row" style="height: 17%;">
 
 		</div>
 	</div>
@@ -84,17 +84,17 @@
 	</div>
 </div>
 <hr style="width:85%; text-align: center;margin: auto;height: 2px;"/>
-<div class="layui-row" style="height: auto;background-color: #F7F7F7;">
-	<div class="layui-col-md2 layui-col-lg2 layui-col-sm2 layui-col-xs2">
-		<ul class="layui-nav layui-nav-tree layui-inline" lay-filter="demo"
-			style="margin-right:10px;width: 100%;height:350px; background-color:#F7F7F7 ;">
-			<li class="layui-nav-item layui-this">
+<div class="layui-container layui-row" style="height: auto;background-color: #F7F7F7;">
+    <div class="layui-col-md2 layui-col-lg2 layui-col-sm2 layui-col-xs2">
+        <ul class="layui-nav layui-nav-tree layui-inline" lay-filter="demo"
+            style="margin-right:10px;width: 100%;height:350px; background-color:#F7F7F7 ;">
+            <li class="layui-nav-item layui-this">
 
-				<a th:href="@{/revUser(id=${adminInfo.getAdminId()})}" target="ifram" name="id" style="color: #333333;">账户信息修改</a>
-			</li>
+                <a th:href="@{/revUser(id=${adminInfo.getAdminId()})}" target="ifram" name="id" style="color: #333333;">账户信息修改</a>
+            </li>
 
-			<li class="layui-nav-item">
-				<a href="collect.html" target="ifram" style="color: #333333;">我的收藏</a>
+            <li class="layui-nav-item">
+                <a href="collect.html" target="ifram" style="color: #333333;">我的收藏</a>
 			</li>
 
 			<li class="layui-nav-item">

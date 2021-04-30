@@ -1,7 +1,9 @@
 package com.cxy.fcms.Util;
 
+import com.cxy.fcms.mapper.ComFictionMapper;
 import com.cxy.fcms.util.IDUtil;
 import com.cxy.fcms.util.RedisUtil;
+import com.cxy.fcms.util.SelectRedis;
 import com.cxy.fcms.util.ShiroMd5Util;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,8 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 import javax.mail.internet.MimeMessage;
+import java.lang.reflect.InvocationTargetException;
+import java.util.List;
 
 @SpringBootTest
 public class utilText {
@@ -17,6 +21,8 @@ public class utilText {
     JavaMailSenderImpl mailSender;
     @Autowired
     RedisUtil redisUtil;
+    @Autowired
+    ComFictionMapper fictionMapper;
 
     @Test
     void ShiroUtil1() {
@@ -49,5 +55,15 @@ public class utilText {
         String emil = "1069664381@qq.com";
         boolean matches = emil.matches("^\\w+@\\w{2,6}\\.\\w{2,6}$");
         System.out.println(matches);
+    }
+
+    @Test
+    void TTss1() {
+        try {
+            List<Object> objects = SelectRedis.selectRedis(redisUtil, "fictions", fictionMapper, "getFictions");
+            System.out.println(objects);
+        } catch (NoSuchMethodException | IllegalAccessException | InstantiationException | InvocationTargetException e) {
+            e.printStackTrace();
+        }
     }
 }
