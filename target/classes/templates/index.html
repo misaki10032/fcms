@@ -30,27 +30,33 @@
                 <div id="demo1" style="width: 100%">
                     <!-- 定义图片 -->
                     <ul style="width: 100%;">
-                        <li style="width: 100%" ><img style="width: 100%" src="./img/img1.png" /></li>
-                        <li style="width: 100%"><img style="width: 100%" src="./img/img2.png"  /></li>
-                        <li style="width: 100%"><img style="width: 100%" src="./img/img3.png" /></li>
-                        <li style="width: 100%"><img style="width: 100%" src="./img/img4.png" /></li>
+                        <li style="width: 100%"><img style="width: 100%" src="./img/img1.png"/></li>
+                        <li style="width: 100%"><img style="width: 100%" src="./img/img2.png"/></li>
+                        <li style="width: 100%"><img style="width: 100%" src="./img/img3.png"/></li>
+                        <li style="width: 100%"><img style="width: 100%" src="./img/img4.png"/></li>
                     </ul>
-                 </div>
+                </div>
                 <div id="demo2" style="width: 100%;"></div>
             </div>
             <script>
-                var speed=30
-                document.getElementById("demo2").innerHTML=document.getElementById("demo1").innerHTML
-                function Marquee(){
-                    if(document.getElementById("demo2").offsetTop-document.getElementById("demo").scrollTop<=0)
-                        document.getElementById("demo").scrollTop-=document.getElementById("demo1").offsetHeight
-                    else{
+                var speed = 30
+                document.getElementById("demo2").innerHTML = document.getElementById("demo1").innerHTML
+
+                function Marquee() {
+                    if (document.getElementById("demo2").offsetTop - document.getElementById("demo").scrollTop <= 0)
+                        document.getElementById("demo").scrollTop -= document.getElementById("demo1").offsetHeight
+                    else {
                         document.getElementById("demo").scrollTop++
                     }
                 }
-                var MyMar=setInterval(Marquee,speed)
-                document.getElementById("demo").onmouseover=function() {clearInterval(MyMar)}
-                document.getElementById("demo").onmouseout=function() {MyMar=setInterval(Marquee,speed)}
+
+                var MyMar = setInterval(Marquee, speed)
+                document.getElementById("demo").onmouseover = function () {
+                    clearInterval(MyMar)
+                }
+                document.getElementById("demo").onmouseout = function () {
+                    MyMar = setInterval(Marquee, speed)
+                }
             </script>
         </div>
 
@@ -72,47 +78,54 @@
                 <div id="demo4" style="width: 100%">
                     <!-- 定义图片 -->
                     <ul style="width: 100%;">
-                        <li style="width: 100%" ><img style="width: 100%" src="./img/img1.png" /></li>
-                        <li style="width: 100%"><img style="width: 100%" src="./img/img2.png"  /></li>
-                        <li style="width: 100%"><img style="width: 100%" src="./img/img3.png" /></li>
-                        <li style="width: 100%"><img style="width: 100%" src="./img/img4.png" /></li>
+                        <li style="width: 100%"><img style="width: 100%" src="./img/img1.png"/></li>
+                        <li style="width: 100%"><img style="width: 100%" src="./img/img2.png"/></li>
+                        <li style="width: 100%"><img style="width: 100%" src="./img/img3.png"/></li>
+                        <li style="width: 100%"><img style="width: 100%" src="./img/img4.png"/></li>
                     </ul>
                 </div>
                 <div id="demo5" style="width: 100%;"></div>
             </div>
             <script>
-                var speed1=30
-                document.getElementById("demo5").innerHTML=document.getElementById("demo4").innerHTML
-                function Marquee1(){
-                    if(document.getElementById("demo5").offsetTop-document.getElementById("demo3").scrollTop<=0)
-                        document.getElementById("demo3").scrollTop-=document.getElementById("demo4").offsetHeight
-                    else{
+                var speed1 = 30
+                document.getElementById("demo5").innerHTML = document.getElementById("demo4").innerHTML
+
+                function Marquee1() {
+                    if (document.getElementById("demo5").offsetTop - document.getElementById("demo3").scrollTop <= 0)
+                        document.getElementById("demo3").scrollTop -= document.getElementById("demo4").offsetHeight
+                    else {
                         document.getElementById("demo3").scrollTop++
                     }
                 }
-                var MyMar1=setInterval(Marquee1,speed1)
-                document.getElementById("demo3").onmouseover=function() {clearInterval(MyMar1)}
-                document.getElementById("demo3").onmouseout=function() {MyMar1=setInterval(Marquee1,speed1)}
+
+                var MyMar1 = setInterval(Marquee1, speed1)
+                document.getElementById("demo3").onmouseover = function () {
+                    clearInterval(MyMar1)
+                }
+                document.getElementById("demo3").onmouseout = function () {
+                    MyMar1 = setInterval(Marquee1, speed1)
+                }
             </script>
         </div>
     </div>
-    </div>
-    <script>
-        layui.use('carousel', function () {
-            var carousel = layui.carousel;
-            //建造实例
-            carousel.render({
-                elem: '#test1',
-                width: '100%' //设置容器宽度
-                ,
-                height: '300px',
-                arrow: 'hover' //始终显示箭头
-                // ,anim: 'updown' //切换动画方式
-                ,
-                interval: 3000
-            });
+</div>
+<script>
+    layui.use('carousel', function () {
+        var carousel = layui.carousel;
+        //建造实例
+        carousel.render({
+            elem: '#test1',
+            width: '100%' //设置容器宽度
+            ,
+            height: '300px',
+            arrow: 'hover' //始终显示箭头
+            // ,anim: 'updown' //切换动画方式
+            ,
+            interval: 3000
         });
-    </script>
+    });
+</script>
+<div class="layui-container">
     <blockquote class="layui-elem-quote" style="margin: 0;padding: 5px">
         <fieldset class="layui-elem-field layui-field-title" style="margin: 10px;padding: 0px">
             <legend>热门</legend>
