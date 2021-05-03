@@ -19,10 +19,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.Hashtable;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
+
 /**
  * @ClassName UserController
  * @Author 陈新予
@@ -50,10 +48,11 @@ public class FictionController {
             String ficid = IDUtil.getID();
             map.put("id", ficid);
             map.put("ficName",title);
-            if(author!=null&&!author.equals("")){
-                map.put("ficAuthor",author);
+            if (author != null && !author.equals("")) {
+                map.put("ficAuthor", author);
+            } else {
+                map.put("ficAuthor", null);
             }
-            map.put("ficAuthor",null);
             fictionService.addFiction(map,ficid,data,type);
             out.print("ok");
         }catch (Exception e){
@@ -110,6 +109,20 @@ public class FictionController {
         } catch (IOException e) {
             System.err.println("删除失败!");
         }
+    }
+
+    @GetMapping("/getfictionslimit")
+    @ResponseBody//数据请求接口
+    public Object getAllFictions2(int page, int limit) throws JSONException {
+        List<ComFiction> fiction = fictionService.getFiction();
+        List<ComFiction> fiction3 = new ArrayList<>();
+        for (int i = (page - 1) * limit; i < fiction.size(); i++) {
+            fiction3.add(fiction.get(i));
+            if (fiction3.size() == limit) {
+                break;
+            }
+        }
+        return new LayuiReplay<ComFiction>(0, "OK", fiction.size(), fiction3);
     }
 
 }

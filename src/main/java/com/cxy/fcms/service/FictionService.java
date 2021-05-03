@@ -24,4 +24,7 @@ public interface FictionService {
     List<String> getFictionsByType(String id);
 
     ComFicDate getFictionDataById(String id);
+
+    List<ComFiction> getFictionlimit(int page, int limit);
+
 }

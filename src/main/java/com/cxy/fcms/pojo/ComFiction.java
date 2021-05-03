@@ -57,12 +57,12 @@ public class ComFiction implements Serializable {
     /**
      * 创建时间
      */
-    private String createTime;
+    private String gmtCreate;
 
     /**
      * 修改时间
      */
-    private String updateTime;
+    private String gmtModified;
 
     /**
      * 逻辑删除
@@ -74,11 +74,19 @@ public class ComFiction implements Serializable {
      */
     private Integer ficHost;
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = DateUtil.dateToString(createTime);
+    public void setGmtCreate(Object gmtCreate) {
+        if (gmtCreate instanceof Date) {
+            this.gmtCreate = DateUtil.dateToString((Date) gmtCreate);
+        } else {
+            this.gmtCreate = String.valueOf(gmtCreate);
+        }
     }
 
-    public void setUpdateTime(Date updateTime) {
-        this.createTime = DateUtil.dateToString(updateTime);
+    public void setGmtModified(Object gmtModified) {
+        if (gmtModified instanceof Date) {
+            this.gmtModified = DateUtil.dateToString((Date) gmtModified);
+        } else {
+            this.gmtModified = String.valueOf(gmtModified);
+        }
     }
 }

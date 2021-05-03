@@ -45,13 +45,12 @@ public class ShiroConfig {
          * perms:拥有某个资源的权限才可以访
          * role:拥有某个角色权限才可以访问
          */
-        Map<String,String> filtermap = new LinkedHashMap<>();//过滤器map
-//        filtermap.put("/add","perms[123]");
-//        filtermap.put("/update","perms[111]");
-//        filtermap.put("/select","perms[select]");
+        Map<String, String> filtermap = new LinkedHashMap<>();//过滤器map
+        filtermap.put("/toUserHome", "perms[loginOK]");
+        filtermap.put("/revUser", "perms[loginOK]");
         bean.setFilterChainDefinitionMap(filtermap);//添加shiro过滤器
 
-        bean.setLoginUrl("/login");//设置登录页面
+        bean.setLoginUrl("/usertologin");//设置登录页面
         bean.setUnauthorizedUrl("/noauthor");//设置未授权跳转页面
         return bean;
     }

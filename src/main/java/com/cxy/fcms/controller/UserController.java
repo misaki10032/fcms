@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,11 +35,19 @@ public class UserController {
     UserService userService;
     @Autowired
     UserInfoService userInfoService;
+
     @GetMapping("/getUsers")
     @ResponseBody
-    public Object getAllUsers() {
+    public Object getAllUsers(int page, int limit) {
         List<ComUser> users = userService.selUser();
-        return new LayuiReplay<ComUser>(0, "OK", users.size(), users);
+        List<ComUser> userlimit = new ArrayList<>();
+        for (int i = (page - 1) * limit; i < users.size(); i++) {
+            userlimit.add(users.get(i));
+            if (userlimit.size() == limit) {
+                break;
+            }
+        }
+        return new LayuiReplay<ComUser>(0, "OK", users.size(), userlimit);
     }
 
     @RequestMapping("/toUsers")

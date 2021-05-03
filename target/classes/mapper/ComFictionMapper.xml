@@ -40,8 +40,8 @@
                f.fic_name     AS ficName,
                f.fic_author   AS ficAuthor,
                ct.ty_name     AS ficType,
-               f.gmt_create   AS createTime,
-               f.gmt_modified AS updateTime,
+               f.gmt_create   AS gmtCreate,
+               f.gmt_modified AS gmtModified,
                f.is_deleted   AS isDeleted,
                f.fic_img      AS ficImg,
                f.fic_host     AS ficHost
@@ -56,8 +56,8 @@
                f.fic_name     AS ficName,
                f.fic_author   AS ficAuthor,
                ct.ty_name     AS ficType,
-               f.gmt_create   AS createTime,
-               f.gmt_modified AS updateTime,
+               f.gmt_create   AS gmtCreate,
+               f.gmt_modified AS gmtModified,
                f.is_deleted   AS isDeleted,
                f.fic_img      AS ficImg,
                f.fic_host     AS ficHost
@@ -66,15 +66,15 @@
              com_fiction_type t ON f.id = t.fic_id
                  INNER JOIN
              com_type ct ON t.fic_type = ct.id
-        order by createTime DESC;
+        order by gmtCreate DESC;
     </select>
     <select id="getFictionsOrderByHost" resultType="ComFiction">
         SELECT f.id           AS id,
                f.fic_name     AS ficName,
                f.fic_author   AS ficAuthor,
                ct.ty_name     AS ficType,
-               f.gmt_create   AS createTime,
-               f.gmt_modified AS updateTime,
+               f.gmt_create   AS gmtCreate,
+               f.gmt_modified AS gmtModified,
                f.is_deleted   AS isDeleted,
                f.fic_img      AS ficImg,
                f.fic_host     AS ficHost
@@ -112,10 +112,27 @@
     <select id="getFictionDataById" resultType="ComFicDate">
         select id           AS id
              , fic_data     AS ficData
-             , gmt_create   AS createTime
-             , gmt_modified AS updateTime
+             , gmt_create   AS gmtCreate
+             , gmt_modified AS gmtModified
         from com_fiction_data
         where fic_id = #{id};
     </select>
 
+    <select id="getFictionslimit" resultType="ComFiction">
+        SELECT f.id           AS id,
+               f.fic_name     AS ficName,
+               f.fic_author   AS ficAuthor,
+               ct.ty_name     AS ficType,
+               f.gmt_create   AS gmtCreate,
+               f.gmt_modified AS gmtModified,
+               f.is_deleted   AS isDeleted,
+               f.fic_img      AS ficImg,
+               f.fic_host     AS ficHost
+        FROM com_fiction f
+                 INNER JOIN
+             com_fiction_type t ON f.id = t.fic_id
+                 INNER JOIN
+             com_type ct ON t.fic_type = ct.id
+        limit #{pagelimit},#{limit};
+    </select>
 </mapper>

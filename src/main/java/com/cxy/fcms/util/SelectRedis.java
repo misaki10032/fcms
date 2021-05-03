@@ -4,7 +4,6 @@ import com.cxy.fcms.mapper.ComFictionMapper;
 import com.cxy.fcms.pojo.ComFiction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -19,7 +18,7 @@ import java.util.concurrent.TimeUnit;
  * @Version 1.0
  */
 @Component
-public class SelectRedis {
+public class SelectRedis<T> {
     /**
      * redis查询列表的泛用抽象
      *
@@ -27,20 +26,16 @@ public class SelectRedis {
      * @param mapper     mapper
      * @param invokeName mapper的方法
      * @return 返回object类型的List集合
-     * @throws NoSuchMethodException     异常
-     * @throws IllegalAccessException    异常
-     * @throws InstantiationException    异常
-     * @throws InvocationTargetException 异常
      */
-    public static List selectRedis(RedisUtil redisUtil, String keyName, Object mapper, String invokeName)
+    public static List<Object> selectRedis(RedisUtil redisUtil, String keyName, Object mapper, String invokeName)
             throws NoSuchMethodException, IllegalAccessException, InstantiationException, InvocationTargetException {
         try {
-            List redisFic = redisUtil.lRange(keyName, 0, -1);
+            List<Object> redisFic = redisUtil.lRange(keyName, 0, -1);
             if (!redisFic.isEmpty()) {
                 return redisFic;
             } else {
                 Method method = mapper.getClass().getDeclaredMethod(invokeName);
-                List<Object> invoke = Collections.singletonList(method.invoke(mapper.getClass().newInstance()));
+                List<Object> invoke = (List<Object>) method.invoke(mapper);
                 for (Object fiction : invoke) {
                     redisUtil.lLeftPush(keyName, fiction);
                 }
@@ -48,7 +43,8 @@ public class SelectRedis {
                 return invoke;
             }
         } catch (Exception e) {
-            return Collections.singletonList(mapper.getClass().getDeclaredMethod(invokeName).invoke(mapper.getClass().newInstance()));
+            e.printStackTrace();
+            return (List<Object>) (mapper.getClass().getDeclaredMethod(invokeName).invoke(mapper));
         }
 
     }

@@ -9,6 +9,7 @@ import com.cxy.fcms.pojo.SysAdmin;
 import com.cxy.fcms.service.FictionService;
 import com.cxy.fcms.util.IDUtil;
 import com.cxy.fcms.util.RedisUtil;
+import com.cxy.fcms.util.SelectRedis;
 import com.cxy.fcms.util.TimeOutSetting;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,20 +46,25 @@ public class FictionServiceImpl implements FictionService {
                 return fictions;
             }else{
                 List<ComFiction> fictions = fictionMapper.getFictions();
-                for (ComFiction fiction:fictions) {
-                    redisUtil.lLeftPush("fictions",fiction);
+                for (ComFiction fiction : fictions) {
+                    redisUtil.lLeftPush("fictions", fiction);
                 }
                 redisUtil.expire("fictions", TimeOutSetting.REDIS_TIME_OUT, TimeUnit.SECONDS);
                 return fictions;
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println("=====================   Redis 宕机   =======================");
             return fictionMapper.getFictions();
         }
-
     }
+
     @Override
-    public void addFiction(HashMap<String,String> ficmap,String ficid,String text,String type) {
+    public List<ComFiction> getFictionlimit(int page, int limit) {
+        return fictionMapper.getFictionslimit(limit * (page - 1), limit);
+    }
+
+    @Override
+    public void addFiction(HashMap<String, String> ficmap, String ficid, String text, String type) {
         fictionMapper.addFiction(ficmap);
         fictionMapper.addFictionData(IDUtil.getID(), ficid, text);
         String typeId = typeMapper.getTypeIdByName(type);
@@ -123,7 +129,6 @@ public class FictionServiceImpl implements FictionService {
             return fictionMapper.getFictionsOrderByHost();
         }
     }
-
     @Override
     public void delFiction(String id) {
         fictionMapper.delFicData(id);
@@ -137,13 +142,11 @@ public class FictionServiceImpl implements FictionService {
         }
         redisUtil.expire("fictions", TimeOutSetting.REDIS_TIME_OUT, TimeUnit.SECONDS);
     }
-
     @Override
     public List<String> getFictionsByType(String id) {
         System.out.println("----正在查找书id");
         return fictionMapper.getFictionByTypeId(id);
     }
-
     @Override
     public ComFicDate getFictionDataById(String id) {
         try {
@@ -165,6 +168,4 @@ public class FictionServiceImpl implements FictionService {
             return fictionMapper.getFictionDataById(id);
         }
     }
-
-
 }

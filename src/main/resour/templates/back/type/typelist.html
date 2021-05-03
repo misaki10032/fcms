@@ -91,7 +91,9 @@
                     width: 150
                 }]
             ],
-            page: true
+            page: true,
+            limit: 10,
+            limits: [3, 5, 10, 20]
         });
 
         table.on('toolbar(test)', function (obj) {

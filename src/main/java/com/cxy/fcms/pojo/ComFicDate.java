@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -20,7 +21,7 @@ import java.util.Date;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-public class ComFicDate {
+public class ComFicDate implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -36,12 +37,20 @@ public class ComFicDate {
 
     private String updateTime;
 
-    public void setGmtCreate(Date createTime) {
-        this.createTime = DateUtil.dateToString(createTime);
+    public void setGmtCreate(Object createTime) {
+        if (createTime instanceof Date) {
+            this.createTime = DateUtil.dateToString((Date) createTime);
+        } else {
+            this.createTime = String.valueOf(createTime);
+        }
     }
 
-    public void setGmtModified(Date updateTime) {
-        this.updateTime = DateUtil.dateToString(updateTime);
+    public void setGmtModified(Object updateTime) {
+        if (updateTime instanceof Date) {
+            this.createTime = DateUtil.dateToString((Date) updateTime);
+        } else {
+            this.createTime = String.valueOf(updateTime);
+        }
     }
 
 }

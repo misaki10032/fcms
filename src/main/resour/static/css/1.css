@@ -1,0 +1,193 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+body {
+    background: url(https://img.infinitynewtab.com/bingWallpaper/bg.jpg?md5);
+    background-size: 100%;
+}
+
+#div_zong {
+    width: 100%;
+    height: 730px;
+    transition: all 0.2s linear 0s;
+    position: absolute;
+    z-index: 1;
+}
+
+#div_qingxi1 {
+    width: 100%;
+    height: 180px;
+    background: 0;
+    position: absolute;
+    z-index: 4;
+    top: 0;
+}
+
+#div_qingxi2 {
+    width: 100%;
+    height: 480px;
+    background: 0;
+    position: absolute;
+    z-index: 11;
+    top: 250px
+}
+
+#div_soso {
+    width: 100%;
+    height: 730px;
+    z-index: 3;
+    position: absolute;
+}
+
+#div_img {
+    width: 1200px;
+    height: 600px;
+    /* background: rgba(225,225,225,0.5);	 */
+    margin: 0 auto;
+}
+
+#div_ss {
+    margin: 0 auto;
+}
+
+#div_top {
+    width: 1200px;
+    height: 70px;
+}
+
+#div_body {
+    width: 1200px;
+    height: 530px;
+}
+
+#div_bottom {
+    width: 1200px;
+    height: 100px;
+    position: absolute;
+    top: 350px;
+    left: 180px;
+}
+
+#div_kuang {
+    /* width: 557px; */
+    /* margin: 0 auto; */
+    /* border:2px solid #ffd5d5;/* 边框选项 */
+    /* border-radius: 30px; */
+}
+
+#SouSuo {
+    top: 200px;
+    width: 230px;
+    height: 22px;
+    font: 16px/18px arial;
+    line-height: 22px;
+    border: 0;
+    outline: 0;
+    -webkit-appearance: none;
+    border: 2px;
+    border-radius: 30px; /* 圆滑边框 */
+    text-align: center; /* 文字居中 */
+    background-color: rgba(255, 255, 255, .25);
+    padding: 13px 15px;
+    box-shadow: rgba(0, 0, 0, .5) 0 0 10px; /* 盒子阴影 */
+    backdrop-filter: blur(10px); /* 毛玻璃特效 */
+    position: absolute;
+    left: calc(50% - 115px);
+    transition: all 0.2s linear 0s;
+}
+
+#SouSuo:focus {
+    color: #000;
+    background-color: rgba(255, 255, 255, 1);
+    box-shadow: rgba(0, 0, 0, .2) 0 0 10px;
+    backdrop-filter: blur(10px); /* 毛玻璃特效 */
+    left: calc(50% - 265px);
+    width: 530px;
+
+
+}
+
+#SouSuo:hover {
+    color: #000;
+    background-color: rgba(255, 255, 255, 1);
+    box-shadow: rgba(0, 0, 0, .3) 0 0 10px;
+    left: calc(50% - 265px);
+    width: 530px;
+
+}
+
+/* #SouSuo{
+	width: 526px;
+    height: 22px;
+    font: 16px/18px arial;
+    line-height: 22px;
+    border: 0;
+    outline: 0;
+    -webkit-appearance: none;
+	border: 2px;
+	border-radius: 30px;/* 圆滑边框 */
+#timenow {
+    top: 120px;
+    position: absolute;
+    display: block;
+    font-size: 2em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+    width: 100px;
+    left: 46.2%;
+    /* text-align: center; */
+    transition: all .25s;
+    padding: 15px 0px 15px 0px;
+    text-shadow: 0 0 20px rgba(0, 0, 0, .4); /* 文字阴影 */
+    color: #fbdada;
+}
+
+#timenow:hover {
+    /* font: 38px/38px arial; */
+    text-shadow: 0 0 20px rgba(0, 0, 0, .9);
+    backdrop-filter: blur(10px); /* 毛玻璃特效 */
+}
+
+#div_chenxinyu {
+    position: absolute;
+    left: 43%;
+    transition: all .25s;
+}
+
+#div_bofang {
+    position: absolute;
+    border-radius: 30px;
+    transition: all .25s;
+}
+
+#div_zhankai {
+    position: absolute;
+    left: 90%;
+    border-radius: 30px;
+    transition: all .25s;
+}
+
+#div_lianjie {
+    position: absolute;
+    top: 70px;
+    left: 400px;
+    /* display:none; */
+    transition: all .25s;
+}
+
+.lianjie1:hover,
+#div_bofang:hover, #div_zhankai:hover, #div_chenxinyu:hover {
+    opacity: 0.5;
+}
+
+.lianjie1 {
+    border-radius: 19px;
+}
+
+.img_logo {
+    border-radius: 56px;
+    border: 1px solid;
+}

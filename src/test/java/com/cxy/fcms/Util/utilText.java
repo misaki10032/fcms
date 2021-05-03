@@ -66,4 +66,9 @@ public class utilText {
             e.printStackTrace();
         }
     }
+
+    @Test
+    void T1111() {
+        System.out.println(redisUtil.lRange("fictions", 0, -1));
+    }
 }

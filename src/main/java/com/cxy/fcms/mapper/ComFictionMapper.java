@@ -43,4 +43,6 @@ public interface ComFictionMapper extends BaseMapper<ComFiction> {
 
     ComFicDate getFictionDataById(String id);
 
+    List<ComFiction> getFictionslimit(@Param("pagelimit") int pagelimit, @Param("limit") int limit);
+
 }

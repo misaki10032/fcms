@@ -36,11 +36,12 @@ public class MyRealm extends AuthorizingRealm {
         System.out.println("=====================授权========================");
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
         Subject subject = SecurityUtils.getSubject();
-        Session session = subject.getSession();
-        SysAdmin admin = (SysAdmin) session.getAttribute("admin");
-        String author = admin.getAdminAuthority();
-        System.out.println("授予用户:" + author + "权限");
-        info.addStringPermission(author);
+//        Session session = subject.getSession();
+//        SysAdmin admin = (SysAdmin) session.getAttribute("admin");
+//        String author = admin.getAdminAuthority();
+//        System.out.println("授予用户:" + author + "权限");
+//        info.addStringPermission(author);
+        info.addStringPermission("loginOK");
         return info;
     }
 

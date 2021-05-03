@@ -74,11 +74,19 @@ public class ComUser implements Serializable {
      */
     private Integer isBanned;
 
-    public void setGmtCreate(Date gmtCreate) {
-        this.gmtCreate = DateUtil.dateToString(gmtCreate);
+    public void setGmtCreate(Object gmtCreate) {
+        if (gmtCreate instanceof Date) {
+            this.gmtCreate = DateUtil.dateToString((Date) gmtCreate);
+        } else {
+            this.gmtCreate = String.valueOf(gmtCreate);
+        }
     }
 
-    public void setGmtModified(Date gmtModified) {
-        this.gmtModified = DateUtil.dateToString(gmtModified);
+    public void setGmtModified(Object gmtModified) {
+        if (gmtModified instanceof Date) {
+            this.gmtModified = DateUtil.dateToString((Date) gmtModified);
+        } else {
+            this.gmtModified = String.valueOf(gmtModified);
+        }
     }
 }
