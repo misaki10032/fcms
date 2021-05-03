@@ -107,7 +107,7 @@ public class LoginController {
             return "login";
         } catch (Exception e) {
             model.addAttribute("msg", "系统发生未知错误!");
-            return "userlogin";
+            return "login";
         }
     }
 
