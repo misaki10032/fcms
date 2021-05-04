@@ -14,6 +14,7 @@ import com.cxy.fcms.util.TimeOutSetting;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -57,12 +58,10 @@ public class FictionServiceImpl implements FictionService {
             return fictionMapper.getFictions();
         }
     }
-
     @Override
     public List<ComFiction> getFictionlimit(int page, int limit) {
         return fictionMapper.getFictionslimit(limit * (page - 1), limit);
     }
-
     @Override
     public void addFiction(HashMap<String, String> ficmap, String ficid, String text, String type) {
         fictionMapper.addFiction(ficmap);
@@ -96,7 +95,6 @@ public class FictionServiceImpl implements FictionService {
                     redisUtil.lRightPush("fictionsOrderByTime", fiction);
                 }
                 redisUtil.expire("fictionsOrderByTime", TimeOutSetting.REDIS_TIME_OUT, TimeUnit.SECONDS);
-
                 return fictions;
             }
         } catch (Exception e) {
@@ -166,6 +164,24 @@ public class FictionServiceImpl implements FictionService {
         } catch (Exception e) {
             System.out.println("=====================   Redis 宕机   =======================");
             return fictionMapper.getFictionDataById(id);
+        }
+    }
+
+    @Override
+    public List<ComFiction> SearchFiction(String msg) {
+        String likemsg = "%" + msg + "%";
+        try {
+            List<Object> searchFiction = SelectRedis.selectRedis(redisUtil, "search_" + msg, fictionMapper, "searchFiction", likemsg, 10 * 60);
+            ArrayList<ComFiction> fictions = new ArrayList<>();
+            for (Object o : searchFiction) {
+                if (o instanceof ComFiction) {
+                    fictions.add((ComFiction) o);
+                }
+            }
+            return fictions;
+        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+            e.printStackTrace();
+            return fictionMapper.searchFiction(likemsg);
         }
     }
 }

@@ -1,8 +1,10 @@
 package com.cxy.fcms.service;
 
+import com.cxy.fcms.mapper.ComFictionMapper;
 import com.cxy.fcms.pojo.ComFiction;
 import com.cxy.fcms.pojo.SysAdmin;
 import com.cxy.fcms.pojo.SysAdminInfo;
+import com.cxy.fcms.util.RedisUtil;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.configurationprocessor.json.JSONArray;
@@ -10,6 +12,7 @@ import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.lang.reflect.Method;
 import java.util.List;
 
 @SpringBootTest
@@ -22,6 +25,10 @@ public class ServiceTest {
     FictionService fictionService;
     @Autowired
     UserInfoService userInfoService;
+    @Autowired
+    ComFictionMapper fictionMapper;
+    @Autowired
+    RedisUtil redisUtil;
 
     @Test
     void getAdminsText() {
@@ -42,8 +49,9 @@ public class ServiceTest {
     }
 
     @Test
-    void getFictionsToJSON() throws JSONException {
-
+    void searchFiction() {
+        List<ComFiction> fictions = fictionService.SearchFiction("8");
+        System.out.println(fictions);
     }
 
     @Test

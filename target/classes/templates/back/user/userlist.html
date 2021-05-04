@@ -38,7 +38,7 @@
 				table.render({
 					elem: '#test',
 					url: 'http://192.168.31.225:9898/getUsers',
-					parseData: function(res) { //res 即为原始返回的数据
+					parseData: function (res) { //res 即为原始返回的数据
 						return {
 							"code": res.code, //解析接口状态
 							"msg": res.msg, //解析提示文本
@@ -48,9 +48,9 @@
 					},
 					page: true,
 					limit: 10,
-					limits: [3,5,10,20],
+					limits: [3, 5, 10, 20],
 					toolbar: '#toolbarDemo', //开启头部工具栏，并为其绑定左侧模板
-					height:'full-3',
+					height: 'full-3',
 					defaultToolbar: ['filter', 'exports', 'print', { //自定义头部工具栏右侧图标。如无需自定义，去除该参数即可
 						title: '提示',
 						layEvent: 'LAYTABLE_TIPS',
@@ -101,7 +101,7 @@
 							field: 'isBanned',
 							title: '状态',
 							width: 80
-						} , {
+						}, {
 							fixed: 'right',
 							title: '操作',
 							toolbar: '#barDemo',

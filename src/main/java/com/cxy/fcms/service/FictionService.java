@@ -27,4 +27,6 @@ public interface FictionService {
 
     List<ComFiction> getFictionlimit(int page, int limit);
 
+    List<ComFiction> SearchFiction(String msg);
+
 }

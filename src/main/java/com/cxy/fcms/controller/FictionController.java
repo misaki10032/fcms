@@ -125,4 +125,19 @@ public class FictionController {
         return new LayuiReplay<ComFiction>(0, "OK", fiction.size(), fiction3);
     }
 
+    @GetMapping("/getfictionSearch")
+    @ResponseBody
+    public Object getfictionSearch(String searchMSG) {
+        List<ComFiction> fictions = fictionService.SearchFiction(searchMSG);
+        return new LayuiReplay<ComFiction>(0, "OK", fictions.size(), fictions);
+    }
+
+    @GetMapping("/getfictionTopHost")
+    @ResponseBody
+    public Object toHostTop(String searchMSG) {
+        List<ComFiction> fictions = fictionService.getFictionsOrderByHost();
+        return new LayuiReplay<ComFiction>(0, "OK", fictions.size(), fictions);
+    }
+
+
 }
