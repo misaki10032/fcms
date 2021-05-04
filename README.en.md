@@ -10,7 +10,7 @@ Redis makes the cache
 
 #### Contribution
 
-1.  廖廖清梦-gitee/misaki10032-github
+1.  廖廖清梦/misaki10032
 2.  未来战士
 3.  天yu
 

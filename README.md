@@ -11,8 +11,8 @@ redis制作缓存区
 #### 参与贡献
 
 1.  廖廖清梦-gitee/misaki10032-github
-2.  未来战士
-3.  天yu
+2.  未来战士-gitee
+3.  天yu-gitee
 
 #### 特技
 
