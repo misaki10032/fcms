@@ -20,6 +20,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -39,11 +40,14 @@ public class LoginController {
     LoginService loginService;
     @Autowired
     FictionService fictionService;
-
     @Autowired
     UserInfoService userInfoService;
 
-    //起始页
+    /**
+     * 欢迎页,起始页
+     *
+     * @return 欢迎页, 起始页
+     */
     @GetMapping({"/", "hello"})
     public String welcome(Model model, HttpSession session) {
         List<ComFiction> fictionsOrderByHost = fictionService.getFictionsOrderByHost();
@@ -71,17 +75,24 @@ public class LoginController {
     }
 
     /**
-     * 管理员登录相关
+     * 去往管理员登录页面
      */
     @GetMapping("/tologin")
     public String toLogin() {
         return "login";
     }
 
+    /**
+     * 管理员登录判断
+     *
+     * @param nums 账号
+     * @param pwd  密码
+     * @return 成功进入详细页, 失败返回提示信息
+     */
     @PostMapping("/login")
-    public String Login(Model model, String nums, String pwd){
+    public String Login(Model model, String nums, String pwd) {
         Subject subject = SecurityUtils.getSubject();//获取用户信息
-        UsernamePasswordToken token = new UsernamePasswordToken(nums,pwd);//封装
+        UsernamePasswordToken token = new UsernamePasswordToken(nums, pwd);//封装
         try {
             subject.login(token);
             //通过subject取
@@ -119,6 +130,13 @@ public class LoginController {
         return "userlogin";
     }
 
+    /**
+     * 用户登录判断
+     *
+     * @param nums 账号
+     * @param pwd  密码
+     * @return 成功进入详细页, 失败返回提示信息
+     */
     @PostMapping("/userlogin")
     public String userLogin(Model model, String nums, String pwd) {
         Subject subject = SecurityUtils.getSubject();//获取用户信息
@@ -156,6 +174,11 @@ public class LoginController {
         }
     }
 
+    /**
+     * 退出
+     *
+     * @return 清除session, 返回起始页
+     */
     @GetMapping("/logOut")
     public String logOut(HttpServletRequest req) {
         Subject subject = SecurityUtils.getSubject();
@@ -186,12 +209,22 @@ public class LoginController {
         return "index";
     }
 
+    /**
+     * 没有权限返回页面
+     *
+     * @return 没有权限返回页面
+     */
     @GetMapping("/noauthor")
     @ResponseBody
     public String noauthor() {
         return "您没有权限,或者没有登录!";
     }
 
+    /**
+     * 导航页
+     *
+     * @return 导航页
+     */
     @GetMapping("/todhzhuye")
     public String todao() {
         return "wodezhuye";

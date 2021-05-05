@@ -14,7 +14,9 @@ import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -78,8 +80,6 @@ public class FictionController {
     public String toFictionXX(String index) {
         List<ComFiction> fictionOrderByTime = fictionService.getFictionOrderByTime();
         int index2 = Integer.parseInt(index);
-
-
         return fictionOrderByTime.get(index2 - 1).toString();
     }
 
@@ -126,15 +126,32 @@ public class FictionController {
     }
 
     @GetMapping("/getfictionSearch")
-    @ResponseBody
+    @ResponseBody//数据请求接口
     public Object getfictionSearch(String searchMSG) {
         List<ComFiction> fictions = fictionService.SearchFiction(searchMSG);
         return new LayuiReplay<ComFiction>(0, "OK", fictions.size(), fictions);
     }
 
+    /**
+     * RESTful风格的搜索
+     *
+     * @param searchMSG 搜索信息
+     * @return 返回json
+     */
+    @GetMapping("/getfictionSearch/{searchMSG}")
+    @ResponseBody//数据请求接口
+    public Object getfictionSearchREST(@PathVariable("searchMSG") String searchMSG) {
+        List<ComFiction> fictions = fictionService.SearchFiction(searchMSG);
+        return new LayuiReplay<ComFiction>(0, "OK", fictions.size(), fictions);
+    }
+
+    /**
+     * 热门榜单
+     *
+     * @return 返回json
+     */
     @GetMapping("/getfictionTopHost")
-    @ResponseBody
-    public Object toHostTop(String searchMSG) {
+    public Object toHostTop() {
         List<ComFiction> fictions = fictionService.getFictionsOrderByHost();
         return new LayuiReplay<ComFiction>(0, "OK", fictions.size(), fictions);
     }

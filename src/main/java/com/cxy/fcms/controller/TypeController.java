@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -27,11 +28,21 @@ public class TypeController {
     @Autowired
     TypeService typeService;
 
+    /**
+     * 分区管理页
+     *
+     * @return 分区管理页
+     */
     @GetMapping("/toTypes")
     public String toTypePage() {
         return "back/type/typelist";
     }
 
+    /**
+     * 获取全部的分区数据
+     *
+     * @return 分区管理页
+     */
     @GetMapping("/getTypes")
     @ResponseBody
     public Object getTypeJSON() {
@@ -39,6 +50,11 @@ public class TypeController {
         return new LayuiReplay<ComType>(0, "OK", comTypes.size(), comTypes);
     }
 
+    /**
+     * 删除分区信息
+     *
+     * @param id id
+     */
     @GetMapping("/deltype")
     public void DelType(String id, HttpServletResponse rep) {
         typeService.delType(id);
@@ -52,6 +68,11 @@ public class TypeController {
         }
     }
 
+    /**
+     * 添加信息
+     *
+     * @param tyname 分区名
+     */
     @GetMapping("/addType")
     public void AddType(String tyname, HttpServletResponse rep) {
         HashMap<String, String> map = new HashMap<>();
@@ -67,6 +88,12 @@ public class TypeController {
         }
     }
 
+    /**
+     * 修改分区信息
+     *
+     * @param id   id
+     * @param name 修改成的分区名
+     */
     @GetMapping("/updateTypeName")
     public void updateTypeName(String id, String name, HttpServletResponse rep) {
         HashMap<String, Object> map = new HashMap<>();

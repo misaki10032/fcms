@@ -11,6 +11,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -33,18 +34,37 @@ public class AdminController {
     @Autowired
     JavaMailSenderImpl mailSender;
 
+    /**
+     * 打开小说表格
+     *
+     * @return 小说表格
+     */
     @GetMapping("/toFicList")
     public String toFicList() {
         return "back/fiction/booklist";
     }
 
+    /**
+     * 管理员页面
+     *
+     * @return 管理员页面
+     */
     @GetMapping("/gohome")
     public String toAdminInfo() {
         return "back/adminInfo";
     }
 
     /**
-     * 管理员注册相关
+     * 管理员注册
+     *
+     * @param phone   手机号
+     * @param number  账号
+     * @param pwd     密码
+     * @param pwd2    二次确认的密码
+     * @param name    姓名
+     * @param emil    邮箱
+     * @param emilRes 邮箱验证码
+     * @throws IOException io异常
      */
     @GetMapping("/withResiger")
     public void resiger(String phone, String number, String pwd, String pwd2, String name, String emil, String emilRes, HttpServletResponse resp) throws IOException {
@@ -82,6 +102,12 @@ public class AdminController {
         }
     }
 
+    /**
+     * 发送验证邮件
+     *
+     * @param emil 邮箱地址
+     * @throws IOException io异常
+     */
     @GetMapping("/sendAdminEmil")
     public void SendAdminEmil(String emil, HttpServletResponse rep) throws IOException {
         PrintWriter out = rep.getWriter();
@@ -107,7 +133,15 @@ public class AdminController {
         out.print("已发送");
     }
 
-
+    /**
+     * 提交admin注册
+     *
+     * @param phone  手机号
+     * @param number 账号
+     * @param pwd    密码
+     * @param name   姓名
+     * @return 返回登陆页面
+     */
     @GetMapping("/resiger")
     public String resigerOk(String phone, String number, String pwd, String name) {
         HashMap<String, String> map = new HashMap<>();
