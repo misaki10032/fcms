@@ -122,7 +122,7 @@ public class AdminController {
         mailMessage.setSubject(title);
         mailMessage.setText(text);
         mailMessage.setTo(emil);
-        mailMessage.setFrom("1069664381@qq.com");
+        mailMessage.setFrom("fcms_snut@qq.com");
         mailSender.send(mailMessage);
         try {
             redisUtil.set(emil + "_msg", msg);

@@ -151,6 +151,7 @@ public class FictionController {
      * @return 返回json
      */
     @GetMapping("/getfictionTopHost")
+    @ResponseBody
     public Object toHostTop() {
         List<ComFiction> fictions = fictionService.getFictionsOrderByHost();
         return new LayuiReplay<ComFiction>(0, "OK", fictions.size(), fictions);

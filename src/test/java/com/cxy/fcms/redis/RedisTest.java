@@ -25,8 +25,9 @@ public class RedisTest {
 
     @Test
     void redisPing() {
-        List<Object> allAdmins = redisUtil.lRange("fictions", 0, -1);
-        System.out.println(allAdmins);
+        redisUtil.set("blank", "111");
+        Object blank = redisUtil.get("blank");
+        System.out.println(blank);
     }
 
     @Test

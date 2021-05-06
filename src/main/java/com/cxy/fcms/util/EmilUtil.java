@@ -19,7 +19,7 @@ public class EmilUtil {
         mailMessage.setSubject(title);
         mailMessage.setText(Text);
         mailMessage.setTo(to);
-        mailMessage.setFrom("1069664381@qq.com");
+        mailMessage.setFrom("fcms_snut@qq.com");
         mailSender.send(mailMessage);
     }
 }
