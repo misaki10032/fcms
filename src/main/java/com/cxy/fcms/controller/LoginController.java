@@ -27,6 +27,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @ClassName UserController
@@ -49,7 +50,36 @@ public class LoginController {
      * @return 欢迎页, 起始页
      */
     @GetMapping({"/", "hello"})
-    public String welcome(Model model, HttpSession session) {
+    public String welcome(Model model, HttpSession session, HttpServletRequest req) {
+        Boolean isAdmin = (Boolean) session.getAttribute("isAdmin");
+        if (isAdmin != null && isAdmin) {
+            Subject subject = SecurityUtils.getSubject();
+            subject.logout();
+            session = req.getSession();
+            List<ComFiction> fictionsOrderByHost = fictionService.getFictionsOrderByHost();
+            List<ComFiction> fictionOrderByTime = fictionService.getFictionOrderByTime();
+            List<String> host = new ArrayList<>();
+            List<String> time = new ArrayList<>();
+            List<String> timeimg = new ArrayList<>();
+            List<String> hostimg = new ArrayList<>();
+            for (ComFiction fiction : fictionsOrderByHost) {
+                host.add(fiction.getFicName());
+                hostimg.add(fiction.getFicImg());
+            }
+            for (ComFiction fiction : fictionOrderByTime) {
+                time.add(fiction.getFicName());
+                timeimg.add(fiction.getFicImg());
+
+            }
+            System.out.println(timeimg);
+            System.out.println(hostimg);
+            session.setAttribute("byhost", host);
+            session.setAttribute("bytime", time);
+            session.setAttribute("timeimg", timeimg);
+            session.setAttribute("hostimg", hostimg);
+            return "index";
+        }
+        session = req.getSession();
         List<ComFiction> fictionsOrderByHost = fictionService.getFictionsOrderByHost();
         List<ComFiction> fictionOrderByTime = fictionService.getFictionOrderByTime();
         List<String> host = new ArrayList<>();
@@ -63,7 +93,6 @@ public class LoginController {
         for (ComFiction fiction : fictionOrderByTime) {
             time.add(fiction.getFicName());
             timeimg.add(fiction.getFicImg());
-
         }
         System.out.println(timeimg);
         System.out.println(hostimg);

@@ -76,11 +76,20 @@ public class FictionController {
     }
 
     @GetMapping("/tofictionxx")
-    @ResponseBody
-    public String toFictionXX(String index) {
-        List<ComFiction> fictionOrderByTime = fictionService.getFictionOrderByTime();
+    public String toFictionXX(String index, Model model) {
+        List<ComFiction> fictions = fictionService.getFictionOrderByTime();
+        for (ComFiction fiction : fictions) {
+            System.out.println(fiction);
+        }
+
         int index2 = Integer.parseInt(index);
-        return fictionOrderByTime.get(index2 - 1).toString();
+        ComFiction comFiction = fictions.get(index2 - 1);
+        //发送数据
+        model.addAttribute("ficBook", comFiction);
+        //查询内容信息
+        ComFicDate data = fictionService.getFictionDataById(comFiction.getId());
+        model.addAttribute("data", data);
+        return "/front/fiction/info";
     }
 
     @GetMapping("/tofictionhost")

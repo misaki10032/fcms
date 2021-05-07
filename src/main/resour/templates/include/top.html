@@ -67,8 +67,8 @@
                 <dd><a href="/tologin">管理员登录</a></dd>
                 <dd><a href="/usertologin">用户登录</a></dd>
             </dl>
-            <a shiro:user="" th:text="${session.user.getUserName()}"></a>
-            <dl shiro:user="" class="layui-nav-child">
+            <a shiro:authenticated="" th:text="${session.user.getUserName()}"></a>
+            <dl class="layui-nav-child" shiro:authenticated="">
                 <dd><a th:href="@{/toUserHome(id=${session.user.getId()})}">小屋</a></dd>
                 <dd><a href="/logOut">退出</a></dd>
             </dl>
