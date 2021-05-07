@@ -1,0 +1,181 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="fcms:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/fcms_jar</output-path>
+    <root id="archive" name="fcms.jar">
+      <element id="module-output" name="fcms" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/org/thymeleaf/thymeleaf/3.0.12.RELEASE/thymeleaf-3.0.12.RELEASE.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/org/apache/shiro/shiro-event/1.7.1/shiro-event-1.7.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/org/apache/shiro/shiro-crypto-core/1.7.1/shiro-crypto-core-1.7.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/org/springframework/spring-expression/5.3.5/spring-expression-5.3.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/org/springframework/spring-tx/5.3.5/spring-tx-5.3.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/ch/qos/logback/logback-core/1.2.3/logback-core-1.2.3.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/org/reactivestreams/reactive-streams/1.0.3/reactive-streams-1.0.3.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/org/springframework/data/spring-data-redis/2.4.6/spring-data-redis-2.4.6.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/com/baomidou/mybatis-plus-generator/3.0.5/mybatis-plus-generator-3.0.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/jakarta/annotation/jakarta.annotation-api/1.3.5/jakarta.annotation-api-1.3.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/ch/qos/logback/logback-classic/1.2.3/logback-classic-1.2.3.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/org/apache/shiro/shiro-crypto-cipher/1.7.1/shiro-crypto-cipher-1.7.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/org/springframework/boot/spring-boot/2.4.4/spring-boot-2.4.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/org/springframework/spring-beans/5.3.5/spring-beans-5.3.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/com/fasterxml/jackson/core/jackson-annotations/2.11.4/jackson-annotations-2.11.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/org/springframework/boot/spring-boot-starter-json/2.4.4/spring-boot-starter-json-2.4.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/commons-beanutils/commons-beanutils/1.9.4/commons-beanutils-1.9.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/io/netty/netty-transport/4.1.60.Final/netty-transport-4.1.60.Final.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/org/apache/shiro/shiro-config-core/1.7.1/shiro-config-core-1.7.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/org/springframework/boot/spring-boot-starter/2.4.4/spring-boot-starter-2.4.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/mysql/mysql-connector-java/8.0.23/mysql-connector-java-8.0.23.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/com/baomidou/mybatis-plus-core/3.0.5/mybatis-plus-core-3.0.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/org/springframework/spring-context/5.3.5/spring-context-5.3.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/io/netty/netty-common/4.1.60.Final/netty-common-4.1.60.Final.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/org/owasp/encoder/encoder/1.2.2/encoder-1.2.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/org/apache/logging/log4j/log4j-to-slf4j/2.13.3/log4j-to-slf4j-2.13.3.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/org/apache/shiro/shiro-cache/1.7.1/shiro-cache-1.7.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/org/projectlombok/lombok/1.18.18/lombok-1.18.18.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/org/springframework/spring-oxm/5.3.5/spring-oxm-5.3.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/com/fasterxml/jackson/core/jackson-databind/2.11.4/jackson-databind-2.11.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/com/baomidou/mybatis-plus/3.0.5/mybatis-plus-3.0.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/org/apache/logging/log4j/log4j-api/2.13.3/log4j-api-2.13.3.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/org/springframework/data/spring-data-commons/2.4.6/spring-data-commons-2.4.6.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/org/apache/velocity/velocity-engine-core/2.0/velocity-engine-core-2.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/org/springframework/boot/spring-boot-autoconfigure/2.4.4/spring-boot-autoconfigure-2.4.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/org/springframework/spring-context-support/5.3.5/spring-context-support-5.3.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/com/github/theborakompanioni/thymeleaf-extras-shiro/2.0.0/thymeleaf-extras-shiro-2.0.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/org/apache/commons/commons-lang3/3.11/commons-lang3-3.11.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/com/google/code/gson/gson/2.8.6/gson-2.8.6.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/com/sun/activation/jakarta.activation/1.2.2/jakarta.activation-1.2.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/org/thymeleaf/extras/thymeleaf-extras-java8time/3.0.4.RELEASE/thymeleaf-extras-java8time-3.0.4.RELEASE.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/com/sun/mail/jakarta.mail/1.6.6/jakarta.mail-1.6.6.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/org/unbescape/unbescape/1.1.6.RELEASE/unbescape-1.1.6.RELEASE.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/io/lettuce/lettuce-core/6.0.3.RELEASE/lettuce-core-6.0.3.RELEASE.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/org/apache/shiro/shiro-core/1.7.1/shiro-core-1.7.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/commons-collections/commons-collections/3.2.2/commons-collections-3.2.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/org/springframework/boot/spring-boot-configuration-processor/2.4.4/spring-boot-configuration-processor-2.4.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/org/springframework/spring-jdbc/5.3.5/spring-jdbc-5.3.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/io/netty/netty-codec/4.1.60.Final/netty-codec-4.1.60.Final.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/org/springframework/boot/spring-boot-starter-thymeleaf/2.4.4/spring-boot-starter-thymeleaf-2.4.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/io/netty/netty-buffer/4.1.60.Final/netty-buffer-4.1.60.Final.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/org/yaml/snakeyaml/1.27/snakeyaml-1.27.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/com/zaxxer/HikariCP/3.4.5/HikariCP-3.4.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/org/mybatis/mybatis/3.4.6/mybatis-3.4.6.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/org/springframework/spring-webmvc/5.3.5/spring-webmvc-5.3.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/org/springframework/spring-jcl/5.3.5/spring-jcl-5.3.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/io/netty/netty-resolver/4.1.60.Final/netty-resolver-4.1.60.Final.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/org/slf4j/slf4j-api/1.7.30/slf4j-api-1.7.30.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/org/apache/shiro/shiro-config-ogdl/1.7.1/shiro-config-ogdl-1.7.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.11.4/jackson-datatype-jsr310-2.11.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/org/slf4j/jul-to-slf4j/1.7.30/jul-to-slf4j-1.7.30.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/com/fasterxml/jackson/datatype/jackson-datatype-jdk8/2.11.4/jackson-datatype-jdk8-2.11.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/com/github/jsqlparser/jsqlparser/1.2/jsqlparser-1.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/org/springframework/spring-aop/5.3.5/spring-aop-5.3.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/com/baomidou/mybatis-plus-extension/3.0.5/mybatis-plus-extension-3.0.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/org/springframework/spring-web/5.3.5/spring-web-5.3.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/com/baomidou/mybatis-plus-boot-starter/3.0.5/mybatis-plus-boot-starter-3.0.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/com/fasterxml/jackson/core/jackson-core/2.11.4/jackson-core-2.11.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/org/springframework/spring-core/5.3.5/spring-core-5.3.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/org/apache/shiro/shiro-spring/1.7.1/shiro-spring-1.7.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/org/springframework/boot/spring-boot-starter-mail/2.4.4/spring-boot-starter-mail-2.4.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/org/apache/shiro/shiro-lang/1.7.1/shiro-lang-1.7.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/org/springframework/boot/spring-boot-starter-jdbc/2.4.4/spring-boot-starter-jdbc-2.4.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/org/thymeleaf/thymeleaf-spring5/3.0.12.RELEASE/thymeleaf-spring5-3.0.12.RELEASE.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/org/attoparser/attoparser/2.0.5.RELEASE/attoparser-2.0.5.RELEASE.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/org/springframework/data/spring-data-keyvalue/2.4.6/spring-data-keyvalue-2.4.6.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/org/springframework/boot/spring-boot-starter-data-redis/2.4.4/spring-boot-starter-data-redis-2.4.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/com/fasterxml/jackson/module/jackson-module-parameter-names/2.11.4/jackson-module-parameter-names-2.11.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/org/springframework/boot/spring-boot-starter-logging/2.4.4/spring-boot-starter-logging-2.4.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/io/projectreactor/reactor-core/3.4.4/reactor-core-3.4.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/com/baomidou/mybatis-plus-annotation/3.0.5/mybatis-plus-annotation-3.0.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/org/apache/shiro/shiro-crypto-hash/1.7.1/shiro-crypto-hash-1.7.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/io/netty/netty-handler/4.1.60.Final/netty-handler-4.1.60.Final.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/org/mybatis/mybatis-spring/1.3.2/mybatis-spring-1.3.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/org/apache/shiro/shiro-web/1.7.1/shiro-web-1.7.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../../../Tomcat/apache-maven-3.6.3/maven-repo/org/springframework/boot/spring-boot-starter-web/2.4.4/spring-boot-starter-web-2.4.4.jar" path-in-jar="/" />
+      <element id="library" level="project" name="Maven: ch.qos.logback:logback-classic:1.2.3" />
+      <element id="library" level="project" name="Maven: ch.qos.logback:logback-core:1.2.3" />
+      <element id="library" level="project" name="Maven: com.baomidou:mybatis-plus-annotation:3.0.5" />
+      <element id="library" level="project" name="Maven: com.baomidou:mybatis-plus-boot-starter:3.0.5" />
+      <element id="library" level="project" name="Maven: com.baomidou:mybatis-plus-core:3.0.5" />
+      <element id="library" level="project" name="Maven: com.baomidou:mybatis-plus-extension:3.0.5" />
+      <element id="library" level="project" name="Maven: com.baomidou:mybatis-plus-generator:3.0.5" />
+      <element id="library" level="project" name="Maven: com.baomidou:mybatis-plus:3.0.5" />
+      <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.11.4" />
+      <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-core:2.11.4" />
+      <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.11.4" />
+      <element id="library" level="project" name="Maven: com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.11.4" />
+      <element id="library" level="project" name="Maven: com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.11.4" />
+      <element id="library" level="project" name="Maven: com.fasterxml.jackson.module:jackson-module-parameter-names:2.11.4" />
+      <element id="library" level="project" name="Maven: com.github.jsqlparser:jsqlparser:1.2" />
+      <element id="library" level="project" name="Maven: com.github.theborakompanioni:thymeleaf-extras-shiro:2.0.0" />
+      <element id="library" level="project" name="Maven: com.google.code.gson:gson:2.8.6" />
+      <element id="library" level="project" name="Maven: com.sun.activation:jakarta.activation:1.2.2" />
+      <element id="library" level="project" name="Maven: com.sun.mail:jakarta.mail:1.6.6" />
+      <element id="library" level="project" name="Maven: com.zaxxer:HikariCP:3.4.5" />
+      <element id="library" level="project" name="Maven: commons-beanutils:commons-beanutils:1.9.4" />
+      <element id="library" level="project" name="Maven: commons-collections:commons-collections:3.2.2" />
+      <element id="library" level="project" name="Maven: io.lettuce:lettuce-core:6.0.3.RELEASE" />
+      <element id="library" level="project" name="Maven: io.netty:netty-buffer:4.1.60.Final" />
+      <element id="library" level="project" name="Maven: io.netty:netty-codec:4.1.60.Final" />
+      <element id="library" level="project" name="Maven: io.netty:netty-common:4.1.60.Final" />
+      <element id="library" level="project" name="Maven: io.netty:netty-handler:4.1.60.Final" />
+      <element id="library" level="project" name="Maven: io.netty:netty-resolver:4.1.60.Final" />
+      <element id="library" level="project" name="Maven: io.netty:netty-transport:4.1.60.Final" />
+      <element id="library" level="project" name="Maven: io.projectreactor:reactor-core:3.4.4" />
+      <element id="library" level="project" name="Maven: jakarta.annotation:jakarta.annotation-api:1.3.5" />
+      <element id="library" level="project" name="Maven: mysql:mysql-connector-java:8.0.23" />
+      <element id="library" level="project" name="Maven: org.apache.commons:commons-lang3:3.11" />
+      <element id="library" level="project" name="Maven: org.apache.logging.log4j:log4j-api:2.13.3" />
+      <element id="library" level="project" name="Maven: org.apache.logging.log4j:log4j-to-slf4j:2.13.3" />
+      <element id="library" level="project" name="Maven: org.apache.shiro:shiro-cache:1.7.1" />
+      <element id="library" level="project" name="Maven: org.apache.shiro:shiro-config-core:1.7.1" />
+      <element id="library" level="project" name="Maven: org.apache.shiro:shiro-config-ogdl:1.7.1" />
+      <element id="library" level="project" name="Maven: org.apache.shiro:shiro-core:1.7.1" />
+      <element id="library" level="project" name="Maven: org.apache.shiro:shiro-crypto-cipher:1.7.1" />
+      <element id="library" level="project" name="Maven: org.apache.shiro:shiro-crypto-core:1.7.1" />
+      <element id="library" level="project" name="Maven: org.apache.shiro:shiro-crypto-hash:1.7.1" />
+      <element id="library" level="project" name="Maven: org.apache.shiro:shiro-event:1.7.1" />
+      <element id="library" level="project" name="Maven: org.apache.shiro:shiro-lang:1.7.1" />
+      <element id="library" level="project" name="Maven: org.apache.shiro:shiro-spring:1.7.1" />
+      <element id="library" level="project" name="Maven: org.apache.shiro:shiro-web:1.7.1" />
+      <element id="library" level="project" name="Maven: org.apache.velocity:velocity-engine-core:2.0" />
+      <element id="library" level="project" name="Maven: org.attoparser:attoparser:2.0.5.RELEASE" />
+      <element id="library" level="project" name="Maven: org.mybatis:mybatis-spring:1.3.2" />
+      <element id="library" level="project" name="Maven: org.mybatis:mybatis:3.4.6" />
+      <element id="library" level="project" name="Maven: org.owasp.encoder:encoder:1.2.2" />
+      <element id="library" level="project" name="Maven: org.projectlombok:lombok:1.18.18" />
+      <element id="library" level="project" name="Maven: org.reactivestreams:reactive-streams:1.0.3" />
+      <element id="library" level="project" name="Maven: org.slf4j:jul-to-slf4j:1.7.30" />
+      <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.30" />
+      <element id="library" level="project" name="Maven: org.springframework.boot:spring-boot-autoconfigure:2.4.4" />
+      <element id="library" level="project" name="Maven: org.springframework.boot:spring-boot-configuration-processor:2.4.4" />
+      <element id="library" level="project" name="Maven: org.springframework.boot:spring-boot-starter-data-redis:2.4.4" />
+      <element id="library" level="project" name="Maven: org.springframework.boot:spring-boot-starter-jdbc:2.4.4" />
+      <element id="library" level="project" name="Maven: org.springframework.boot:spring-boot-starter-json:2.4.4" />
+      <element id="library" level="project" name="Maven: org.springframework.boot:spring-boot-starter-logging:2.4.4" />
+      <element id="library" level="project" name="Maven: org.springframework.boot:spring-boot-starter-thymeleaf:2.4.4" />
+      <element id="library" level="project" name="Maven: org.springframework.boot:spring-boot-starter-web:2.4.4" />
+      <element id="library" level="project" name="Maven: org.springframework.boot:spring-boot-starter:2.4.4" />
+      <element id="library" level="project" name="Maven: org.springframework.boot:spring-boot:2.4.4" />
+      <element id="library" level="project" name="Maven: org.springframework.boot:spring-boot-starter-mail:2.4.4" />
+      <element id="library" level="project" name="Maven: org.springframework.data:spring-data-commons:2.4.6" />
+      <element id="library" level="project" name="Maven: org.springframework.data:spring-data-keyvalue:2.4.6" />
+      <element id="library" level="project" name="Maven: org.springframework.data:spring-data-redis:2.4.6" />
+      <element id="library" level="project" name="Maven: org.springframework:spring-aop:5.3.5" />
+      <element id="library" level="project" name="Maven: org.springframework:spring-beans:5.3.5" />
+      <element id="library" level="project" name="Maven: org.springframework:spring-context-support:5.3.5" />
+      <element id="library" level="project" name="Maven: org.springframework:spring-context:5.3.5" />
+      <element id="library" level="project" name="Maven: org.springframework:spring-core:5.3.5" />
+      <element id="library" level="project" name="Maven: org.springframework:spring-expression:5.3.5" />
+      <element id="library" level="project" name="Maven: org.springframework:spring-jcl:5.3.5" />
+      <element id="library" level="project" name="Maven: org.springframework:spring-jdbc:5.3.5" />
+      <element id="library" level="project" name="Maven: org.springframework:spring-oxm:5.3.5" />
+      <element id="library" level="project" name="Maven: org.springframework:spring-tx:5.3.5" />
+      <element id="library" level="project" name="Maven: org.springframework:spring-web:5.3.5" />
+      <element id="library" level="project" name="Maven: org.springframework:spring-webmvc:5.3.5" />
+      <element id="library" level="project" name="Maven: org.thymeleaf.extras:thymeleaf-extras-java8time:3.0.4.RELEASE" />
+      <element id="library" level="project" name="Maven: org.thymeleaf:thymeleaf-spring5:3.0.12.RELEASE" />
+      <element id="library" level="project" name="Maven: org.thymeleaf:thymeleaf:3.0.12.RELEASE" />
+      <element id="library" level="project" name="Maven: org.unbescape:unbescape:1.1.6.RELEASE" />
+      <element id="library" level="project" name="Maven: org.yaml:snakeyaml:1.27" />
+      <element id="javaee-facet-resources" facet="fcms/web/Web" />
+    </root>
+  </artifact>
+</component>
