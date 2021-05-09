@@ -10,7 +10,7 @@ import com.cxy.fcms.service.FictionService;
 import com.cxy.fcms.util.IDUtil;
 import com.cxy.fcms.util.LayuiReplay;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.configurationprocessor.json.JSONException;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,15 +38,16 @@ public class FictionController {
 
     @GetMapping("/getfictions")
     @ResponseBody//数据请求接口
-    public Object  getAllFictions() throws JSONException {
+    public Object getAllFictions() {
         List<ComFiction> fiction = fictionService.getFiction();
         return new LayuiReplay<ComFiction>(0, "OK", fiction.size(), fiction);
     }
+
     @GetMapping("/addfiction")
     public void addFiction(HttpServletResponse resp, String title, String author, String type, String isdel, String data) throws IOException {
         PrintWriter out = resp.getWriter();
-        try{
-            HashMap<String,String> map = new HashMap<>();
+        try {
+            HashMap<String, String> map = new HashMap<>();
             String ficid = IDUtil.getID();
             map.put("id", ficid);
             map.put("ficName",title);
@@ -122,7 +123,7 @@ public class FictionController {
 
     @GetMapping("/getfictionslimit")
     @ResponseBody//数据请求接口
-    public Object getAllFictions2(int page, int limit) throws JSONException {
+    public Object getAllFictions2(int page, int limit) {
         List<ComFiction> fiction = fictionService.getFiction();
         List<ComFiction> fiction3 = new ArrayList<>();
         for (int i = (page - 1) * limit; i < fiction.size(); i++) {
