@@ -39,7 +39,7 @@ public class AdminController {
      *
      * @return 小说表格
      */
-    @GetMapping("/toFicList")
+    @GetMapping("toFicList")
     public String toFicList() {
         return "back/fiction/booklist";
     }
@@ -49,7 +49,7 @@ public class AdminController {
      *
      * @return 管理员页面
      */
-    @GetMapping("/gohome")
+    @GetMapping("gohome")
     public String toAdminInfo() {
         return "back/adminInfo";
     }
@@ -66,7 +66,7 @@ public class AdminController {
      * @param emilRes 邮箱验证码
      * @throws IOException io异常
      */
-    @GetMapping("/withResiger")
+    @GetMapping("withResiger")
     public void resiger(String phone, String number, String pwd, String pwd2, String name, String emil, String emilRes, HttpServletResponse resp) throws IOException {
         PrintWriter out = resp.getWriter();
         List<SysAdmin> admins = loginService.getAdmins();
@@ -108,7 +108,7 @@ public class AdminController {
      * @param emil 邮箱地址
      * @throws IOException io异常
      */
-    @GetMapping("/sendAdminEmil")
+    @GetMapping("sendAdminEmil")
     public void SendAdminEmil(String emil, HttpServletResponse rep) throws IOException {
         PrintWriter out = rep.getWriter();
         if (emil == null || !emil.matches("^\\w+@\\w{2,6}\\.\\w{2,6}$")) {
@@ -142,7 +142,7 @@ public class AdminController {
      * @param name   姓名
      * @return 返回登陆页面
      */
-    @GetMapping("/resiger")
+    @GetMapping("resiger")
     public String resigerOk(String phone, String number, String pwd, String name) {
         HashMap<String, String> map = new HashMap<>();
         //加密

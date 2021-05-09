@@ -36,7 +36,7 @@ public class UserController {
     @Autowired
     UserInfoService userInfoService;
 
-    @GetMapping("/getUsers")
+    @GetMapping("getUsers")
     @ResponseBody
     public Object getAllUsers(int page, int limit) {
         List<ComUser> users = userService.selUser();
@@ -50,15 +50,15 @@ public class UserController {
         return new LayuiReplay<ComUser>(0, "OK", users.size(), userlimit);
     }
 
-    @RequestMapping("/toUsers")
+    @RequestMapping("toUsers")
     public String toUsersInfos() {
-        return "/back/user/userlist";
+        return "back/user/userlist";
     }
 
     /**
      * 用户注册
      */
-    @GetMapping("/userWithResiger")
+    @GetMapping("userWithResiger")
     public void userResiger(String phone, String pwd, String pwd2, String name, HttpServletResponse resp)
             throws IOException {
         PrintWriter out = resp.getWriter();
@@ -84,7 +84,7 @@ public class UserController {
         }
     }
 
-    @GetMapping("/userResiger")
+    @GetMapping("userResiger")
     public String UserResigerOk(String phone, String pwd, String name, String emil) {
         HashMap<String, String> map = new HashMap<>();
         //用账号作为盐值进行加密
@@ -107,7 +107,7 @@ public class UserController {
     /**
      * 封禁用户
      */
-    @GetMapping("/onlock")
+    @GetMapping("onlock")
     public void onlock(String id, String isBlock, HttpServletResponse rep) throws IOException {
         PrintWriter out = rep.getWriter();
         if (isBlock.equals("0")) {
@@ -119,7 +119,7 @@ public class UserController {
         }
     }
 
-    @GetMapping("/toUserHome")
+    @GetMapping("toUserHome")
     public String toUserHome(String id, Model model) {
         SysAdminInfo sysAdminInfo = userInfoService.selAdmin(id);
         model.addAttribute("adminInfo", sysAdminInfo);
@@ -127,14 +127,14 @@ public class UserController {
         return "reception/userHome";
     }
 
-    @GetMapping("/revUser")
+    @GetMapping("revUser")
     public String RevUser(String id, Model model) {
         SysAdminInfo sysAdminInfo = userInfoService.selAdmin(id);
         System.out.println(sysAdminInfo);
         model.addAttribute("userInfo", sysAdminInfo);
         return "reception/rev";
     }
-    @GetMapping("/submitRev")
+    @GetMapping("submitRev")
     @ResponseBody
     public String submitRev(String hidden,String call,String name,String adminSex,String adminAge,String adminAddress,
                             String adminDec,String adminEmail,Model model){

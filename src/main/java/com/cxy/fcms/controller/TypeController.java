@@ -33,7 +33,7 @@ public class TypeController {
      *
      * @return 分区管理页
      */
-    @GetMapping("/toTypes")
+    @GetMapping("toTypes")
     public String toTypePage() {
         return "back/type/typelist";
     }
@@ -43,7 +43,7 @@ public class TypeController {
      *
      * @return 分区管理页
      */
-    @GetMapping("/getTypes")
+    @GetMapping("getTypes")
     @ResponseBody
     public Object getTypeJSON() {
         List<ComType> comTypes = typeService.selType();
@@ -55,7 +55,7 @@ public class TypeController {
      *
      * @param id id
      */
-    @GetMapping("/deltype")
+    @GetMapping("deltype")
     public void DelType(String id, HttpServletResponse rep) {
         typeService.delType(id);
         PrintWriter out = null;
@@ -73,7 +73,7 @@ public class TypeController {
      *
      * @param tyname 分区名
      */
-    @GetMapping("/addType")
+    @GetMapping("addType")
     public void AddType(String tyname, HttpServletResponse rep) {
         HashMap<String, String> map = new HashMap<>();
         map.put("tyName", tyname);
@@ -94,7 +94,7 @@ public class TypeController {
      * @param id   id
      * @param name 修改成的分区名
      */
-    @GetMapping("/updateTypeName")
+    @GetMapping("updateTypeName")
     public void updateTypeName(String id, String name, HttpServletResponse rep) {
         HashMap<String, Object> map = new HashMap<>();
         map.put("tyName", name);

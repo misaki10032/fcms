@@ -25,13 +25,13 @@ public class FrontController {
     FictionService fictionService;
 
     // 跳转到单本书籍页面
-    @RequestMapping("/info")
+    @RequestMapping("info")
     public String info() {
-        return "/front/fiction/info";
+        return "front/fiction/info";
     }
 
     // 跳转到单本书籍详细页面
-    @RequestMapping("/toContentPage")
+    @RequestMapping("toContentPage")
     public String toContent(String bid, Model model) {
         ComFicDate data = fictionService.getFictionDataById(bid);
         List<ComFiction> fiction = fictionService.getFiction();

@@ -49,7 +49,7 @@ public class LoginController {
      *
      * @return 欢迎页, 起始页
      */
-    @GetMapping({"/", "hello"})
+    @GetMapping({"", "hello"})
     public String welcome(Model model, HttpSession session, HttpServletRequest req) {
         Boolean isAdmin = (Boolean) session.getAttribute("isAdmin");
         if (isAdmin != null && isAdmin) {
@@ -106,7 +106,7 @@ public class LoginController {
     /**
      * 去往管理员登录页面
      */
-    @GetMapping("/tologin")
+    @GetMapping("tologin")
     public String toLogin() {
         return "login";
     }
@@ -118,7 +118,7 @@ public class LoginController {
      * @param pwd  密码
      * @return 成功进入详细页, 失败返回提示信息
      */
-    @PostMapping("/login")
+    @PostMapping("login")
     public String Login(Model model, String nums, String pwd) {
         Subject subject = SecurityUtils.getSubject();//获取用户信息
         UsernamePasswordToken token = new UsernamePasswordToken(nums, pwd);//封装
@@ -154,7 +154,7 @@ public class LoginController {
     /**
      * 用户登录
      */
-    @GetMapping("/usertologin")
+    @GetMapping("usertologin")
     public String userToLogin() {
         return "userlogin";
     }
@@ -166,7 +166,7 @@ public class LoginController {
      * @param pwd  密码
      * @return 成功进入详细页, 失败返回提示信息
      */
-    @PostMapping("/userlogin")
+    @PostMapping("userlogin")
     public String userLogin(Model model, String nums, String pwd) {
         Subject subject = SecurityUtils.getSubject();//获取用户信息
         UsernamePasswordToken token = new UsernamePasswordToken(nums, pwd);//封装
@@ -208,7 +208,7 @@ public class LoginController {
      *
      * @return 清除session, 返回起始页
      */
-    @GetMapping("/logOut")
+    @GetMapping("logOut")
     public String logOut(HttpServletRequest req) {
         Subject subject = SecurityUtils.getSubject();
         subject.logout();
@@ -243,7 +243,7 @@ public class LoginController {
      *
      * @return 没有权限返回页面
      */
-    @GetMapping("/noauthor")
+    @GetMapping("noauthor")
     @ResponseBody
     public String noauthor() {
         return "您没有权限,或者没有登录!";
@@ -254,7 +254,7 @@ public class LoginController {
      *
      * @return 导航页
      */
-    @GetMapping("/todhzhuye")
+    @GetMapping("todhzhuye")
     public String todao() {
         return "wodezhuye";
     }

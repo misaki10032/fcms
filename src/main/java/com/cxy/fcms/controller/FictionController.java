@@ -36,14 +36,14 @@ public class FictionController {
     @Autowired
     ComTypeMapper typeMapper;
 
-    @GetMapping("/getfictions")
+    @GetMapping("getfictions")
     @ResponseBody//数据请求接口
     public Object getAllFictions() {
         List<ComFiction> fiction = fictionService.getFiction();
         return new LayuiReplay<ComFiction>(0, "OK", fiction.size(), fiction);
     }
 
-    @GetMapping("/addfiction")
+    @GetMapping("addfiction")
     public void addFiction(HttpServletResponse resp, String title, String author, String type, String isdel, String data) throws IOException {
         PrintWriter out = resp.getWriter();
         try {
@@ -63,7 +63,7 @@ public class FictionController {
         }
     }
 
-    @GetMapping("/addfictionWindow")//打开添加的浮动窗口
+    @GetMapping("addfictionWindow")//打开添加的浮动窗口
     public String toAddFictionWindow(Model model){
         List<ComType> comTypes = typeMapper.selectList(null);
         String[] types = new String[comTypes.size()];
@@ -76,7 +76,7 @@ public class FictionController {
         return "back/fiction/addFiction";
     }
 
-    @GetMapping("/tofictionxx")
+    @GetMapping("tofictionxx")
     public String toFictionXX(String index, Model model) {
         List<ComFiction> fictions = fictionService.getFictionOrderByTime();
         for (ComFiction fiction : fictions) {
@@ -90,10 +90,10 @@ public class FictionController {
         //查询内容信息
         ComFicDate data = fictionService.getFictionDataById(comFiction.getId());
         model.addAttribute("data", data);
-        return "/front/fiction/info";
+        return "front/fiction/info";
     }
 
-    @GetMapping("/tofictionhost")
+    @GetMapping("tofictionhost")
     public String toFictionHost(String index, Model model) {
         List<ComFiction> fictions = fictionService.getFictionsOrderByHost();
         for (ComFiction fiction : fictions) {
@@ -106,10 +106,10 @@ public class FictionController {
         //查询内容信息
         ComFicDate data = fictionService.getFictionDataById(comFiction.getId());
         model.addAttribute("data", data);
-        return "/front/fiction/info";
+        return "front/fiction/info";
     }
 
-    @GetMapping("/delfic")
+    @GetMapping("delfic")
     public void delFiction(String id, HttpServletResponse rep) {
         PrintWriter out = null;
         try {
@@ -121,7 +121,7 @@ public class FictionController {
         }
     }
 
-    @GetMapping("/getfictionslimit")
+    @GetMapping("getfictionslimit")
     @ResponseBody//数据请求接口
     public Object getAllFictions2(int page, int limit) {
         List<ComFiction> fiction = fictionService.getFiction();
@@ -135,7 +135,7 @@ public class FictionController {
         return new LayuiReplay<ComFiction>(0, "OK", fiction.size(), fiction3);
     }
 
-    @GetMapping("/getfictionSearch")
+    @GetMapping("getfictionSearch")
     @ResponseBody//数据请求接口
     public Object getfictionSearch(String searchMSG) {
         List<ComFiction> fictions = fictionService.SearchFiction(searchMSG);
@@ -148,7 +148,7 @@ public class FictionController {
      * @param searchMSG 搜索信息
      * @return 返回json
      */
-    @GetMapping("/getfictionSearch/{searchMSG}")
+    @GetMapping("getfictionSearch/{searchMSG}")
     @ResponseBody//数据请求接口
     public Object getfictionSearchREST(@PathVariable("searchMSG") String searchMSG) {
         List<ComFiction> fictions = fictionService.SearchFiction(searchMSG);
@@ -160,7 +160,7 @@ public class FictionController {
      *
      * @return 返回json
      */
-    @GetMapping("/getfictionTopHost")
+    @GetMapping("getfictionTopHost")
     @ResponseBody
     public Object toHostTop() {
         List<ComFiction> fictions = fictionService.getFictionsOrderByHost();
