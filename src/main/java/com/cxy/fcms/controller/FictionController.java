@@ -139,31 +139,35 @@ public class FictionController {
     @GetMapping("getfictionSearch")
     public String getfictionSearch(String searchMSG, Model model) {
         List<ComFiction> fictions = fictionService.SearchFiction(searchMSG);
-        int pages;
-        if (fictions.size() % 5 == 0) {
-            pages = fictions.size() / 5;
+        if (fictions.size() == 0) {
+            return "search/NoSearch";
         } else {
-            pages = fictions.size() / 5 + 1;
+            int pages;
+            if (fictions.size() % 5 == 0) {
+                pages = fictions.size() / 5;
+            } else {
+                pages = fictions.size() / 5 + 1;
+            }
+            ArrayList<String> fictionNames = new ArrayList<>();
+            ArrayList<String> fictionTypes = new ArrayList<>();
+            ArrayList<String> imges = new ArrayList<>();
+            ArrayList<Integer> fictionHosts = new ArrayList<>();
+            ArrayList<String> fictionDatas = new ArrayList<>();
+            for (ComFiction fiction : fictions) {
+                fictionNames.add(fiction.getFicName());
+                fictionTypes.add(fiction.getFicType());
+                imges.add(fiction.getFicImg());
+                fictionHosts.add(fiction.getFicHost());
+                fictionDatas.add(fiction.getGmtCreate());
+            }
+            model.addAttribute("fictionNames", fictionNames);
+            model.addAttribute("fictionTypes", fictionTypes);
+            model.addAttribute("imges", imges);
+            model.addAttribute("fictionHosts", fictionHosts);
+            model.addAttribute("fictionData", fictionDatas);
+            model.addAttribute("pages", pages);
+            return "search/titleSearch";
         }
-        ArrayList<String> fictionNames = new ArrayList<>();
-        ArrayList<String> fictionTypes = new ArrayList<>();
-        ArrayList<String> imges = new ArrayList<>();
-        ArrayList<Integer> fictionHosts = new ArrayList<>();
-        ArrayList<String> fictionDatas = new ArrayList<>();
-        for (ComFiction fiction : fictions) {
-            fictionNames.add(fiction.getFicName());
-            fictionTypes.add(fiction.getFicType());
-            imges.add(fiction.getFicImg());
-            fictionHosts.add(fiction.getFicHost());
-            fictionDatas.add(fiction.getGmtCreate());
-        }
-        model.addAttribute("fictionNames", fictionNames);
-        model.addAttribute("fictionTypes", fictionTypes);
-        model.addAttribute("imges", imges);
-        model.addAttribute("fictionHosts", fictionHosts);
-        model.addAttribute("fictionData", fictionDatas);
-        model.addAttribute("pages", pages);
-        return "search/titleSearch";
     }
 
     /**
