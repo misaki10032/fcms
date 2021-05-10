@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.lang.reflect.Array;
 import java.util.*;
 
 /**
@@ -136,10 +137,33 @@ public class FictionController {
     }
 
     @GetMapping("getfictionSearch")
-    @ResponseBody//数据请求接口
-    public Object getfictionSearch(String searchMSG) {
+    public String getfictionSearch(String searchMSG, Model model) {
         List<ComFiction> fictions = fictionService.SearchFiction(searchMSG);
-        return new LayuiReplay<ComFiction>(0, "OK", fictions.size(), fictions);
+        int pages;
+        if (fictions.size() % 5 == 0) {
+            pages = fictions.size() / 5;
+        } else {
+            pages = fictions.size() / 5 + 1;
+        }
+        ArrayList<String> fictionNames = new ArrayList<>();
+        ArrayList<String> fictionTypes = new ArrayList<>();
+        ArrayList<String> imges = new ArrayList<>();
+        ArrayList<Integer> fictionHosts = new ArrayList<>();
+        ArrayList<String> fictionDatas = new ArrayList<>();
+        for (ComFiction fiction : fictions) {
+            fictionNames.add(fiction.getFicName());
+            fictionTypes.add(fiction.getFicType());
+            imges.add(fiction.getFicImg());
+            fictionHosts.add(fiction.getFicHost());
+            fictionDatas.add(fiction.getGmtCreate());
+        }
+        model.addAttribute("fictionNames", fictionNames);
+        model.addAttribute("fictionTypes", fictionTypes);
+        model.addAttribute("imges", imges);
+        model.addAttribute("fictionHosts", fictionHosts);
+        model.addAttribute("fictionData", fictionDatas);
+        model.addAttribute("pages", pages);
+        return "search/titleSearch";
     }
 
     /**
@@ -167,5 +191,16 @@ public class FictionController {
         return new LayuiReplay<ComFiction>(0, "OK", fictions.size(), fictions);
     }
 
+    @GetMapping("tofictionInfo")
+    public String ficInfo(String name, Model model) {
+        ComFiction fiction = fictionService.getFictionByName(name);
+
+        //发送数据
+        model.addAttribute("ficBook", fiction);
+        //查询内容信息
+        ComFicDate data = fictionService.getFictionDataById(fiction.getId());
+        model.addAttribute("data", data);
+        return "front/fiction/info";
+    }
 
 }

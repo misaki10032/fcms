@@ -29,4 +29,6 @@ public interface FictionService {
 
     List<ComFiction> SearchFiction(String msg);
 
+    ComFiction getFictionByName(String name);
+
 }

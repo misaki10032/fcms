@@ -184,4 +184,14 @@ public class FictionServiceImpl implements FictionService {
             return fictionMapper.searchFiction(likemsg);
         }
     }
+
+    @Override
+    public ComFiction getFictionByName(String name) {
+        try {
+            return (ComFiction) SelectRedis.selectRedisOne(redisUtil, name + "_info", fictionMapper, "getFictionByName", name, 30 * 60);
+        } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
+            e.printStackTrace();
+            return fictionMapper.getFictionByName(name);
+        }
+    }
 }
