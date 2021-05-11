@@ -53,4 +53,6 @@ public interface ComUserMapper extends BaseMapper<ComUser> {
      * 根据电话号查询用户信息
      */
     ComUser selUserByPhone(String userPhone);
+
+    void revUserPwd(Map<String, String> map);
 }

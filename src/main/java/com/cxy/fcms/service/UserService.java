@@ -44,4 +44,6 @@ public interface UserService {
      * 根据电话号查询用户信息
      */
     ComUser selUserByPhone(String userPhone);
+
+    void revUserPwd(HashMap<String, String> map);
 }

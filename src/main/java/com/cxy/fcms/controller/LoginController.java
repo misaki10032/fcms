@@ -4,9 +4,8 @@ import com.cxy.fcms.pojo.ComFiction;
 import com.cxy.fcms.pojo.ComUser;
 import com.cxy.fcms.pojo.SysAdmin;
 import com.cxy.fcms.pojo.SysAdminInfo;
-import com.cxy.fcms.service.FictionService;
-import com.cxy.fcms.service.LoginService;
-import com.cxy.fcms.service.UserInfoService;
+import com.cxy.fcms.service.*;
+import com.cxy.fcms.util.ShiroMd5Util;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.LockedAccountException;
@@ -26,6 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
@@ -43,6 +43,10 @@ public class LoginController {
     FictionService fictionService;
     @Autowired
     UserInfoService userInfoService;
+    @Autowired
+    AdminService adminService;
+    @Autowired
+    UserService userService;
 
     /**
      * 欢迎页,起始页
@@ -257,5 +261,71 @@ public class LoginController {
     @GetMapping("todhzhuye")
     public String todao() {
         return "wodezhuye";
+    }
+
+    @GetMapping("toHeloPage")
+    public String toUpdatePWDPage() {
+        return "help/updatepwd";
+    }
+
+    @GetMapping("toLockPage")
+    public String toUNlockpage() {
+        return "help/numUnLock";
+    }
+
+    @PostMapping("updatePwd")
+    public String UpdataPWD(Model model, String nums, String name, String newpwd, String newpwd1, String type) {
+        if (type.equals("管理员")) {
+            List<SysAdmin> admins = adminService.getAdmins();
+            for (SysAdmin admin : admins) {
+                if (admin.getAdminNum().equals(nums)) {
+                    if (admin.getAdminPhone().equals(name)) {
+                        if (newpwd.equals(newpwd1)) {
+                            HashMap<String, String> map = new HashMap<>();
+                            String s1 = ShiroMd5Util.toPwdMd5(nums, newpwd);
+                            map.put("num", nums);
+                            map.put("pwd", s1);
+                            adminService.revAdminPwd(map);
+                            model.addAttribute("修改成功");
+                            return "login";
+                        } else {
+                            model.addAttribute("两次密码不一致");
+                            return "help/updatepwd";
+                        }
+                    } else {
+                        model.addAttribute("密码错误");
+                        return "help/updatepwd";
+                    }
+                }
+            }
+            model.addAttribute("没有这个用户->" + nums);
+            return "help/updatepwd";
+        } else {
+            List<ComUser> comUsers = userService.selUser();
+            for (ComUser user : comUsers) {
+                if (user.getUserPhone().equals(nums)) {
+                    if (user.getUserName().equals(name)) {
+                        if (newpwd.equals(newpwd1)) {
+                            HashMap<String, String> map = new HashMap<>();
+                            String s1 = ShiroMd5Util.toPwdMd5(nums, newpwd);
+                            map.put("num", nums);
+                            map.put("pwd", s1);
+                            userService.revUserPwd(map);
+                            model.addAttribute("修改成功");
+                            return "userlogin";
+                        } else {
+                            model.addAttribute("两次密码不一致");
+                            return "help/updatepwd";
+                        }
+                    } else {
+                        model.addAttribute("密码错误");
+                        return "help/updatepwd";
+                    }
+                }
+            }
+            model.addAttribute("没有这个用户->" + nums);
+            return "help/updatepwd";
+        }
+
     }
 }

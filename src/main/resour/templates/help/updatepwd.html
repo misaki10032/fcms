@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>登录</title>
+    <meta content="initial-scale=1" name="viewport">
+    <link rel="stylesheet" th:href="@{boot/css/bootstrap.min.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{boot/css/bootstrap-theme.min.css}" type="text/css"/>
+    <script th:src="@{js/jquery-3.5.1.min.js}"></script>
+    <script th:src="@{boot/js/bootstrap.min.js}"></script>
+    <script type="text/javascript">
+
+
+    </script>
+</head>
+<body background="img/bg.jpg" style="background-size: 1880px;">
+<div class="container">
+    <div class="">
+        <div style="height:0px;padding-bottom:13%">
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-lg-offset-4 row  col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3"
+                 style="border: 1px solid #bbfffa;border-radius: 15px;backdrop-filter: blur(19px);">
+                <form action="updatePwd" method="post">
+                    <h2 align="center" style="color: #bdffdc;">Welcome !</h2>
+                    <br>
+                    <p align="center" class="text-danger" th:text="${msg}"></p>
+                    <div class="col-lg-10 col-lg-offset-1">
+                        <label class="container-fluid">
+                            <h4 style="color: #bdffdc;">
+                                账 号
+                                <span class="small">(手机号/邮箱)</span>
+                            </h4>
+                        </label>
+                        <input class="form-control" name="nums" type="text"/>
+                        <label class="container-fluid">
+                            <h4 style="color: #bdffdc;">
+                                用户类型
+                            </h4>
+                        </label>
+                        <input class="form-control" name="type" placeholder="管理员 | 用户" type="text"/>
+                        <label class="container-fluid">
+                            <h4 style="color: #bdffdc;">
+                                用户昵称
+                                <span class="small">(必填)</span>
+                            </h4>
+                        </label>
+                        <input class="form-control" name="name" placeholder="管理员输入手机号,用户输入昵称" type="text"/>
+                        <label class="container-fluid">
+                            <h4 style="color: #bdffdc;">
+                                新密码
+                                <span class="small">(必填)</span>
+                            </h4>
+                        </label>
+                        <input class="form-control" name="newpwd" type="password"/>
+                        <label class="container-fluid">
+                            <h4 style="color: #bdffdc;">
+                                新密码
+                                <span class="small">(必填)</span>
+                            </h4>
+                        </label>
+                        <input class="form-control" name="newpwd1" placeholder="请重复一边密码" type="password"/>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-4  col-lg-offset-3  col-xs-4 col-xs-offset-3">
+                                <input class="btn btn-info " style="width: 80px;" type="submit" value="提交"/>
+                            </div>
+                        </div>
+                        <br>
+                        <div>
+                            <span style="text-align: center"><a href="toLockPage">申请解封</a></span>
+                        </div>
+                        <br>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

@@ -20,4 +20,6 @@ public interface AdminService {
 
     void delAdmin(HashMap<String, String> map);
 
+    void revAdminPwd(HashMap<String, String> map);
+
 }

@@ -78,4 +78,20 @@ public class AdmnServiceImpl implements AdminService {
             adminMapper.delAdmin(map);
         }
     }
+
+    @Override
+    public void revAdminPwd(HashMap<String, String> map) {
+        try {
+            adminMapper.revAdminPassword(map);
+            redisUtil.delete("allAdmins");
+            List<SysAdmin> allAdmins1 = adminMapper.getAllAdmins();
+            for (SysAdmin admin : allAdmins1) {
+                redisUtil.lLeftPush("allAdmins", admin);
+            }
+            redisUtil.expire("allAdmins", 300, TimeUnit.SECONDS);
+        } catch (Exception e) {
+            adminMapper.revAdminPassword(map);
+        }
+
+    }
 }

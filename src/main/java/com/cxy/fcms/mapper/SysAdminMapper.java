@@ -26,4 +26,6 @@ public interface SysAdminMapper extends BaseMapper<SysAdmin> {
 
     void delAdmin(HashMap<String, String> map);
 
+    void revAdminPassword(HashMap<String, String> map);
+
 }

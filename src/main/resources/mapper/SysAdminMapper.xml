@@ -22,4 +22,10 @@
         set isdel = #{isdel}
         where id = #{id}
     </update>
+
+    <update id="revAdminPassword">
+        update sys_admin
+        set admin_pwd = #{pwd}
+        where admin_num = #{num}
+    </update>
 </mapper>

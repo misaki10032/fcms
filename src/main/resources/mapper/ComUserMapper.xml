@@ -95,4 +95,10 @@
         from com_user
         where user_phone = #{userPhone}
     </select>
+
+    <update id="revUserPwd">
+        update com_user
+        set user_pwd = #{pwd}
+        where user_phone = #{num}
+    </update>
 </mapper>
