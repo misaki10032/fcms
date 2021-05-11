@@ -1,9 +1,10 @@
 package com.cxy.fcms.controller;
 
-
 import com.cxy.fcms.pojo.SysAdmin;
+import com.cxy.fcms.service.AdminService;
 import com.cxy.fcms.service.LoginService;
 import com.cxy.fcms.util.IDUtil;
+import com.cxy.fcms.util.LayuiReplay;
 import com.cxy.fcms.util.RedisUtil;
 import com.cxy.fcms.util.ShiroMd5Util;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,14 +12,16 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+
 /**
  * @ClassName UserController
  * @Author 陈新予
@@ -29,6 +32,8 @@ import java.util.concurrent.TimeUnit;
 public class AdminController {
     @Autowired
     LoginService loginService;
+    @Autowired
+    AdminService adminService;
     @Autowired
     RedisUtil redisUtil;
     @Autowired
@@ -154,5 +159,63 @@ public class AdminController {
         map.put("phone", phone);
         loginService.addAdmin(map);
         return "login";
+    }
+
+    @GetMapping("toAdminlist")
+    public String toAdminList() {
+        return "back/admin/adminlist";
+    }
+
+    /**
+     * 管理员列表,数据接口
+     *
+     * @return 返回管理员信息的json数据
+     */
+    @GetMapping("getalladmin")
+    @ResponseBody
+    public Object getAllAdmin(int page, int limit) {
+        List<SysAdmin> admins = adminService.getAdmins();
+        List<SysAdmin> userlimit = new ArrayList<>();
+        for (int i = (page - 1) * limit; i < admins.size(); i++) {
+            userlimit.add(admins.get(i));
+            if (userlimit.size() == limit) {
+                break;
+            }
+        }
+        return new LayuiReplay<SysAdmin>(0, "OK", admins.size(), userlimit);
+    }
+
+    @GetMapping("updateAdminAuthor")
+    public void updateAdminAuthor(String id, String author, HttpServletResponse rep) {
+        HashMap<String, String> map = new HashMap<>();
+        map.put("author", author);
+        map.put("id", id);
+        PrintWriter out = null;
+        try {
+            out = rep.getWriter();
+            adminService.revAdmin(map);
+            out.print("1");
+        } catch (IOException e) {
+            System.err.println("0");
+        }
+    }
+
+    @GetMapping("updateAdminDel")
+    public void updateAdminDel(String id, String isdel, HttpServletResponse rep) {
+        HashMap<String, String> map = new HashMap<>();
+        if (isdel.equals("正常")) {
+            map.put("isdel", "封锁");
+        } else {
+            map.put("isdel", "正常");
+        }
+        map.put("id", id);
+        PrintWriter out = null;
+        try {
+            out = rep.getWriter();
+            adminService.delAdmin(map);
+            out.print("1");
+        } catch (IOException e) {
+            System.err.println("0");
+        }
     }
 }

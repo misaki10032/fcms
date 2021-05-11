@@ -18,8 +18,12 @@ import java.util.List;
 @Component
 public interface SysAdminMapper extends BaseMapper<SysAdmin> {
 
-    int addAdmin(HashMap<String,String> map);
+    int addAdmin(HashMap<String, String> map);
 
     List<SysAdmin> getAllAdmins();
+
+    void revAdminAuthorById(HashMap<String, String> map);
+
+    void delAdmin(HashMap<String, String> map);
 
 }

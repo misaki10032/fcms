@@ -4,9 +4,22 @@
 
     <insert id="addAdmin">
         insert into sys_admin(id, admin_num, admin_pwd, admin_name, admin_phone)
-        value (#{id},#{num},#{pwd},#{name},#{phone})
+            value (#{id}, #{num}, #{pwd}, #{name}, #{phone})
     </insert>
     <select id="getAllAdmins" resultType="SysAdmin">
-        select * from sys_admin
+        select *
+        from sys_admin
     </select>
+
+    <update id="revAdminAuthorById">
+        update sys_admin
+        set admin_authority = #{author}
+        where id = #{id}
+    </update>
+
+    <update id="delAdmin">
+        update sys_admin
+        set isdel = #{isdel}
+        where id = #{id}
+    </update>
 </mapper>

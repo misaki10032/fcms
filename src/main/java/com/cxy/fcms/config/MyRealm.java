@@ -36,11 +36,15 @@ public class MyRealm extends AuthorizingRealm {
         System.out.println("=====================授权========================");
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
         Subject subject = SecurityUtils.getSubject();
-//        Session session = subject.getSession();
-//        SysAdmin admin = (SysAdmin) session.getAttribute("admin");
-//        String author = admin.getAdminAuthority();
-//        System.out.println("授予用户:" + author + "权限");
-//        info.addStringPermission(author);
+        Session session = subject.getSession();
+        Object admin = session.getAttribute("admin");
+        SysAdmin thisadmin = null;
+        if (admin instanceof SysAdmin) {
+            thisadmin = (SysAdmin) admin;
+            String author = thisadmin.getAdminAuthority();
+            System.out.println("授予用户:" + author + "权限");
+            info.addStringPermission(author);
+        }
         info.addStringPermission("loginOK");
         return info;
     }
@@ -57,6 +61,9 @@ public class MyRealm extends AuthorizingRealm {
                 System.out.println("------->admin------->ok");
                 Subject subject = SecurityUtils.getSubject();
                 Session session = subject.getSession();
+                if (admin.getIsDel() != null && !admin.getIsDel().equals("正常")) {
+                    throw new LockedAccountException();
+                }
                 session.setAttribute("admin", admin);
                 session.setAttribute("isAdmin", true);
                 //盐值

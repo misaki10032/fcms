@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en"
+	  xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:shiro="http://www.pollix.at/thymeleaf/shiro"
+	  xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<title>Layui</title>
+	<meta content="webkit" name="renderer">
+	<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+	<meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport">
+	<link href="/layui-v2.6.4/layui/css/layui.css" media="all" rel="stylesheet">
+	<script charset="UTF-8" src="/js/jquery-3.5.1.min.js"></script>
+</head>
+<body>
+
+<table class="layui-hide" id="test" lay-filter="test"></table>
+<script id="toolbarDemo" type="text/html">
+	<div class="layui-btn-container">
+		<button class="layui-btn layui-btn-sm" lay-event="getCheckData">获取选中行数据</button>
+		<button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button>
+		<button class="layui-btn layui-btn-sm" lay-event="isAll">验证是否全选</button>
+	</div>
+</script>
+<script id="barDemo" type="text/html">
+	<a class="layui-btn layui-btn-xs" lay-event="edit">更改权限</a>
+	<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">封禁</a>
+</script>
+<script charset="utf-8" src="/layui-v2.6.4/layui/layui.js"></script>
+
+<script th:inline="javascript" type="text/javascript">
+	var adminAuthor = /*[[${session.admin.getAdminAuthority()}]]*/
+			layui.use('table', function () {
+				var table = layui.table;
+				table.render({
+					elem: '#test',
+					url: 'getalladmin',
+					parseData: function (res) { //res 即为原始返回的数据
+						return {
+							"code": res.code, //解析接口状态
+							"msg": res.msg, //解析提示文本
+							"count": res.count, //解析数据长度
+							"data": res.data //解析数据列表
+						}
+					},
+					page: true,
+					limits: [3, 5, 10, 20],
+					limit: 10,
+					toolbar: '#toolbarDemo', //开启头部工具栏，并为其绑定左侧模板
+					height: 'full-3',
+					defaultToolbar: ['filter', 'exports', 'print', { //自定义头部工具栏右侧图标。如无需自定义，去除该参数即可
+						title: '提示',
+						layEvent: 'LAYTABLE_TIPS',
+						icon: 'layui-icon-tips'
+					}],
+					title: '管理员数据表',
+					cols: [
+						[{
+							type: 'checkbox',
+							fixed: 'left'
+						}, {
+							field: 'id',
+							title: 'ID',
+							width: 100,
+							fixed: 'left',
+							unresize: true
+						}, {
+							field: 'adminNum',
+							title: '管理员账号',
+							width: 200,
+							edit: 'text'
+						}, {
+							field: 'adminPwd',
+							title: '管理员密码',
+							width: 150,
+							edit: 'text'
+						}, {
+							field: 'adminName',
+							title: '管理员昵称',
+							width: 150,
+							edit: 'text',
+							sort: true
+						}, {
+							field: 'adminAuthority',
+							title: '管理权限',
+							width: 80,
+							edit: 'text',
+						}, {
+							field: 'adminPhone',
+							title: '手机号码',
+							width: 150,
+							edit: 'text',
+						}, {
+							field: 'isDel',
+							title: '状态',
+							width: 100,
+							edit: 'text',
+						}, {
+							fixed: 'right',
+							title: '操作',
+							toolbar: '#barDemo',
+							width: 150
+						}]
+					]
+
+				});
+
+				table.on('toolbar(test)', function (obj) {
+					var checkStatus = table.checkStatus(obj.config.id);
+					switch (obj.event) {
+						case 'getCheckData':
+							var data = checkStatus.data;
+							layer.alert(JSON.stringify(data));
+							break;
+						case 'getCheckLength':
+							var data = checkStatus.data;
+							layer.msg('选中了：' + data.length + ' 个');
+							break;
+						case 'isAll':
+							layer.msg(checkStatus.isAll ? '全选' : '未全选');
+							break;
+						case 'LAYTABLE_TIPS':
+							layer.alert('这是工具栏右侧自定义的一个图标按钮');
+							break;
+					}
+					;
+				});
+
+				//监听行工具事件
+				table.on('tool(test)', function (obj) {
+					var data = obj.data;
+					if (obj.event === 'edit') {
+						if (adminAuthor == "root") {
+							layer.prompt({
+								formType: 2,
+								value: data.adminAuthority,
+								title: '最高管理员-->root\n\t超级管理员-->super\n\t普通管理员-->ordinary'
+							}, function (value, index) {
+								if (value != "root" && value != "ordinary" && value != "super") {
+									layer.msg("不存在您输入的权限!")
+								} else {
+									var adminid = data.id;
+									$.ajax({
+										url: "/updateAdminAuthor"
+										, type: 'get'
+										, async: false
+										, data: {
+											id: adminid,
+											author: value
+										}
+										, success: function (res) {
+											if (res === "1") {
+												obj.update({
+													adminAuthority: value
+												});
+												layer.msg("修改成功")
+												layer.close(index);
+											} else if (res === "0") {
+												layer.msg("修改失败")
+											}
+										}
+									});
+									layer.close(index);
+								}
+							});
+						} else {
+							layer.msg("没有权限访问!")
+						}
+					} else {
+						if (adminAuthor != 'root') {
+							if (data.adminAuthority == 'root' || data.adminAuthority == 'super') {
+								layer.msg("你没有权限封禁更高级的管理员!")
+							} else {
+								layer.confirm('确定么', function (index) {
+									var adminid = data.id;
+									var isdel = data.isDel;
+									$.ajax({
+										url: "/updateAdminDel"
+										, type: 'get'
+										, async: false
+										, data: {
+											id: adminid,
+											isdel: isdel
+										}
+										, success: function (res) {
+											if (res === "1") {
+												if (data.isDel == '正常') {
+													obj.update({
+														isDel: "封锁"
+													});
+												} else {
+													obj.update({
+														isDel: "正常"
+													});
+												}
+												layer.msg("操作成功")
+												layer.close(index);
+											} else if (res === "0") {
+												layer.msg("操作失败")
+											}
+										}
+									});
+								});
+							}
+						} else {
+							if (data.adminAuthority == 'root') {
+								layer.msg("最高管理员不可被封禁!")
+							} else {
+								layer.confirm('确定么', function (index) {
+									var adminid = data.id;
+									var isdel = data.isDel;
+									$.ajax({
+										url: "/updateAdminDel"
+										, type: 'get'
+										, async: false
+										, data: {
+											id: adminid,
+											isdel: isdel
+										}
+										, success: function (res) {
+											if (res === "1") {
+												if (data.isDel == '正常') {
+													obj.update({
+														isDel: "封锁"
+													});
+												} else {
+													obj.update({
+														isDel: "正常"
+													});
+												}
+												layer.msg("操作成功")
+												layer.close(index);
+											} else if (res === "0") {
+												layer.msg("操作失败")
+											}
+										}
+									});
+								});
+							}
+						}
+					}
+				});
+			});
+</script>
+
+</body>
+</html>

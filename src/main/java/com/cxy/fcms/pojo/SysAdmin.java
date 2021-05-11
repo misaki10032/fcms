@@ -53,5 +53,10 @@ public class SysAdmin implements Serializable {
      */
     private String adminPhone;
 
+    /**
+     * 逻辑删除
+     */
+    private String isDel;
+
 
 }

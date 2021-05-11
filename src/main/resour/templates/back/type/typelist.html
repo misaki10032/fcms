@@ -126,7 +126,7 @@
                 layer.confirm('真的删除么', function (index) {
                     var typeid = data.id;
                     $.ajax({
-                        url: "/deltype"
+                        url: "/updateAdminDel"
                         , type: 'get'
                         , async: false
                         , data: {
@@ -169,7 +169,6 @@
                             }
                         }
                     });
-
                     layer.close(index);
                 });
             }
