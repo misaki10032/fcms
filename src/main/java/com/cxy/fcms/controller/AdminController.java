@@ -218,4 +218,21 @@ public class AdminController {
             System.err.println("0");
         }
     }
+
+    @GetMapping("toLevelUP")
+    public String LevelUP() {
+        return "back/admin/levelUP";
+    }
+
+    @GetMapping("levelUP")
+    public void sendMailLevelUP(String name, String desc) {
+        String title = "管理员申请";
+        String text = "【FCMS小说网】" + desc;
+        SimpleMailMessage mailMessage = new SimpleMailMessage();
+        mailMessage.setSubject(title);
+        mailMessage.setText(text);
+        mailMessage.setTo("1069664381@qq.com");
+        mailMessage.setFrom("fcms_snut@qq.com");
+        mailSender.send(mailMessage);
+    }
 }
