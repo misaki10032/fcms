@@ -286,19 +286,19 @@ public class LoginController {
                             map.put("num", nums);
                             map.put("pwd", s1);
                             adminService.revAdminPwd(map);
-                            model.addAttribute("修改成功");
+                            model.addAttribute("msg", "修改成功");
                             return "login";
                         } else {
-                            model.addAttribute("两次密码不一致");
+                            model.addAttribute("msg", "两次密码不一致");
                             return "help/updatepwd";
                         }
                     } else {
-                        model.addAttribute("密码错误");
+                        model.addAttribute("msg", "密码错误");
                         return "help/updatepwd";
                     }
                 }
             }
-            model.addAttribute("没有这个用户->" + nums);
+            model.addAttribute("msg", "没有这个用户->" + nums);
             return "help/updatepwd";
         } else {
             List<ComUser> comUsers = userService.selUser();
@@ -311,19 +311,19 @@ public class LoginController {
                             map.put("num", nums);
                             map.put("pwd", s1);
                             userService.revUserPwd(map);
-                            model.addAttribute("修改成功");
+                            model.addAttribute("msg", "修改成功");
                             return "userlogin";
                         } else {
-                            model.addAttribute("两次密码不一致");
+                            model.addAttribute("msg", "两次密码不一致");
                             return "help/updatepwd";
                         }
                     } else {
-                        model.addAttribute("密码错误");
+                        model.addAttribute("msg", "密码错误");
                         return "help/updatepwd";
                     }
                 }
             }
-            model.addAttribute("没有这个用户->" + nums);
+            model.addAttribute("msg", "没有这个用户->" + nums);
             return "help/updatepwd";
         }
 
